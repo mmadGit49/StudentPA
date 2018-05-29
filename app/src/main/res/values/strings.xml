@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Student PA</string>
+    <string name="register_prompt">Register</string>
+    <string name="login_prompt">Log In</string>
+    <string name="textviewregister_prompt">Don\'t have an account? Click below to sign up</string>
+    <string name="signup_prompt">Sign Up</string>
+    <string name="email_prompt">Enter your email</string>
+    <string name="password_prompt">Enter your Password</string>
+    <string name="name_prompt">Enter your First Name</string>
+    <string name="surname_prompt">Enter your Surname</string>
+    <string name="new_password_prompt">Enter new Password</string>
+    <string name="confirm_password_prompt">Confirm your Password</string>
+    <string name="dob_prompt">Date of Birth</string>
+
+
+</resources>
