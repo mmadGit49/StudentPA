@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id= "@+id/Budget"
+        android:title= "Budget"/>
+    <item android:id= "@+id/ToDoList"
+        android:title= "To Do"/>
+    <item android:id= "@+id/Timetable"
+        android:title= "Timetable"/>
+    <item android:id= "@+id/Reminders"
+        android:title= "Reminders, Deadlines"/>
+</menu>
