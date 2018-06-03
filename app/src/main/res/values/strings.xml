@@ -21,10 +21,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name= "">Spending</string>
-    <string name= "">Spending</string>
-
-    <string name= "">Spending</string>
+    <string name="Reminders">Reminders</string>
+    <string name="Spending">Spending</string>
+    <string name="Milestones">Milestones</string>
+    <string name="Schedule">Schedule</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>
