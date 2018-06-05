@@ -23,7 +23,7 @@ public class Splash extends AppCompatActivity {
         Thread timer = new Thread(){
             public void run(){//funtion to time how long the splash screen appears
                 try{
-                    sleep(1500);
+                    sleep(1000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }

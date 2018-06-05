@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 public class SavedUserLogin {//for auto login functionality
         static final String NAME_SAVED= "username";
 
-        static SharedPreferences getSharedPreferences(Context ctx) {//context is the activity in question
+        static SharedPreferences getSharedPreferences(Context ctx) {//context is used to get relevant params in question
             return PreferenceManager.getDefaultSharedPreferences(ctx);
         }//Shared preferences will check if user has logged in and their login  data exists
 

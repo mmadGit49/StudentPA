@@ -26,6 +26,10 @@ public class Login extends AppCompatActivity {
         username= (EditText) findViewById(R.id.editTextEmail);
         password= (EditText) findViewById(R.id.editTextPassword);
 
+        String email;
+        String passwordString;
+
+
         register.setOnClickListener(new View.OnClickListener() {//method to start next activity
             View view;
             @Override

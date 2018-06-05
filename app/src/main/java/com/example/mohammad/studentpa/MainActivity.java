@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         /**Uncomment this once database has been made for login
          *
-        if(SavedUserLogin.getUserName(MainActivity.this).length() == 0)//checks if user is ogged in
+        if(SavedUserLogin.getUserName(MainActivity.this).length() == 0)//checks if user is logged in
         {//if not logged in this happens
             Intent login= new Intent(this, Login.class);
             startActivity(login);

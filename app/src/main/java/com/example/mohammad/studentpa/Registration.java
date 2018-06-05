@@ -32,6 +32,8 @@ public class Registration extends AppCompatActivity {
         gender=(Spinner) findViewById(R.id.spinnerGender);
         dob= (EditText) findViewById(R.id.editTextDob);
 
+        String fName, lName, email, pword, confirmPword;
+
         register.setOnClickListener(new View.OnClickListener() {
             View view;
             @Override
