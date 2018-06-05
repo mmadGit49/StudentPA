@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,8 +10,10 @@
     <style name="AppThemeDark" parent= "Theme.AppCompat.DayNight.DarkActionBar">
     </style>
 
-    <style name="Light" parent="Theme.AppCompat.DayNight"></style>
-    <style name="AppTheme.NoActionBar">
+    <style name="Light" parent="Theme.AppCompat.DayNight">
+    </style>
+
+    <style name="splashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

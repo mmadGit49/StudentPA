@@ -8,13 +8,13 @@
         android:label="Organ Eyes"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/Light">
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".login" />
+        <activity android:name=".Login" />
         <activity android:name=".Registration" />
-        <activity android:name=".Splash">
+        <activity android:theme="@style/splashTheme" android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

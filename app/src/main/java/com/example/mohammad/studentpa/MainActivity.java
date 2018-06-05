@@ -28,6 +28,20 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /**Uncomment this once database has been made for login
+         *
+        if(SavedUserLogin.getUserName(MainActivity.this).length() == 0)//checks if user is ogged in
+        {//if not logged in this happens
+            Intent login= new Intent(this, Login.class);
+            startActivity(login);
+        }
+        else//TODO: stay in main activity
+        {
+            // Stay at the current activity.
+        }
+
+         */
     }
 
     @Override
