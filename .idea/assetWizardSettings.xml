@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Mohammad\Desktop\Organ Eyes Icons\2x\baseline_notification_important_black_18dp.png" />
-                                      <entry key="outputName" value="ic_reminders" />
+                                      <entry key="imageAsset" value="C:\Users\Mohammad\Desktop\icon.png" />
+                                      <entry key="outputName" value="ic_icon_image" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
                                     </map>
@@ -38,7 +38,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="66" />
+                                                <entry key="scalingPercent" value="57" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -49,14 +49,19 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundImage" value="C:\Users\Mohammad\Desktop\organlogo.png" />
-                                      <entry key="foregroundLayerName" value="ic_logogo" />
-                                      <entry key="outputName" value="ic_logo" />
+                                      <entry key="foregroundImage" value="C:\Users\Mohammad\Desktop\icon.png" />
+                                      <entry key="foregroundLayerName" value="ic_lconImage" />
+                                      <entry key="outputName" value="ic_IconImage" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

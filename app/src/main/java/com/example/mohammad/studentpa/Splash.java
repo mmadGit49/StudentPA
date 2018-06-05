@@ -14,14 +14,14 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         Animation splashAnim= AnimationUtils.loadAnimation(this, R.anim.mytransition);
-        textv= findViewById(R.id.textViewtest);
-        textv.startAnimation(splashAnim);
+        textv= findViewById(R.id.textViewLogo);//finds the logo
+        textv.startAnimation(splashAnim);//starts the animation transition
         final Intent intent= new Intent(this, MainActivity.class);
 
         Thread timer = new Thread(){
-            public void run(){
+            public void run(){//funtion to time how long the splash screen appears
                 try{
-                    sleep(900);
+                    sleep(1500);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }

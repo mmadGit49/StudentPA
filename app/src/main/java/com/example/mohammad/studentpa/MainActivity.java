@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
     @Override
