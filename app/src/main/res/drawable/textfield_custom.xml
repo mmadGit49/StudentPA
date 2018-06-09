@@ -10,15 +10,15 @@
 
     <stroke
         android:color="#68cc14e9"
-        android:width="1dp"
+        android:width="0dp"
         />
 
 
     <gradient
         android:angle="135"
-        android:centerColor="#a0cc14e9"
-        android:endColor="#c85505dc"
-        android:startColor="#c8dcb0ec"
+        android:centerColor="#a014e970"
+        android:endColor="#c805dc49"
+        android:startColor="#c805dc49"
         android:type="linear" />
 
 
