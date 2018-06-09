@@ -1,5 +1,6 @@
 package com.example.mohammad.studentpa;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,10 @@ public class Registration extends AppCompatActivity {
     private Spinner gender;
     private EditText dob;//date of birth
     private EditText confirmPassword;
+    //to create an instance of the database
+    private AppDatabase db= Room.databaseBuilder(getApplicationContext(),
+            AppDatabase.class, "App_data").build();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
