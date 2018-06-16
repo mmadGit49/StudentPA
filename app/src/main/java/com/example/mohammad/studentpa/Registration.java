@@ -28,16 +28,17 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        register= (Button) findViewById(R.id.buttonRegister);
-        firstName= (EditText) findViewById(R.id.editTextName);
-        lastName= (EditText) findViewById(R.id.editTextSurname);
-        email= (EditText) findViewById(R.id.editTextEmail);
-        password= (EditText) findViewById(R.id.editTextNewPassword);
-        confirmPassword=(EditText) findViewById(R.id.editTextconfirmNewPassword);
-        gender=(Spinner) findViewById(R.id.spinnerGender);
-        dob= (EditText) findViewById(R.id.editTextDob);
+        register= findViewById(R.id.buttonRegister);
+        firstName= findViewById(R.id.editTextName);
+        lastName= findViewById(R.id.editTextSurname);
+        email= findViewById(R.id.editTextEmail);
+        password= findViewById(R.id.editTextNewPassword);
+        confirmPassword= findViewById(R.id.editTextconfirmNewPassword);
+        gender= findViewById(R.id.spinnerGender);
+        dob= findViewById(R.id.editTextDob);
 
         String fName, lName, email, pword, confirmPword;
+        
 
         register.setOnClickListener(new View.OnClickListener() {
             View view;

@@ -20,8 +20,13 @@ public class Splash extends AppCompatActivity {
         imageView.startAnimation(splashAnim);//starts the animation transition
         final Intent intent= new Intent(this, Login.class);
 
+        /**
+         * A thread is a thread of execution in a program.
+         * The Java Virtual Machine allows an application to have multiple
+         * threads of execution running concurrently.
+         */
         Thread timer = new Thread(){
-            public void run(){//funtion to time how long the splash screen appears
+            public void run(){//function to time how long the splash screen appears
                 try{
                     sleep(1000);
                 }catch (InterruptedException e){

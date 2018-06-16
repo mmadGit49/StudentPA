@@ -5,11 +5,13 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.time.LocalDate;
+import io.reactivex.annotations.NonNull;
 
 @Entity
 public class User {
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true) //Obvious,and it shall autoGenerate
+    @NonNull//Obvious
+    @ColumnInfo (name="userID")//Not necessary unless you want column name to differ from variable
     private int userID;
     public int getUserID() {
         return userID;
@@ -18,7 +20,7 @@ public class User {
         this.userID = userID;
     }
 
-    @ColumnInfo (name="first_name")
+    @ColumnInfo (name="first_name") //really not necessary to name in this case but for learning purposes..
     private String firstName;
     public String getFirstName() {
 
@@ -33,7 +35,6 @@ public class User {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -43,7 +44,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -53,7 +53,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -76,12 +75,15 @@ public class User {
         this.gender = gender;
     }
 
-    @ColumnInfo (name="date_of_birth")
-    private LocalDate dateOfBirth;
-    public LocalDate getDateOfBirth() {
+    //TODO: resolve date parsing issue
+    /*@ColumnInfo (name="date_of_birth")
+    private Date dateOfBirth;
+    private java.sql.Date dateConverted;
+
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
+    }*/
 }
