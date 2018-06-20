@@ -3,9 +3,14 @@ package com.example.mohammad.studentpa;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView= findViewById(R.id.navigation_view_main);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -32,54 +43,66 @@ public class MainActivity extends AppCompatActivity {
                 menuItem.setChecked(true);
                 // close drawer when item is tapped
                 drawerLayout.closeDrawers();
-
-                // Add code here to update the UI based on the item selected
-                // For example, swap UI fragments here
-
+                onOptionsItemSelected(menuItem);
                 return true;
             }
         });
 
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-
-        drawerLayout.addDrawerListener(toggle);//the listener for the menu button
-        toggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        /**Uncomment this once database has been made for login
+        /*TODO: Uncomment this once database has been made for login
          *
         if(SavedUserLogin.getUserName(MainActivity.this).length() == 0)//checks if user is logged in
         {//if not logged in this happens
             Intent login= new Intent(this, Login.class);
             startActivity(login);
         }
-        else//TODO: stay in main activity
+        else//y
         {
             // Stay at the current activity.
         }
 
          */
     }
+    public void replaceFrag(Fragment fragment){
+        if (fragment != null){
+            FragmentTransaction fragTrans= getSupportFragmentManager().beginTransaction();
+            fragTrans.replace(R.id.drawer_layout, fragment);
+            fragTrans.commit();
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){//method to activate the clicked menu button
+        Fragment fragment = null;
         int id = item.getItemId();
-        if(toggle.onOptionsItemSelected(item)){
-            if (id == R.id.Milestones) {
 
-            } else if (id == R.id.Schedule) {
-
-            } else if (id == R.id.Reminders) {
-
-            } else if (id == R.id.Spending) {
-
-            }
-            return true;
-
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
+
+        switch(id){
+            case R.id.Milestones:
+                fragment= new Milestones();
+                replaceFrag(fragment);
+                return true;
+            case R.id.Schedule:
+                fragment= new Schedule();
+                replaceFrag(fragment);
+                return true;
+            case R.id.Reminders:
+                fragment= new Reminders();
+                replaceFrag(fragment);
+                return true;
+            case R.id.Spending:
+                fragment= new Spending();
+                replaceFrag(fragment);
+                return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
 }
 
 /**

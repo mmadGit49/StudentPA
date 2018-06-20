@@ -1,13 +1,7 @@
 package com.example.mohammad.studentpa;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
-
-import java.util.List;
 
 /**little-no SQL required in this interface for updates, deleted etc
  * all methods are abstract
@@ -26,11 +20,8 @@ public interface UserDao {
     //in case 2 rows with same pri key are entered
     //will replace a row
 
-    @Query("SELECT * FROM user")//Method to get all rows
-    LiveData<List<User>> getAllRows();//LiveData allows DB to be automatically updated
-
-    @Query("SELECT * FROM user WHERE userID IN (:userIds)")
-    List<com.example.mohammad.studentpa.User> loadAllByIds(int[] userIds);
+    /*@Query("SELECT email FROM user")//Method to get all emails/usernames
+    LiveData<List<User>> getAllusernames();
 
     @Update
     void updateList(User user);//Update the table
@@ -39,7 +30,7 @@ public interface UserDao {
     void delete(User user);//Delete the rows, I guess?
 
     @Insert
-    void insert(User param);
+    void insert(User param);*/
 
     //void insert(User param);
 }
