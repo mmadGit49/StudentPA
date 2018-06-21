@@ -11,46 +11,21 @@
     tools:context=".MainActivity"
     tools:openDrawer="start">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_colour">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-        
-        </FrameLayout>
-<!--
-    <fragment
-        android:name="com.example.mohammad.studentpa.Milestones"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/MilestonesFragment"
-        />
-    <fragment
-        android:name="com.example.mohammad.studentpa.Schedule"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ScheduleFragment"
-        />
-    <fragment
-        android:name="com.example.mohammad.studentpa.Reminders"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/RemindersFragment"
-        />
-    <fragment
-        android:name="com.example.mohammad.studentpa.Spending"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/SpendingFragment"
-        />
-    -->
+            android:layout_height="606dp"
+            android:background="@drawable/background_colour"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme">
 
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+        </FrameLayout>
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <android.support.design.widget.NavigationView

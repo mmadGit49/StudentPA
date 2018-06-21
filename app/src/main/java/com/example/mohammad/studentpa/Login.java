@@ -21,24 +21,25 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //Remember to add a security mechanism to avoid brute force logins
         //e.g. initialise a counter
-        register= (Button) findViewById(R.id.buttonSignUp);
-        login= (Button) findViewById(R.id.buttonLogin);
-        username= (EditText) findViewById(R.id.editTextEmail);
-        password= (EditText) findViewById(R.id.editTextPassword);
+        register= findViewById(R.id.buttonSignUp);
+        login= findViewById(R.id.buttonLogin);
+        username= findViewById(R.id.editTextEmail);
+        password= findViewById(R.id.editTextPassword);
 
         String email;
         String passwordString;
 
 
         register.setOnClickListener(new View.OnClickListener() {//method to start next activity
-            View view;
+            View regView;
             @Override
             public void onClick(View v) {//on button "Sign up" clicked, obvious
                 //TODO: store details to DB
-                startRegister(view);//will start main activity
+                startRegister(regView);//will start registration activity
             }
         });
 
+        //onClick Listener,as stated, to listen for button clicks
         login.setOnClickListener(new View.OnClickListener() {
             View view;
             @Override

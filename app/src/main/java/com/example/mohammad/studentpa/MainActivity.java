@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -16,12 +15,9 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
     /**TODO: Check and verify navigation menu button functionality
      * TODO: Add visual appeal to menu items
-     * TODO: Comment on how onOptionsItemSelect method works
-     *
      *
     */
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
          */
     }
-    public void replaceFrag(Fragment fragment){
+    public void replaceFrag(Fragment fragment){//to replace the selected fragment
         if (fragment != null){
             FragmentTransaction fragTrans= getSupportFragmentManager().beginTransaction();
             fragTrans.replace(R.id.drawer_layout, fragment);
