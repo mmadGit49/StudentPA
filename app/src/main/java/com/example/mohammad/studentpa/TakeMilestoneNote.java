@@ -2,23 +2,46 @@ package com.example.mohammad.studentpa;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+
+import java.util.ArrayList;
 
 public class TakeMilestoneNote extends AppCompatActivity {
 
     private static final String TAG = "TakeMilestoneNote";
 
-    private EditText editTextTitle = findViewById(R.id.editTextTitle);
-    private EditText editTextDetails = findViewById(R.id.editTextMilestone);
+    private EditText editTextTitle;
+    private EditText editTextDetails;
+    private FloatingActionButton fab;
+    private ArrayList<String> titleNames= new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_layout_milestones);
 
-        //getIncomingIntent();
+        editTextTitle = findViewById(R.id.editTextTitle);
+        editTextDetails = findViewById(R.id.editTextMilestone);
+
+        fab = findViewById(R.id.fab_save);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {//TO save the note. TODO: improve note save onClick
+                if (editTextDetails != null || editTextTitle != null){
+                    //getIncomingIntent();
+                    String noteTitle = editTextTitle.getText().toString();
+                    String noteDetails = editTextDetails.getText().toString();
+                    setDetails(noteTitle, noteDetails);
+                    finish();
+                }
+            }
+        });
+
 
     }
 
@@ -27,25 +50,25 @@ public class TakeMilestoneNote extends AppCompatActivity {
         //checks if intent has extras, may crash if condition not set
         if(getIntent().hasExtra("note_title") && getIntent().hasExtra("note_details")){
             Log.d(TAG, "getIncomingIntent: foundIntentExtras");
-/*
-            String noteTitle = getIntent().getStringExtra("note_title");
-            String noteDetails = getIntent().getStringExtra("note_details");
-            setDetails(noteTitle, noteDetails);*/
+            //String noteTitle = getIntent().getStringExtra("note_title");
+            //String noteDetails = getIntent().getStringExtra("note_details");
+            //setDetails(noteTitle, noteDetails);
         }
 
     }
 
-    public void setDetails(String noteTitle, String imageName){//Set the note as follows
+    public void setDetails(String noteTitle, String noteDetails){//Set the note as follows
         Log.d(TAG, "setDetails: started");
+        //TODO: SAve the note and refresh to display
+        /*Milestones milestones = new Milestones();
+        titleNames.add(noteTitle);
+        notes.add(noteDetails);
 
-        /*TextView textViewTitle = findViewById(R.id.textViewTitle);
-        TextView textViewNoteDetails = findViewById(R.id.textViewMilestone);
-
-        String title = editTextTitle.getText().toString();
-        String details = editTextDetails.getText().toString();
-
-        textViewTitle.setText(title);
-        textViewNoteDetails.setText(details);*/
-
+        milestones.setTitleNames(titleNames);
+        milestones.setNotes(notes);
+        milestones.initRecyclerView();
+*/
     }
+
+
 }

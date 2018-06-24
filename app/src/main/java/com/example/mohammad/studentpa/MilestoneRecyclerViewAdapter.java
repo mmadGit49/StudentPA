@@ -14,14 +14,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "RecyclerViewAdapter";
+public class MilestoneRecyclerViewAdapter extends RecyclerView.Adapter<MilestoneRecyclerViewAdapter.ViewHolder> {
+    private static final String TAG = "MileRecyclViewAdapter";
 
-    private ArrayList<String> titleNames;
-    private ArrayList<String> notes;
+    private ArrayList<String> titleNames = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
     private Context context;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> titleNames, ArrayList<String> notes) {
+    public MilestoneRecyclerViewAdapter(Context context, ArrayList<String> titleNames, ArrayList<String> notes) {
         this.titleNames = titleNames;
         this.notes = notes;
         this.context = context;
@@ -48,8 +48,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 //On item click, start note taker activity
                 Intent noteIntent= new Intent(context, TakeMilestoneNote.class);
                 //TakeMilestoneNote class needs to know WHICH note is being accessed
-                noteIntent.putExtra("note_title", titleNames.get(position));
-                noteIntent.putExtra("note_details", notes.get(position));
+                //noteIntent.putExtra("note_title", titleNames.get(position));
+                //noteIntent.putExtra("note_details", notes.get(position));
                 context.startActivity(noteIntent);
 
                 Toast.makeText(context, notes.get(position), Toast.LENGTH_SHORT).show();
@@ -77,4 +77,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             milestoneLayout = itemView.findViewById(R.id.recyclerview_note_display);
         }
     }
+
 }
