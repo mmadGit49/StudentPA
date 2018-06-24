@@ -2,11 +2,11 @@
     android:shape="rectangle">
 
     <corners
-        android:bottomLeftRadius="50dp"
-        android:topRightRadius="50dp"
-        android:topLeftRadius="50dp"
-        android:bottomRightRadius="50dp"
-        ></corners>
+        android:bottomLeftRadius="20dp"
+        android:topRightRadius="20dp"
+        android:topLeftRadius="20dp"
+        android:bottomRightRadius="20dp"
+        />
 
     <stroke
         android:color="#68cc14e9"

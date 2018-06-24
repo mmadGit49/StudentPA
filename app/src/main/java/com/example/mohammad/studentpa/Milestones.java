@@ -1,103 +1,96 @@
 package com.example.mohammad.studentpa;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.EditText;
 
-import javax.annotation.Nullable;
-
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Milestones.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Milestones#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
 
 public class Milestones extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    //private OnFragmentInteractionListener mListener;
-
-    public Milestones() {
-        // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static Milestones newInstance(String param1, String param2) {
-        Milestones fragment = new Milestones();
-        Bundle args = new Bundle();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private EditText milestoneNote;
+    private EditText milestoneTitle;
+    private View mileView;
+    private LinearLayoutManager layoutManager;
+    private Context context;
+    private ArrayList<String> titleNames= new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mileView= inflater.inflate(R.layout.fragment_milestones, container, false);
+        milestoneTitle= mileView.findViewById(R.id.editTextTitle);
+        milestoneNote= mileView.findViewById(R.id.editTextMilestone);
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_milestones, container, false);
-
+        Toolbar toolbar = mileView.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        initNotes();
+        return mileView;
     }
 
-/*
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void initNotes(){
+        titleNames.add("Hello");
+        notes.add("Test1");
 
+        titleNames.add("Hello");
+        notes.add("Test2");
+
+        titleNames.add("Hello");
+        notes.add("Test3");
+
+        titleNames.add("Hello");
+        notes.add("Test4");
+
+        titleNames.add("Hello");
+        notes.add("Test5");
+
+        titleNames.add("Hello");
+        notes.add("Test6");
+
+        titleNames.add("Hello");
+        notes.add("Test7");
+
+        titleNames.add("Hello");
+        notes.add("Test8");
+
+        titleNames.add("Hello");
+        notes.add("Test9");
+
+        initRecyclerView();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+
+    private void initRecyclerView() {//initialises
+        RecyclerView recyclerView = mileView.findViewById(R.id.recycler_view);
+        layoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getActivity(), titleNames, notes);
+        recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void setContext(Context context) {
+        this.context = context;
+    }//not quite necessary
+
+    /*
+    //This method is meant to add the data to the DB, use it later
+    public void addDataToDB(EditText milestoneTitle, EditText milestoneNote){
+        milestoneTitle.getText();
+        milestoneNote.getText();
+
     }
-
-    *//**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     *
-    *//*
-
-    public interface OnFragmentInteractionListener {
-
-        void onFragmentInteraction(Uri uri);
-    }*/
+    */
 }

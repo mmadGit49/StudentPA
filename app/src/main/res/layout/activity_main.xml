@@ -16,7 +16,8 @@
             android:layout_height="606dp"
             android:background="@drawable/background_colour"
             android:fitsSystemWindows="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:id="@+id/frameContainer">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
