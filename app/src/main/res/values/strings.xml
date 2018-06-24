@@ -31,6 +31,14 @@
 
     <string name="Title_header">Title</string>
     <string name="text_header">Enter Text</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="spending_date">Date</string>
+    <string name="spending_amount">Amount spent</string>
+    <string name="spending_details">Details</string>
+    <string name="spending_add_detail">Add an Item</string>
+    <string name="spending_total">Total Spent Today: </string>
+
+
+
+
 
 </resources>

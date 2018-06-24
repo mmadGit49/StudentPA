@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MilestoneRecyclerViewAdapter extends RecyclerView.Adapter<MilestoneRecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "MileRecyclViewAdapter";
+    private static final String TAG = "MileRecycViewAdapter";
 
     private ArrayList<String> titleNames = new ArrayList<>();
     private ArrayList<String> notes = new ArrayList<>();

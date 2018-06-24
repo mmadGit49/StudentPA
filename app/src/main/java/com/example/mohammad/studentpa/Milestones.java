@@ -72,21 +72,6 @@ public class Milestones extends Fragment {
         this.context = context;
     }//not quite necessary
 
-    public ArrayList<String> getTitleNames() {
-        return titleNames;
-    }
-
-    public void setTitleNames(ArrayList<String> titleNames) {
-        this.titleNames = titleNames;
-    }
-
-    public ArrayList<String> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(ArrayList<String> notes) {
-        this.notes = notes;
-    }
 /*
     //This method is meant to add the data to the DB, use it later
     public void addDataToDB(EditText milestoneTitle, EditText milestoneNote){
