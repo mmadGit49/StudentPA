@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/list_view_design"
+    android:id="@+id/recyclerview_note_display"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:background="@drawable/note_custom_design"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/Title_header" />
+
+    <TextView
+        android:id="@+id/textViewMilestone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/note_custom_design"
+        android:padding="8dp"
+        android:text="@string/text_header" />
+</LinearLayout>
