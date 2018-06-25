@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,37 +26,40 @@ public class Spending extends Fragment {
     private ArrayList<String> spendTotals = new ArrayList<>();
 
 
-
+    private static final String TAG = "SpendRecycVAdapt";
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        spendView = inflater.inflate(R.layout.fragment_reminders, container, false);
+        spendView = inflater.inflate(R.layout.fragment_spending, container, false);
         Toolbar toolbar = spendView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);//sets menu icon to action bar
 
         //Floating action Button action
         fab = spendView.findViewById(R.id.fab_spend);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initRecyclerView();
+                spendDates.add("Test ME");
+                spendTotals.add("3500 spent today");
+                initSpendRecyclerView();
             }
         });
 
         return spendView;
     }
-
-    public void initRecyclerView() {//initialises adapters, views and what have you's
+    
+    public void initSpendRecyclerView() {//initialises adapters, views and what have you'
+        Log.d(TAG, "initSpendRecyclerView: initRecycStarted.");
         RecyclerView recyclerView = spendView.findViewById(R.id.spending_recycler_view);
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        //FIXME: Spending recyclerViewAdapter not recognised
-        //SpendingRecyclerViewAdapter adapter = new SpendingRecyclerViewAdapter(this.getActivity(),
-               // spendDates, spendTotals);
-        //recyclerView.setAdapter(adapter);
+        SpendingRecyclerViewAdapter adapter = new SpendingRecyclerViewAdapter(this.getActivity(),
+               spendDates, spendTotals);
+        recyclerView.setAdapter(adapter);
     }
 
 }

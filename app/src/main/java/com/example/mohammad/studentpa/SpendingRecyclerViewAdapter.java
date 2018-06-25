@@ -1,3 +1,5 @@
+package com.example.mohammad.studentpa;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,9 +11,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.TakeSpendingItems;
 
 import java.util.ArrayList;
 

@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:background="@drawable/list_view_design"
+    android:layout_weight="1">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="start">
 
-        <EditText
-            android:id="@+id/editTextSpendDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="@string/spending_date"
-            android:inputType="date" />
+
+    <EditText
+        android:id="@+id/editTextSpendDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:hint="@string/spending_date_format"
+        android:inputType="date"
+        android:textAlignment="center" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tableLayout_spending"
-        android:layout_margin="8dp">
+        android:padding="8dp">
 
-        <TableRow android:layout_width="wrap_content"
+        <TableRow android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
@@ -50,30 +61,29 @@
         </TableRow>
 
 
-            <TableRow android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <EditText
-                    android:id="@+id/editTextSpendAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:padding="8dp" />
+            <EditText
+                android:id="@+id/editTextSpendAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:padding="8dp" />
 
-                <EditText
-                    android:id="@+id/editTextSpendDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:padding="8dp" />
+            <EditText
+                android:id="@+id/editTextSpendDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:padding="8dp" />
 
-            </TableRow>
+        </TableRow>
 
 
     </TableLayout>
-
     <Button
         android:id="@+id/buttonAddItem"
         android:layout_width="match_parent"
@@ -89,4 +99,14 @@
         android:padding="8dp"
         tools:text="@string/spending_total" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_save_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_done_black_24dp" />
+
 </LinearLayout>
+
+</ScrollView>

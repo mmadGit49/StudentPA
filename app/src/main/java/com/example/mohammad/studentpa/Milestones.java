@@ -41,6 +41,8 @@ public class Milestones extends Fragment {
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
+        //for the floating action button:
+
         fab = mileView.findViewById(R.id.fab_add_note);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
