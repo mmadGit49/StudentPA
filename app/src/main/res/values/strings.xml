@@ -38,6 +38,14 @@
     <string name="spending_add_detail">Add an Item</string>
     <string name="spending_total">Total Spent Today: </string>
 
+    <string name= "Monday">Monday</string>
+    <string name= "Tuesday">Tue</string>
+    <string name= "Wednesday">Wed</string>
+    <string name= "Thurdsay">Thur</string>
+    <string name= "Friday">Fri</string>
+    <string name= "Saturday">Sat</string>
+
+
 
 
 

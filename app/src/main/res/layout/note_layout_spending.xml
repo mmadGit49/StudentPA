@@ -2,6 +2,7 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,64 +27,68 @@
         android:inputType="date"
         android:textAlignment="center" />
 
-    <TableLayout
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+        <TextView
+            android:id="@+id/textViewSpendAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:padding="8dp"
+            android:text="@string/spending_amount"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewSpendDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textViewSpendAmount"
+            android:ems="10"
+            android:padding="8dp"
+            android:text="@string/spending_details"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/GridLayoutSpending"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableLayout_spending"
-        android:padding="8dp">
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
 
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/editTextSpendAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:padding="8dp"
+            app:layout_column="0"
+            app:layout_row="0"/>
 
-            <TextView
-                android:id="@+id/textViewSpendAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:padding="8dp"
-                android:text="@string/spending_amount"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+        <EditText
+            android:id="@+id/editTextSpendDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            app:layout_column="1"
+            app:layout_row="0"
+            />
 
-            <TextView
-                android:id="@+id/textViewSpendDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:padding="8dp"
-                android:text="@string/spending_details"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </TableRow>
+    </android.support.v7.widget.GridLayout>
 
-
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editTextSpendAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:padding="8dp" />
-
-            <EditText
-                android:id="@+id/editTextSpendDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:padding="8dp" />
-
-        </TableRow>
-
-
-    </TableLayout>
     <Button
         android:id="@+id/buttonAddItem"
         android:layout_width="match_parent"

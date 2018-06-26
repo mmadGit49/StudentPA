@@ -17,7 +17,7 @@ public class Registration extends AppCompatActivity {
     private EditText confirmPassword;
     //to create an instance of the database TODO: uncomment
     //private AppDatabase db= Room.databaseBuilder(getApplicationContext(),
-      //      AppDatabase.class, "App_data").build();
+    //AppDatabase.class, "App_data").build();
 
 
     @Override

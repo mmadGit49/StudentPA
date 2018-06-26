@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa;
+package com.example.mohammad.studentpa.Milestones;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mohammad.studentpa.R;
+
 import java.util.ArrayList;
 
 public class MilestoneRecyclerViewAdapter extends RecyclerView.Adapter<MilestoneRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "MileRecycViewAdapter";
 
-    private ArrayList<String> titleNames = new ArrayList<>();
-    private ArrayList<String> notes = new ArrayList<>();
+    private ArrayList<String> titleNames;
+    private ArrayList<String> notes;
     private Context context;
 
     public MilestoneRecyclerViewAdapter(Context context, ArrayList<String> titleNames, ArrayList<String> notes) {

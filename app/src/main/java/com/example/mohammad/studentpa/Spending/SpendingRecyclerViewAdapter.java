@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa;
+package com.example.mohammad.studentpa.Spending;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mohammad.studentpa.R;
+
 import java.util.ArrayList;
 
 public class SpendingRecyclerViewAdapter extends RecyclerView.Adapter<SpendingRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "SpendingRecycvAdapter";
 
-    private ArrayList<String> spendDates = new ArrayList<>();
-    private ArrayList<String> spendTotals = new ArrayList<>();
+    private ArrayList<String> spendDates;
+    private ArrayList<String> spendTotals;
     private Context context;
 
     public SpendingRecyclerViewAdapter(Context context, ArrayList<String> spendDates, ArrayList<String> spendTotals) {

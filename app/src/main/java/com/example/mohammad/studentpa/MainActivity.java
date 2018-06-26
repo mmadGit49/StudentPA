@@ -17,13 +17,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.mohammad.studentpa.Milestones.Milestones;
+import com.example.mohammad.studentpa.Reminders.Reminders;
+import com.example.mohammad.studentpa.Schedule.Schedule;
+import com.example.mohammad.studentpa.Spending.Spending;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    /*TODO: Check and verify navigation menu button functionality
-    */
-
     private static final String TAG = "MainActivity started";
     private DrawerLayout drawerLayout;
     private ArrayList<String> titleNames= new ArrayList<>();

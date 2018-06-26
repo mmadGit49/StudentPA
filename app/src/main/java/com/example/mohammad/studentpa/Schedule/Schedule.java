@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa;
+package com.example.mohammad.studentpa.Schedule;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Reminders extends Fragment {
+import com.example.mohammad.studentpa.R;
 
-    private View remindView;
+public class Schedule extends Fragment {
+
+    private View schedView;
     private Context context;
     private FloatingActionButton fab;
 
@@ -22,14 +24,15 @@ public class Reminders extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        remindView = inflater.inflate(R.layout.fragment_reminders, container, false);
-        Toolbar toolbar = remindView.findViewById(R.id.toolbar);
+        schedView = inflater.inflate(R.layout.fragment_schedule, container, false);
+        Toolbar toolbar = schedView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        toolbar.setTitle("Schedule");
 
-        fab = remindView.findViewById(R.id.fab);
+        fab = schedView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +42,7 @@ public class Reminders extends Fragment {
             }
         });
 
-        return remindView;
+        return schedView;
     }
 
 }

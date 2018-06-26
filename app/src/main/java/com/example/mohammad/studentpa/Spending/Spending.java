@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa;
+package com.example.mohammad.studentpa.Spending;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mohammad.studentpa.R;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public class Spending extends Fragment {
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);//sets menu icon to action bar
+        toolbar.setTitle("Spending");
 
         //Floating action Button action
         fab = spendView.findViewById(R.id.fab_spend);
