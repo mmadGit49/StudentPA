@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".Milestones.TakeMilestoneNote" />
         <activity android:name=".Spending.TakeSpendingItems" />
+        <activity android:name=".Reminders.TakeReminder" />
+        <activity android:name=".Schedule.TakeSchedule" />
     </application>
 
 </manifest>

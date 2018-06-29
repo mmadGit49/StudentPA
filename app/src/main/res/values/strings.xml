@@ -29,21 +29,40 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
+    <!--FOR MILESTONES MODULE-->
     <string name="Title_header">Title</string>
     <string name="text_header">Enter Text</string>
     <string name="spending_date">Date</string>
+    <!--FOR SPENDING MODULE-->
     <string name="spending_date_format">Date e.g. 01/01/1970</string>
     <string name="spending_amount">Amount spent</string>
     <string name="spending_details">Details</string>
     <string name="spending_add_detail">Add an Item</string>
     <string name="spending_total">Total Spent Today: </string>
-
-    <string name= "Monday">Monday</string>
+    <!--FOR SCHEDULE MODULE-->
+    <string name= "Monday">Mon</string>
     <string name= "Tuesday">Tue</string>
     <string name= "Wednesday">Wed</string>
-    <string name= "Thurdsay">Thur</string>
+    <string name= "Thursday">Thur</string>
     <string name= "Friday">Fri</string>
     <string name= "Saturday">Sat</string>
+    <!--FOR REMINDERS MODULE-->
+    <string name= "Alert_name">Title of Reminder</string>
+    <string name= "Alert_details">Extra details</string>
+    <string name= "set_Alert_date">Set Reminder date</string>
+    <string name= "Alert_date">Reminder date</string>
+    <string name= "set_Alert_time">Set Reminder time</string>
+    <string name= "Alert_time">Reminder time</string>
+    <!--FOR SCHEDULE MODULE-->
+    <string name= "schedule_title">Class/Event/Title</string>
+    <string name= "prompt_time_from">From</string>
+    <string name= "prompt_time_to">To</string>
+    <string name= "prompt_date">Date (optional)</string>>
+    <string name= "time_select">Select time</string>
+    <string name= "date_select">Select date</string>
+
+
+
 
 
 

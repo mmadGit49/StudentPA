@@ -62,14 +62,6 @@ public class TakeMilestoneNote extends AppCompatActivity {
     public void setDetails(String noteTitle, String noteDetails){//Set the note as follows
         Log.d(TAG, "setDetails: started");
         //TODO: SAve the note and refresh to display
-        /*Milestones milestones = new Milestones();
-        titleNames.add(noteTitle);
-        notes.add(noteDetails);
-
-        milestones.setTitleNames(titleNames);
-        milestones.setNotes(notes);
-        milestones.initRecyclerView();
-*/
     }
 
 

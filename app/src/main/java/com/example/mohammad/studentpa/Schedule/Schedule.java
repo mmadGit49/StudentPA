@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +21,8 @@ public class Schedule extends Fragment {
     private View schedView;
     private Context context;
     private FloatingActionButton fab;
+    //private SectionsPagerAdapter spa;
+    ViewPager viewPager;
 
 
     @Override
@@ -42,7 +46,27 @@ public class Schedule extends Fragment {
             }
         });
 
+        //spa = new SectionsPagerAdapter(getFragmentManager());
+        //set up viewpager with sections adapter
+        viewPager = schedView.findViewById(R.id.viewPagerContainer);
+        setupViewPager(viewPager);
+
+        TabLayout tabLayout = schedView.findViewById(R.id.scheduleTabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+
         return schedView;
+    }
+
+    public void setupViewPager(ViewPager vPager){
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getFragmentManager());
+        adapter.addFragment(new MondayFragment(), "Mon");
+        adapter.addFragment(new TuesdayFragment(), "Tue");
+        adapter.addFragment(new WednesdayFragment(), "Wed");
+        adapter.addFragment(new ThursdayFragment(), "Thur");
+        adapter.addFragment(new FridayFragment(), "Fri");
+        adapter.addFragment(new SaturdayFragment(), "Sat");
+
+        vPager.setAdapter(adapter);
     }
 
 }
