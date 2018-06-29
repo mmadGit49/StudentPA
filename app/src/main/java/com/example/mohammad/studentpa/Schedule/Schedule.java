@@ -74,8 +74,8 @@ public class Schedule extends Fragment {
         RecyclerView recyclerView = schedView.findViewById(R.id.recycler_view_schedule);
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        //ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(this.getActivity(), titleNames);
-        //recyclerView.setAdapter(adapter);
+        ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(this.getActivity(), titleNames);
+        recyclerView.setAdapter(adapter);
     }
 
 

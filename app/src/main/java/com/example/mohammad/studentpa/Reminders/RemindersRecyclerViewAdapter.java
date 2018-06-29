@@ -48,9 +48,6 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
             public void onClick(View v) {
                 //On item click, start note taker activity
                 Intent remindIntent= new Intent(context, TakeReminder.class);
-                //TakeMilestoneNote class needs to know WHICH note is being accessed
-                //noteIntent.putExtra("note_title", titleNames.get(position));
-                //noteIntent.putExtra("note_details", notes.get(position));
                 context.startActivity(remindIntent);
 
                 Toast.makeText(context, remindDetails.get(position), Toast.LENGTH_SHORT).show();
