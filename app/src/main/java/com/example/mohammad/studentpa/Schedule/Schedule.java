@@ -3,12 +3,13 @@ package com.example.mohammad.studentpa.Schedule;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +17,16 @@ import android.view.ViewGroup;
 
 import com.example.mohammad.studentpa.R;
 
+import java.util.ArrayList;
+
 public class Schedule extends Fragment {
 
     private View schedView;
     private Context context;
     private FloatingActionButton fab;
-    //private SectionsPagerAdapter spa;
+    private LinearLayoutManager layoutManager;
+    private ArrayList<String> titleNames= new ArrayList<>();
+
     ViewPager viewPager;
 
 
@@ -40,13 +45,10 @@ public class Schedule extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Select a category to store notes, set reminders etc :)",
-                        Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                initRecyclerView();
             }
         });
 
-        //spa = new SectionsPagerAdapter(getFragmentManager());
         //set up viewpager with sections adapter
         viewPager = schedView.findViewById(R.id.viewPagerContainer);
         setupViewPager(viewPager);
@@ -68,5 +70,13 @@ public class Schedule extends Fragment {
 
         vPager.setAdapter(adapter);
     }
+    public void initRecyclerView() {//initialises adapters, views and what have you's
+        RecyclerView recyclerView = schedView.findViewById(R.id.recycler_view_schedule);
+        layoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        //ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(this.getActivity(), titleNames);
+        //recyclerView.setAdapter(adapter);
+    }
+
 
 }
