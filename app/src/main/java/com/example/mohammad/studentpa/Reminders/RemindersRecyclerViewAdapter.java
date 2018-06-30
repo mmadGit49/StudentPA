@@ -61,6 +61,7 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
     public int getItemCount() {
         return titleNames.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewReminderTitle;

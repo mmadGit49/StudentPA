@@ -20,19 +20,19 @@ import java.util.List;
 @Dao
 public interface UserDao {
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
-    void insertSingleUser(User user);//Insert a single user's details after registration into the table
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertUser(User user);//Insert a single user's details after registration into the table
 
-    @Query("SELECT email FROM user")//Method to get all emails/usernames
-    LiveData<List<User>> getAllusernames();
+    @Query("SELECT * FROM user")//Method to get all emails/usernames
+    LiveData<List<User>> getAllUsers();
 
-    @Query("SELECT email, password FROM user WHERE email LIKE :email")//Method to get all emails/usernames
+    @Query("SELECT userID, email, password FROM user WHERE email = :email")//Method to get all user names
     LiveData<List<User>> getUserPassword(String email);//Get the PW from DB to check if match
 
     @Update
     void updateList(User user);//Update the table
 
     @Delete
-    void delete(User user);//Delete the rows, I guess?
+    void delete(User user);//Delete the rows, I guess?*/
 
 }

@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mohammad.studentpa.DatePickerFragment;
+import com.example.mohammad.studentpa.Util.DatePickerFragment;
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.TimePickerFragment;
+import com.example.mohammad.studentpa.Util.TimePickerFragment;
 
 //For the not_reminder_layout xml layout
 public class TakeReminder extends AppCompatActivity{

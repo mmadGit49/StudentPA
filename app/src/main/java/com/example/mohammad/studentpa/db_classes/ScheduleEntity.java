@@ -4,8 +4,6 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.sql.Time;
-
 import io.reactivex.annotations.NonNull;
 
 @Entity
@@ -40,20 +38,20 @@ public class ScheduleEntity {
     }
 
     @ColumnInfo (name = "time_from")
-    private Time timeFrom;
-    public Time getTimeFrom() {
+    private String timeFrom;
+    public String getTimeFrom() {
         return timeFrom;
     }
-    public void setTimeFrom(Time timeFrom) {
+    public void setTimeFrom(String timeFrom) {
         this.timeFrom = timeFrom;
     }
 
     @ColumnInfo (name = "time_to")
-    private Time timeTo;
-    public Time getTimeTo() {
+    private String timeTo;
+    public String getTimeTo() {
         return timeTo;
     }
-    public void setTimeTo(Time timeTo) {
+    public void setTimeTo(String timeTo) {
         this.timeTo = timeTo;
     }
 

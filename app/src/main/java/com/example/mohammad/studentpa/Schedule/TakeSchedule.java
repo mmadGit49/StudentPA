@@ -11,8 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.DatePickerFragment;
-import com.example.mohammad.studentpa.TimePickerFragment;
+import com.example.mohammad.studentpa.Util.DatePickerFragment;
+import com.example.mohammad.studentpa.Util.TimePickerFragment;
 
 public class TakeSchedule extends AppCompatActivity {
 

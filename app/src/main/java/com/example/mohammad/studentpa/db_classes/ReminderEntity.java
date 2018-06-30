@@ -4,14 +4,9 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.sql.Time;
-
-import io.reactivex.annotations.NonNull;
-
 @Entity
 public class ReminderEntity {
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
-    @NonNull//Obvious
     @ColumnInfo(name="reminderID")//Not necessary unless you want column name to differ from variable
     private int reminderID;
     public int getReminderID() {
@@ -39,7 +34,7 @@ public class ReminderEntity {
         this.reminderDetails = reminderDetails;
     }
 
-    @ColumnInfo(name ="reminderDate")
+    @ColumnInfo(name ="reminder_date")
     private String reminderDate;
     public String getReminderDate() {
         return reminderDate;
@@ -48,14 +43,12 @@ public class ReminderEntity {
         this.reminderDate = reminderDate;
     }
 
-    @ColumnInfo(name = "reminderTime")
-    private Time reminderTime;
-    public Time getReminderTime() {
+    @ColumnInfo(name = "reminder_time")
+    private String reminderTime;
+    public String getReminderTime() {
         return reminderTime;
     }
-    public void setReminderTime(Time reminderTime) {
+    public void setReminderTime(String reminderTime) {
         this.reminderTime = reminderTime;
     }
-
-
 }

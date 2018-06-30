@@ -5,12 +5,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import io.reactivex.annotations.NonNull;
+import javax.annotation.Nullable;
 
 @Entity
 public class User {
     @PrimaryKey (autoGenerate = true) //Obvious,and it shall autoGenerate
-    @NonNull//Obvious
     @ColumnInfo (name="userID")//Not necessary unless you want column name to differ from variable
     private int userID;
     public int getUserID() {
@@ -55,15 +54,6 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @ColumnInfo (name="age")
-    private int age;
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @ColumnInfo (name="date_of_birth")

@@ -4,12 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import io.reactivex.annotations.NonNull;
+import javax.annotation.Nullable;
 
 @Entity
 public class SpendingEntity {
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
-    @NonNull//Obvious
     @ColumnInfo(name="spendingID")//Not necessary unless you want column name to differ from variable
     private int spendingID;
     public int getSpendingID() {
@@ -28,6 +27,7 @@ public class SpendingEntity {
         this.spendDate = spendDate;
     }
 
+    @Nullable
     @ColumnInfo (name = "spending_amount")
     private double spendAmount;
     public double getSpendAmount() {
@@ -37,6 +37,7 @@ public class SpendingEntity {
         this.spendAmount = spendAmount;
     }
 
+    @Nullable
     @ColumnInfo (name = "spending_details")
     private String spendDetails;
     public String getSpendDetails() {

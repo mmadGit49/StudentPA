@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa;
+package com.example.mohammad.studentpa.Util;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.mohammad.studentpa.Login;
+import com.example.mohammad.studentpa.R;
 
 public class Splash extends AppCompatActivity {
     private TextView textv;

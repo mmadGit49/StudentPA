@@ -1,5 +1,6 @@
 package com.example.mohammad.studentpa.Milestones;
 
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.AppDatabase;
+import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
 
 import java.util.ArrayList;
 
@@ -19,8 +22,8 @@ public class TakeMilestoneNote extends AppCompatActivity {
     private EditText editTextTitle;
     private EditText editTextDetails;
     private FloatingActionButton fab;
-    private ArrayList<String> titleNames= new ArrayList<>();
-    private ArrayList<String> notes = new ArrayList<>();
+    private ArrayList<MilestoneEntity> titleNames= new ArrayList<>();
+    private ArrayList<MilestoneEntity> notes = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,7 +64,9 @@ public class TakeMilestoneNote extends AppCompatActivity {
 
     public void setDetails(String noteTitle, String noteDetails){//Set the note as follows
         Log.d(TAG, "setDetails: started");
-        //TODO: SAve the note and refresh to display
+        //TODO: Save the note and refresh to display
+
+//        titleNames.add(noteTitle);
     }
 
 

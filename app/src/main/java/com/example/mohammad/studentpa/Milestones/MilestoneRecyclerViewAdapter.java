@@ -13,17 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
 
 import java.util.ArrayList;
 
-public class MilestoneRecyclerViewAdapter extends RecyclerView.Adapter<MilestoneRecyclerViewAdapter.ViewHolder> {
+public class MilestoneRecyclerViewAdapter
+        extends RecyclerView.Adapter<MilestoneRecyclerViewAdapter.ViewHolder> {
+
     private static final String TAG = "MileRecycViewAdapter";
 
-    private ArrayList<String> titleNames;
-    private ArrayList<String> notes;
+    private ArrayList<MilestoneEntity> titleNames;
+    private ArrayList<MilestoneEntity> notes;
     private Context context;
 
-    public MilestoneRecyclerViewAdapter(Context context, ArrayList<String> titleNames, ArrayList<String> notes) {
+    public MilestoneRecyclerViewAdapter(Context context,
+                                        ArrayList<MilestoneEntity> titleNames,
+                                        ArrayList<MilestoneEntity> notes) {
         this.titleNames = titleNames;
         this.notes = notes;
         this.context = context;
@@ -41,8 +46,8 @@ public class MilestoneRecyclerViewAdapter extends RecyclerView.Adapter<Milestone
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");//log tag
 
-        holder.textViewTitle.setText(titleNames.get(position));
-        holder.textViewMilestone.setText(notes.get(position));
+        holder.textViewTitle.setText(titleNames.get(position).getMilestoneTitle());
+        holder.textViewMilestone.setText(notes.get(position).getMilestoneDetails());
 
         holder.milestoneLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +59,8 @@ public class MilestoneRecyclerViewAdapter extends RecyclerView.Adapter<Milestone
                 //noteIntent.putExtra("note_details", notes.get(position));
                 context.startActivity(noteIntent);
 
-                Toast.makeText(context, notes.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, notes.get(position).getMilestoneDetails(),
+                        Toast.LENGTH_SHORT).show();
 
             }
         });
