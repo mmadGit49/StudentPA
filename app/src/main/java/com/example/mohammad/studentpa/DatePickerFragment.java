@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.Reminders;
+package com.example.mohammad.studentpa;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -6,9 +6,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
-import android.widget.TextView;
-
-import com.example.mohammad.studentpa.R;
 
 import java.util.Calendar;
 
@@ -22,17 +19,16 @@ public class DatePickerFragment extends DialogFragment implements OnDateSetListe
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-
-
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
+        //FIXME: Save Date to textView in Different classes
         //set date to textView
-        String reminderDate = day + " / " + month + " / " + year;
+        /*String reminderDate = day + " / " + month + " / " + year;
         TextView textViewDate = getActivity().findViewById(R.id.textViewReminderDate);
-        textViewDate.setText(reminderDate);
+        textViewDate.setText(reminderDate);*/
 
     }
 

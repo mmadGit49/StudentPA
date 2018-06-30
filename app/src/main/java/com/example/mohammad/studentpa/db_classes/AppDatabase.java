@@ -1,5 +1,5 @@
 //This is the app database class
-package com.example.mohammad.studentpa;
+package com.example.mohammad.studentpa.db_classes;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;

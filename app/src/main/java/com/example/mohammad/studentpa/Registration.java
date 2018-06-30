@@ -2,10 +2,12 @@ package com.example.mohammad.studentpa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class Registration extends AppCompatActivity {
     private Button register;
@@ -13,11 +15,9 @@ public class Registration extends AppCompatActivity {
     private EditText lastName;
     private EditText email;
     private EditText password;
-    private EditText dob;//date of birth
+    private TextView dob;//date of birth
+    private Button setDob;
     private EditText confirmPassword;
-    //to create an instance of the database TODO: uncomment
-    //private AppDatabase db= Room.databaseBuilder(getApplicationContext(),
-    //AppDatabase.class, "App_data").build();
 
 
     @Override
@@ -31,7 +31,16 @@ public class Registration extends AppCompatActivity {
         email= findViewById(R.id.editTextEmail);
         password= findViewById(R.id.editTextNewPassword);
         confirmPassword= findViewById(R.id.editTextconfirmNewPassword);
-        dob= findViewById(R.id.editTextDob);
+        dob= findViewById(R.id.textViewDob);
+        setDob = findViewById(R.id.buttonRegistrationDob);
+
+        setDob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment pickDate= new DatePickerFragment();
+                showDatePickerDialog(v);
+            }
+        });
 
         register.setOnClickListener(new View.OnClickListener() {
             View view;
@@ -49,4 +58,12 @@ public class Registration extends AppCompatActivity {
         startActivity(loginIntent);
         finish();//prevents user from returning to this screen
     }
+
+    public void showDatePickerDialog(View v) {//onClick for set time
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+
+
+    }
+
 }

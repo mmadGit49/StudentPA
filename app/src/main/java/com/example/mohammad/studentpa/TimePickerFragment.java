@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.Reminders;
+package com.example.mohammad.studentpa;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

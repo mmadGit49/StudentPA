@@ -1,5 +1,5 @@
 //This class is one of the entities of the database
-package com.example.mohammad.studentpa;
+package com.example.mohammad.studentpa.db_classes;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -66,24 +66,12 @@ public class User {
         this.age = age;
     }
 
-    @ColumnInfo (name="gender")
-    private String gender;
-    public String getGender() {
-        return gender;
-    }
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    //TODO: resolve date parsing issue
-    /*@ColumnInfo (name="date_of_birth")
-    private Date dateOfBirth;
-    private java.sql.Date dateConverted;
-
-    public Date getDateOfBirth() {
+    @ColumnInfo (name="date_of_birth")
+    private String dateOfBirth;
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }*/
+    }
 }

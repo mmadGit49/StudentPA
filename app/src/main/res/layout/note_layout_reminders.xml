@@ -57,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/buttonReminderTime"
             android:layout_margin="8dp"
             android:layout_toRightOf="@+id/textViewReminderDate"
             android:padding="8dp"
