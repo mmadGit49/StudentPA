@@ -15,24 +15,39 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MilestoneRecyclerViewAdapter
         extends RecyclerView.Adapter<MilestoneRecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "MileRecycViewAdapter";
 
-    private ArrayList<MilestoneEntity> titleNames;
-    private ArrayList<MilestoneEntity> notes;
+    private List<MilestoneEntity> titleNames;
+    private List<MilestoneEntity> notes;
+    private List<MilestoneEntity> milestones;
     private Context context;
+    private MilestoneEntity milestoneEntity;
 
     public MilestoneRecyclerViewAdapter(Context context,
-                                        ArrayList<MilestoneEntity> titleNames,
-                                        ArrayList<MilestoneEntity> notes) {
+                                        List<MilestoneEntity> titleNames,
+                                        List<MilestoneEntity> notes) {
         this.titleNames = titleNames;
         this.notes = notes;
         this.context = context;
     }
+
+    public MilestoneRecyclerViewAdapter(Context context, MilestoneEntity milestoneEntity) {
+        this.milestoneEntity = milestoneEntity;
+        this.context = context;
+
+    }
+
+    public MilestoneRecyclerViewAdapter(Context context, List<MilestoneEntity> milestones) {
+        this.milestones = milestones;
+        this.context = context;
+
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,30 +61,46 @@ public class MilestoneRecyclerViewAdapter
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");//log tag
 
-        holder.textViewTitle.setText(titleNames.get(position).getMilestoneTitle());
-        holder.textViewMilestone.setText(notes.get(position).getMilestoneDetails());
+        if(titleNames != null  || notes != null) {
 
-        holder.milestoneLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //On item click, start note taker activity
-                Intent noteIntent= new Intent(context, TakeMilestoneNote.class);
-                //TakeMilestoneNote class needs to know WHICH note is being accessed
-                //noteIntent.putExtra("note_title", titleNames.get(position));
-                //noteIntent.putExtra("note_details", notes.get(position));
-                context.startActivity(noteIntent);
+            holder.textViewTitle.setText(milestoneEntity.getMilestoneTitle());
+            holder.textViewMilestone.setText(milestoneEntity.getMilestoneDetails());
+            holder.milestoneLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Open note to edit
+                    Intent noteIntent = new Intent(context, TakeMilestoneNote.class);
+                    noteIntent.putExtra("note_title", titleNames.get(position).toString());
+                    noteIntent.putExtra("note_details", notes.get(position).toString());
+                    context.startActivity(noteIntent);
 
-                Toast.makeText(context, notes.get(position).getMilestoneDetails(),
-                        Toast.LENGTH_SHORT).show();
+                }
+            });
+            Toast.makeText(context, notes.get(position).getMilestoneDetails(),
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            //If data is not ready yet
+            holder.textViewTitle.setText("No notes");
+        }
 
-            }
-        });
+    }
 
+    //not sure what happens here
+    void setWords(List<MilestoneEntity> milestoneEntities){
+        titleNames= milestoneEntities;
+        notes = milestoneEntities;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return titleNames.size();
+        // getItemCount() is called many times, and when it is first called,
+        // notes has not been updated (means initially, it's null, and we can't return null).
+        if (titleNames != null || notes != null) {
+            return notes.size();
+        } else {
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -85,5 +116,7 @@ public class MilestoneRecyclerViewAdapter
             milestoneLayout = itemView.findViewById(R.id.recyclerview_note_display);
         }
     }
+
+
 
 }

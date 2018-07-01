@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.RoomWarnings;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
@@ -19,12 +20,15 @@ public interface SpendingDao {
     LiveData<List<SpendingEntity>> getAllSpendingItems();
 
     @Query("SELECT spendingID, spending_date FROM spendingentity")
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<SpendingEntity>> getAllSpendingDates();
 
     @Query("SELECT spendingID, spending_amount FROM spendingentity")
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<SpendingEntity>> getAllSpendingAmounts();
 
     @Query("SELECT spendingID, spending_details FROM spendingentity")
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<SpendingEntity>> getAllSpendingDetails();
 
     @Update

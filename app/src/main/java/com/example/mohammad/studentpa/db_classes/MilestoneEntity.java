@@ -6,6 +6,12 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class MilestoneEntity {
+
+    public MilestoneEntity(String milestoneTitle, String milestoneDetails) {
+        this.milestoneTitle = milestoneTitle;
+        this.milestoneDetails = milestoneDetails;
+    }
+
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
     @ColumnInfo(name = "milestoneID")
     private int milestoneID;

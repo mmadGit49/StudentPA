@@ -4,8 +4,6 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import javax.annotation.Nullable;
-
 @Entity
 public class SpendingEntity {
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
@@ -27,17 +25,17 @@ public class SpendingEntity {
         this.spendDate = spendDate;
     }
 
-    @Nullable
     @ColumnInfo (name = "spending_amount")
-    private double spendAmount;
-    public double getSpendAmount() {
+    private String spendAmount;
+
+    public String getSpendAmount() {
         return spendAmount;
     }
-    public void setSpendAmount(double spendAmount) {
+
+    public void setSpendAmount(String spendAmount) {
         this.spendAmount = spendAmount;
     }
 
-    @Nullable
     @ColumnInfo (name = "spending_details")
     private String spendDetails;
     public String getSpendDetails() {

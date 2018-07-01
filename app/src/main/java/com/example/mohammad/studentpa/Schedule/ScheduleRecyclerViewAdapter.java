@@ -13,20 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.Reminders.TakeReminder;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRecyclerViewAdapter.ViewHolder>   {
 
     private static final String TAG = "ScheduleRecyclerViewAda";
 
     private Context context;
-    private ArrayList<String> titleDispaly;
+    private List<String> titleDisplay;
 
-    public ScheduleRecyclerViewAdapter(Context context, ArrayList<String> titleDispaly) {
+    public ScheduleRecyclerViewAdapter(Context context, List<String> titleDisplay) {
         this.context = context;
-        this.titleDispaly = titleDispaly;
+        this.titleDisplay = titleDisplay;
     }
 
     @NonNull
@@ -46,10 +45,10 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
             @Override
             public void onClick(View v) {
                 //On item click, start note taker activity
-                Intent remindIntent= new Intent(context, TakeReminder.class);
-                context.startActivity(remindIntent);
+                Intent scheduleIntent= new Intent(context, TakeSchedule.class);
+                context.startActivity(scheduleIntent);
 
-                Toast.makeText(context, titleDispaly.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, titleDisplay.get(position), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -57,7 +56,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
     @Override
     public int getItemCount() {
-        return titleDispaly.size();
+        return titleDisplay.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
