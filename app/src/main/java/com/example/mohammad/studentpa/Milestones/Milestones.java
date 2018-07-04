@@ -1,9 +1,10 @@
 package com.example.mohammad.studentpa.Milestones;
 
-import android.arch.lifecycle.LiveData;
-import android.content.Context;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -11,42 +12,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Milestones extends Fragment {
 
-    private EditText milestoneNote;
-    private EditText milestoneTitle;
     private View mileView;
     private LinearLayoutManager layoutManager;
-    private Context context;
-    private LiveData<List<MilestoneEntity>> titleNames;
-    private LiveData<List<MilestoneEntity>> notes;
-    private List<MilestoneEntity> milestones;
+    private List<MilestoneEntity> milestones = new ArrayList<>();
     private MilestoneViewModel milestoneViewModel;
     private FloatingActionButton fab;
-    private MilestoneEntity milestoneEntity = new MilestoneEntity("Title",
-            "Placeholder Note");
+    private MilestoneEntity milestoneEntity ;
 
-    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
-
-
+   // public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    private static final String TAG = "milestone fragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mileView= inflater.inflate(R.layout.fragment_milestones, container, false);
-        milestoneTitle= mileView.findViewById(R.id.editTextTitle);
-        milestoneNote= mileView.findViewById(R.id.editTextMilestone);
 
         Toolbar toolbar = mileView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -55,9 +48,7 @@ public class Milestones extends Fragment {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         toolbar.setTitle("Milestones");
 
-        initRecyclerView();//For adapter
         //for the floating action button:
-
         fab = mileView.findViewById(R.id.fab_add_note);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,37 +56,34 @@ public class Milestones extends Fragment {
                 //On item click, start note taker activity
                 Intent noteIntent = new Intent(getActivity(), TakeMilestoneNote.class);
                 startActivity(noteIntent);
-                //startActivityForResult(noteIntent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-
             }
         });
+
+        initRecyclerView();//RecyclerView Adapter start
+
         return mileView;
     }
 
     public void initRecyclerView() {//initialises adapters, views and what have you's
+        Log.d(TAG, "initRecyclerView: started");
         RecyclerView recyclerView = mileView.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        //MilestoneRecyclerViewAdapter adapter
-         //       = new MilestoneRecyclerViewAdapter(this.getActivity(), titleNames, notes);
-        MilestoneRecyclerViewAdapter adapter
-                = new MilestoneRecyclerViewAdapter(this.getActivity(), milestoneEntity);
+        final MilestoneRecyclerViewAdapter adapter
+                = new MilestoneRecyclerViewAdapter(this.getActivity(),
+                new ArrayList<MilestoneEntity>());
         recyclerView.setAdapter(adapter);
+        milestoneViewModel = ViewModelProviders.of(this).get(MilestoneViewModel.class);
 
-       /* milestoneViewModel = ViewModelProviders.of(this).get(MilestoneViewModel.class);
-        milestoneViewModel.getAllMilestoneNotes().observe(this, new Observer<List<MilestoneEntity>>() {
+        milestoneViewModel.getAllMilestones().observe(this, new Observer<List<MilestoneEntity>>() {
             @Override
             public void onChanged(@Nullable List<MilestoneEntity> milestoneEntities) {
                 //Update the cached copy of words in the adapter
-                adapter.setWords(milestoneEntities);
+                adapter.setMilestone(milestoneEntities);
+                Log.i("##############",milestoneEntities.size()+"");
             }
-        });*/
+        });
     }
-
-
-    public void setContext(Context context) {
-        this.context = context;
-    }//not quite necessary
 
     /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,12 +99,4 @@ public class Milestones extends Fragment {
         }
     }*/
 
-    /*
-    //This method is meant to add the data to the DB, use it later
-    public void addDataToDB(EditText milestoneTitle, EditText milestoneNote){
-        milestoneTitle.getText();
-        milestoneNote.getText();
-
-    }
-    */
 }

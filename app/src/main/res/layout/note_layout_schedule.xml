@@ -71,18 +71,19 @@ android:layout_height="match_parent">
             android:onClick="showTimePickerDialog"
             android:text="@string/time_select" />
 
-        <TextView
-            android:id="@+id/textViewScheduleTimeTo"
+        <EditText
+            android:id="@+id/textViewScheduleDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textViewScheduleDate"
             android:layout_below="@+id/textViewScheduleTimeFrom"
-            android:layout_alignTop="@+id/buttonScheduleTimeTo"
-            android:layout_toEndOf="@id/buttonScheduleTimeTo"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/duration"
+            android:inputType="time"
+            android:layout_margin="8dp"
             android:padding="8dp"
             android:textSize="18sp"
-            android:text="@string/prompt_time_to" />
-
+            android:textStyle="" />
+<!--
         <Button
             android:id="@+id/buttonScheduleTimeTo"
             android:layout_width="wrap_content"
@@ -91,7 +92,7 @@ android:layout_height="match_parent">
             android:layout_below="@+id/buttonScheduleTimeFrom"
             android:ems="10"
             android:onClick="showTimePickerDialog"
-            android:text="@string/time_select" />
+            android:text="@string/time_select" />-->
     </RelativeLayout>
 
 

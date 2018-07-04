@@ -5,10 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -16,50 +12,55 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     Context context;
 
-    private final List<Fragment> fragmentList = new ArrayList();//Keep track of fragments
-    private final List<String> fragmentTitleList = new ArrayList();//Keep track of fragment titles
-
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.context = context;
     }
 
-    public void addFragment(Fragment fragment, String title){//To add fragment to list
-        Log.d(TAG, "addFragment: ");
-        fragmentList.add(fragment);
-        fragmentTitleList.add(title);
-
-    }
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return new MondayFragment();
-        } else if (position == 1){
-            return new TuesdayFragment();
-        } else if (position == 3){
-            return new WednesdayFragment();
-        }  else if (position == 4){
-            return new ThursdayFragment();
-        } else if (position == 5){
-            return new FridayFragment();
-        }else if(position == 6){
-            return new SaturdayFragment();
-        }else{
-            return fragmentList.get(position);
 
+        Fragment fragment = null;
+        if (position == 0) {
+            fragment = new MondayFragment();
+        } else if (position == 1){
+            fragment=  new TuesdayFragment();
+        } else if (position == 2){
+            fragment = new WednesdayFragment();
+        }  else if (position == 3){
+            fragment=  new ThursdayFragment();
+        } else if (position == 4){
+            fragment = new FridayFragment();
+        }else if(position == 5){
+            fragment = new SaturdayFragment();
         }
+
+        return fragment;
 
     }
 
     @Override
     public int getCount() {
-        return fragmentList.size();
+        return 6;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return fragmentTitleList.get(position);
+        String title= null;
+        if (position == 0) {
+            title = "Mon";
+        } else if (position == 1){
+            title= "Tue";
+        } else if (position == 2){
+            title = "Wed";
+        }  else if (position == 3){
+            title=  "Thur";
+        } else if (position == 4){
+            title = "Fri";
+        }else if(position == 5){
+            title = "Sat";
+        }
+        return title;
     }
 }

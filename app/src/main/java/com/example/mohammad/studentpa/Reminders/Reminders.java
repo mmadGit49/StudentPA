@@ -1,6 +1,7 @@
 package com.example.mohammad.studentpa.Reminders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -43,8 +44,18 @@ public class Reminders extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                titleNames.add("New note");
-                remindDetails.add("Tap to edit new note...");
+                Intent reminderIntent = new Intent (getActivity(), TakeReminder.class);
+                startActivity(reminderIntent);
+                String title = null;
+                String details= null;
+                if(getArguments() != null) {
+                    details = getArguments().getString("reminder_details");
+                    title = getArguments().getString("reminder_title");
+                    String date = getArguments().getString("reminder_date");
+                    String time = getArguments().getString("reminder_time");
+                }
+                titleNames.add(title);
+                remindDetails.add(details);
                 initRecyclerView();
             }
         });

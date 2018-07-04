@@ -28,23 +28,20 @@ public class WednesdayFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         wednesdayView = inflater.inflate(R.layout.fragment_schedule_wednesday, container, false);
-        fab= getActivity().findViewById(R.id.fab);
+        fab= wednesdayView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 titleNames.add("Monday");
-                initRecyclerView();
+                RecyclerView recyclerView = wednesdayView.findViewById(R.id.recycler_view_schedule_wednesday);
+                layoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(layoutManager);
+                ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(), titleNames);
+                recyclerView.setAdapter(adapter);
             }
         });
 
         return wednesdayView;
     }
 
-    public void initRecyclerView() {//initialises adapters, views and what have you's
-        RecyclerView recyclerView = wednesdayView.findViewById(R.id.recycler_view_schedule_wednesday);
-        layoutManager = new LinearLayoutManager(this.getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(this.getActivity(), titleNames);
-        recyclerView.setAdapter(adapter);
-    }
 }

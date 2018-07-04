@@ -3,6 +3,7 @@ package com.example.mohammad.studentpa.Util;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
@@ -10,6 +11,9 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment implements OnDateSetListener {
+
+    String stringDate;
+    private Context context;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -20,15 +24,26 @@ public class DatePickerFragment extends DialogFragment implements OnDateSetListe
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(),
+                year, month, day);
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         //FIXME: Save Date to textView in Different classes
-        //set date to textView
-        /*String reminderDate = day + " / " + month + " / " + year;
-        TextView textViewDate = getActivity().findViewById(R.id.textViewReminderDate);
-        textViewDate.setText(reminderDate);*/
+        stringDate = day + " / " + month + " / " + year;
+
+       /* Intent dateIntent = new Intent(context, TakeReminder.class);
+        dateIntent.putExtra("date", stringDate);
+
+        Intent registrationIntent = new Intent(getActivity().getBaseContext(), TakeReminder.class);
+        registrationIntent.putExtra("date", stringDate);
+
+        Bundle bundle = new Bundle();
+        if (bundle != null) {
+            bundle.putString("date", stringDate);
+            Milestones milestones = new Milestones();
+            milestones.setArguments(bundle);
+        }*/
 
     }
 

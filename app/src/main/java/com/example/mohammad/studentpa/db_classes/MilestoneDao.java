@@ -32,5 +32,5 @@ public interface MilestoneDao {
     void updateList(MilestoneEntity milestoneEntity);//Update the table
 
     @Delete
-    void delete(MilestoneEntity milestoneEntity);//Delete the row passed to param, I guess?
+    void delete(MilestoneEntity milestoneEntity);//Delete the milestone passed to param, I guess?
 }

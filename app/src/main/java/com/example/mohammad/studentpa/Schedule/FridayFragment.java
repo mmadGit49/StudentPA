@@ -28,22 +28,22 @@ public class FridayFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         fridayView = inflater.inflate(R.layout.fragment_schedule_friday, container, false);
-        fab= getActivity().findViewById(R.id.fab);
+
+        fab= fridayView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initRecyclerView();
+                titleNames.add("Monday");
+                RecyclerView recyclerView = fridayView.findViewById(R.id.recycler_view_schedule_friday);
+                layoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(layoutManager);
+                ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(), titleNames);
+                recyclerView.setAdapter(adapter);
             }
         });
 
         return fridayView;
     }
 
-    public void initRecyclerView() {//initialises adapters, views and what have you's
-        RecyclerView recyclerView = fridayView.findViewById(R.id.recycler_view_schedule_friday);
-        layoutManager = new LinearLayoutManager(this.getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(this.getActivity(), titleNames);
-        recyclerView.setAdapter(adapter);
-    }
+
 }

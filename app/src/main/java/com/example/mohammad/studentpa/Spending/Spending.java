@@ -13,15 +13,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.mohammad.studentpa.R;
 
 import java.util.ArrayList;
 
-public class Spending extends Fragment {
+public class Spending extends Fragment{
 
     private View spendView;
     private Context context;
+    private TextView textViewDate;
     private FloatingActionButton fab;
     private LinearLayoutManager layoutManager;
     private ArrayList<String> spendDates = new ArrayList<>();
@@ -34,6 +36,7 @@ public class Spending extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         spendView = inflater.inflate(R.layout.fragment_spending, container, false);
+
         Toolbar toolbar = spendView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
@@ -54,7 +57,7 @@ public class Spending extends Fragment {
 
         return spendView;
     }
-    
+
     public void initSpendRecyclerView() {//initialises adapters, views and what have you'
         Log.d(TAG, "initSpendRecyclerView: initRecycStarted.");
         RecyclerView recyclerView = spendView.findViewById(R.id.spending_recycler_view);

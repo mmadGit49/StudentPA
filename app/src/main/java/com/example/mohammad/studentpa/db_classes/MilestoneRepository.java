@@ -10,25 +10,38 @@ public class MilestoneRepository {
     private MilestoneDao repoMilestoneDao;
     private LiveData<List<MilestoneEntity>> allMilestoneTitles;
     private LiveData<List<MilestoneEntity>> allMilestoneDetails;
+    private LiveData<List<MilestoneEntity>> allMilestones;
+
 
     public MilestoneRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoMilestoneDao = db.milestoneDao();
         allMilestoneTitles = repoMilestoneDao.getAllMilestoneTitles();
         allMilestoneDetails = repoMilestoneDao.getAllMilestoneDetails();
+        allMilestones = repoMilestoneDao.getAllMilestones();
     }
 
-    LiveData<List<MilestoneEntity>> getAllMilestoneTitles (){
+    public LiveData<List<MilestoneEntity>> getAllMilestoneTitles (){
         return allMilestoneTitles;
     }
-
-    LiveData<List<MilestoneEntity>> getAllMilestoneDetails (){
+    public LiveData<List<MilestoneEntity>> getAllMilestoneDetails (){
         return allMilestoneDetails;
+    }
+    public LiveData<List<MilestoneEntity>> getAllMilestones() {
+        return allMilestones;
     }
 
     public void insertMilestone (MilestoneEntity milestoneEntity) {
+        //starts the async task which, in this case, inserts a milestone to the db
         new insertAsyncTask(repoMilestoneDao).execute(milestoneEntity);
     }
+
+    public void deleteMilestone (MilestoneEntity milestoneEntity) {
+        //starts the async task which, in this case, inserts a milestone to the db
+        new insertDeleteAsyncTask(repoMilestoneDao).execute(milestoneEntity);
+    }
+
+
 
     private static class insertAsyncTask extends AsyncTask<MilestoneEntity, Void, Void> {
 
@@ -45,5 +58,19 @@ public class MilestoneRepository {
         }
     }
 
+    private static class insertDeleteAsyncTask extends AsyncTask<MilestoneEntity, Void, Void> {
+
+        private MilestoneDao mAsyncTaskDao;
+
+        insertDeleteAsyncTask(MilestoneDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final MilestoneEntity... params) {
+            mAsyncTaskDao.delete(params[0]);
+            return null;
+        }
+    }
 
 }

@@ -1,6 +1,6 @@
 package com.example.mohammad.studentpa.Milestones;
 
-import android.content.Intent;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,8 +9,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 
 public class TakeMilestoneNote extends AppCompatActivity {
 
@@ -20,72 +23,47 @@ public class TakeMilestoneNote extends AppCompatActivity {
     private EditText editTextDetails;
     private FloatingActionButton fab;
 
+    private MilestoneViewModel milestoneViewModel;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_layout_milestones);
-
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDetails = findViewById(R.id.editTextMilestone);
+        milestoneViewModel = ViewModelProviders.of(TakeMilestoneNote.this).
+                get(MilestoneViewModel.class);
 
         fab = findViewById(R.id.fab_save);
+        //To save the note.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {//TO save the note. TODO: improve note save onClick\
+            public void onClick(View view) {
                 //textUtils is an android class used on strings,apparently is preferred for
                 //exception handling purposes
-                Intent replyIntent = new Intent();
-
+                Log.d(TAG, "onClick: save btn started");
                 if( TextUtils.isEmpty( editTextDetails.getText().toString() ) &&
                             TextUtils.isEmpty(editTextTitle.getText().toString() )  ){
-                                setResult(RESULT_CANCELED, replyIntent);
+                               // setResult(RESULT_CANCELED, replyIntent);
                 }else{
                     String noteTitle = editTextTitle.getText().toString();
                     String noteDetails = editTextDetails.getText().toString();
-                    replyIntent.putExtra("note_title", noteTitle);
-                    replyIntent.putExtra("note_details", noteDetails);
-                    setResult(RESULT_OK, replyIntent);
+                    /*Bundle bundle = new Bundle();
+
+                    if (bundle != null) {
+                        bundle.putString("note_title", noteTitle);
+                        bundle.putString("note_details", noteDetails);
+                        Milestones milestones = new Milestones();
+                        milestones.setArguments(bundle);
+                    }*/
+                    //To save data to the db via the ViewModel
+                    milestoneViewModel.insert(new MilestoneEntity(noteTitle, noteDetails));
                 }
+                Toast.makeText(getApplicationContext(), "Milestones saved", Toast.LENGTH_SHORT).show();
                 finish();
 
-                /*if (editTextDetails != null || editTextTitle != null){
-                    //getIncomingIntent();
-                    String noteTitle = editTextTitle.getText().toString();
-                    String noteDetails = editTextDetails.getText().toString();
-                    setDetails(noteTitle, noteDetails);
-                    finish();
-                }*/
             }
         });
 
-        getIncomingIntent();
-
-
     }
-
-    public void getIncomingIntent(){//From adapter class
-        Log.d(TAG, "getIncomingIntent: started");
-        //checks if intent has extras, may crash if condition not set
-        if(getIntent().hasExtra("note_title") && getIntent().hasExtra("note_details")){
-            Log.d(TAG, "getIncomingIntent: foundIntentExtras");
-            String noteTitle = getIntent().getStringExtra("note_title");
-            String noteDetails = getIntent().getStringExtra("note_details");
-            setDetails(noteTitle, noteDetails);
-        }
-    }
-
-    public void setDetails(String noteTitle, String noteDetails){//Set the note as follows
-        Log.d(TAG, "setDetails: started");
-        //TODO: Save the note and refresh to display
-
-        editTextTitle.setText(noteTitle);
-        editTextDetails.setText(noteDetails);
-
-
-    }
-
-
-
-
 }

@@ -25,30 +25,30 @@ public class MondayFragment extends Fragment {
     private List<String> titleNames=new ArrayList<>();
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mondayView = inflater.inflate(R.layout.fragment_schedule_monday, container, false);
-        fab= getActivity().findViewById(R.id.fab);
+        mondayView = inflater.inflate(R.layout.fragment_schedule_monday,
+                container, false);
+        fab= mondayView.findViewById(R.id.fab_monday);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initRecyclerView();
+                titleNames.add("Placeholder");
+                RecyclerView recyclerView =
+                        mondayView.findViewById(R.id.recycler_view_schedule_monday);
+                layoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(layoutManager);
+                ScheduleRecyclerViewAdapter adapter =
+                        new ScheduleRecyclerViewAdapter(getActivity(), titleNames);
+                recyclerView.setAdapter(adapter);
             }
         });
 
         return mondayView;
     }
 
-    public void initRecyclerView() {//initialises adapters, views and what have you's
-        RecyclerView recyclerView = mondayView.findViewById(R.id.recycler_view_schedule_monday);
-        layoutManager = new LinearLayoutManager(this.getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(this.getActivity(), titleNames);
-        recyclerView.setAdapter(adapter);
-    }
 }
 

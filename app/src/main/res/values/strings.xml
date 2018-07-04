@@ -13,6 +13,8 @@
     <string name="confirm_password_prompt">Confirm your Password</string>
     <string name="dob_prompt">Date of Birth</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name = "welcome">Hello! Open Navigation drawer and select category to begin...</string>
+    <string name = "Copyright">2018 Organ Eyes, Get Organised today...</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -38,6 +40,8 @@
     <string name="spending_amount">Amount spent</string>
     <string name="spending_details">Details</string>
     <string name="spending_add_detail">Add an Item</string>
+    <string name="spending_remove_detail">Delete Item</string>
+    <string name="spending_sum_detail">Calculate total</string>
     <string name="spending_total">Total Spent Today: </string>
     <!--FOR SCHEDULE MODULE-->
     <string name= "Monday">Mon</string>
@@ -60,13 +64,6 @@
     <string name= "prompt_date">Date (optional)</string>>
     <string name= "time_select">Select time</string>
     <string name= "date_select">Select date</string>
-
-
-
-
-
-
-
-
+    <string name = "duration">Duration (HH:MM)</string>
 
 </resources>

@@ -11,17 +11,16 @@ public class MilestoneViewModel extends AndroidViewModel {
     private MilestoneRepository milestoneRepository;
     private LiveData<List<MilestoneEntity>> allMilestoneTitles;
     private LiveData<List<MilestoneEntity>> allMilestoneNotes;
+    private LiveData<List<MilestoneEntity>> allMilestones;
 
     public MilestoneViewModel (Application application){
         super(application);
         milestoneRepository = new MilestoneRepository(application);
-        allMilestoneTitles = milestoneRepository.getAllMilestoneTitles();
-        allMilestoneNotes = milestoneRepository.getAllMilestoneDetails();
+        allMilestones = milestoneRepository.getAllMilestones();
 
     }
 
     //The following getters are used to add EVEN MORE abstraction to the repository and DB
-
 
     public LiveData<List<MilestoneEntity>> getAllMilestoneTitles() {
         return allMilestoneTitles;
@@ -31,10 +30,17 @@ public class MilestoneViewModel extends AndroidViewModel {
         return allMilestoneNotes;
     }
 
+    public LiveData<List<MilestoneEntity>> getAllMilestones() {
+        return allMilestones;
+    }
+
     //Again, for abstraction
     public void insert(MilestoneEntity milestoneEntity) {
         milestoneRepository.insertMilestone(milestoneEntity);
+    }
 
+    public  void delete(MilestoneEntity milestoneEntity){
+        milestoneRepository.deleteMilestone(milestoneEntity);
     }
 
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,30 +23,12 @@ public class MilestoneRecyclerViewAdapter
 
     private static final String TAG = "MileRecycViewAdapter";
 
-    private List<MilestoneEntity> titleNames;
-    private List<MilestoneEntity> notes;
     private List<MilestoneEntity> milestones;
     private Context context;
-    private MilestoneEntity milestoneEntity;
-
-    public MilestoneRecyclerViewAdapter(Context context,
-                                        List<MilestoneEntity> titleNames,
-                                        List<MilestoneEntity> notes) {
-        this.titleNames = titleNames;
-        this.notes = notes;
-        this.context = context;
-    }
-
-    public MilestoneRecyclerViewAdapter(Context context, MilestoneEntity milestoneEntity) {
-        this.milestoneEntity = milestoneEntity;
-        this.context = context;
-
-    }
 
     public MilestoneRecyclerViewAdapter(Context context, List<MilestoneEntity> milestones) {
         this.milestones = milestones;
         this.context = context;
-
     }
 
     @NonNull
@@ -61,22 +44,28 @@ public class MilestoneRecyclerViewAdapter
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");//log tag
 
-        if(titleNames != null  || notes != null) {
-
-            holder.textViewTitle.setText(milestoneEntity.getMilestoneTitle());
-            holder.textViewMilestone.setText(milestoneEntity.getMilestoneDetails());
+        if(milestones != null) {
+            holder.textViewTitle.setText(milestones.get(position).getMilestoneTitle());
+            holder.textViewMilestone.setText(milestones.get(position).getMilestoneDetails());
             holder.milestoneLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Open note to edit
                     Intent noteIntent = new Intent(context, TakeMilestoneNote.class);
-                    noteIntent.putExtra("note_title", titleNames.get(position).toString());
-                    noteIntent.putExtra("note_details", notes.get(position).toString());
                     context.startActivity(noteIntent);
-
                 }
             });
-            Toast.makeText(context, notes.get(position).getMilestoneDetails(),
+            holder.milestoneLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    //TODO: SETUP TO PROMPT AND DELETE
+                    Toast.makeText(context, "Long click!",
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
+            //TODO: REMOVE ME
+            Toast.makeText(context, milestones.get(position).getMilestoneDetails(),
                     Toast.LENGTH_SHORT).show();
         }else{
             //If data is not ready yet
@@ -85,10 +74,8 @@ public class MilestoneRecyclerViewAdapter
 
     }
 
-    //not sure what happens here
-    void setWords(List<MilestoneEntity> milestoneEntities){
-        titleNames= milestoneEntities;
-        notes = milestoneEntities;
+    void setMilestone(List<MilestoneEntity> milestoneEntities){
+        this.milestones = milestoneEntities;
         notifyDataSetChanged();
     }
 
@@ -96,8 +83,8 @@ public class MilestoneRecyclerViewAdapter
     public int getItemCount() {
         // getItemCount() is called many times, and when it is first called,
         // notes has not been updated (means initially, it's null, and we can't return null).
-        if (titleNames != null || notes != null) {
-            return notes.size();
+        if (milestones != null) {
+            return milestones.size();
         } else {
             return 0;
         }
@@ -108,12 +95,21 @@ public class MilestoneRecyclerViewAdapter
         TextView textViewTitle;
         TextView textViewMilestone;
         LinearLayout milestoneLayout;
+        //For the create Milestone activity
+        EditText editTextTitle;
+        EditText editTextDetails;
+        LinearLayout milestoneNoteLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewMilestone = itemView.findViewById(R.id.textViewMilestone);
             milestoneLayout = itemView.findViewById(R.id.recyclerview_note_display);
+            //For the TakeMilestone activity:
+            editTextTitle = itemView.findViewById(R.id.editTextTitle);
+            editTextDetails = itemView.findViewById(R.id.editTextMilestone);
+            milestoneNoteLayout = itemView.findViewById(R.id.milestone_note_layout);
+
         }
     }
 

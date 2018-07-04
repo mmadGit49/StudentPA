@@ -47,17 +47,18 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                 //On item click, start note taker activity
                 Intent scheduleIntent= new Intent(context, TakeSchedule.class);
                 context.startActivity(scheduleIntent);
-
-                Toast.makeText(context, titleDisplay.get(position), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(context, "Edit class", Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.textViewScheduleTitleDisplay.setText(titleDisplay.get(position));
     }
 
     @Override
     public int getItemCount() {
         return titleDisplay.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

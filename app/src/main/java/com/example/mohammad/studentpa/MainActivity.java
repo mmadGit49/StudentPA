@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toast.makeText(this, "Welcome! " +
+                "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
         //for the toolbar, action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
