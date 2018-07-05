@@ -2,6 +2,7 @@ package com.example.mohammad.studentpa.Reminders;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,10 +15,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.Util.DatePickerFragment;
 import com.example.mohammad.studentpa.Util.TimePickerFragment;
+import com.example.mohammad.studentpa.db_classes.ReminderEntity;
+import com.example.mohammad.studentpa.db_classes.ReminderViewModel;
 
 //For the not_reminder_layout xml layout
 public class TakeReminder extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
@@ -28,10 +32,11 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
     private EditText editTextReminderTitle;
     private EditText editTextReminderDetails;
     private TextView textViewSetReminderDate;
-    private Button buttonSetReminderDate;
     private TextView textViewSetReminderTime;
     private Button buttonSetReminderTime;
     private FloatingActionButton fab;
+
+    private ReminderViewModel reminderViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,17 +45,26 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
         editTextReminderTitle = findViewById(R.id.editTextReminderTitle);
         editTextReminderDetails = findViewById(R.id.editTextReminderDetails);
         textViewSetReminderDate = findViewById(R.id.textViewReminderDate);
-        buttonSetReminderDate = findViewById(R.id.buttonReminderDate);
+        Button buttonSetReminderDate = findViewById(R.id.buttonReminderDate);
         textViewSetReminderTime = findViewById(R.id.textViewReminderTime);
-        buttonSetReminderTime = findViewById(R.id.buttonReminderTime);
+        Button buttonSetReminderTime = findViewById(R.id.buttonReminderTime);
 
         buttonSetReminderDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(v);
-
             }
         });
+
+        buttonSetReminderTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialog(v);
+            }
+        });
+
+        reminderViewModel = ViewModelProviders.of
+                (TakeReminder.this).get(ReminderViewModel.class);
 
         fab = findViewById(R.id.fab_save_reminder);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,19 +74,14 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                         TextUtils.isEmpty(editTextReminderDetails.getText().toString() )  ){
                     // setResult(RESULT_CANCELED, replyIntent);
                 }else{
-                    Bundle bundle = new Bundle();
                     String reminderTitle = editTextReminderTitle.getText().toString();
                     String reminderDetails = editTextReminderDetails.getText().toString();
                     String reminderDate= textViewSetReminderDate.getText().toString();
                     String reminderTime = textViewSetReminderTime.getText().toString();
-                    if (bundle != null) {
-                        bundle.putString("reminder_title", reminderTitle);
-                        bundle.putString("reminder_details", reminderDetails);
-                        bundle.putString("reminder_date", reminderDate);
-                        bundle.putString("reminder_time", reminderTime);
-                        Reminders reminders = new Reminders();
-                        reminders.setArguments(bundle);
-                    }
+                    reminderViewModel.insert(new ReminderEntity
+                            (reminderTitle, reminderDetails, reminderDate, reminderTime));
+                    Toast.makeText(getApplicationContext(),
+                            "Reminder saved!", Toast.LENGTH_SHORT).show();
                 }
                 finish();
             }

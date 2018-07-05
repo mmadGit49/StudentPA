@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-    android:background="@color/colorSwitchUp"
+    android:background="@color/ic_launcher_background"
     tools:context=".Util.Splash">
 
     <ImageView
         android:id="@+id/imageViewLogo"
-        android:layout_width="109dp"
-        android:layout_height="114dp"
+        android:layout_width="126dp"
+        android:layout_height="135dp"
         android:adjustViewBounds="true"
         android:background="@drawable/ic_icon_image"
         app:layout_constraintBottom_toBottomOf="parent"

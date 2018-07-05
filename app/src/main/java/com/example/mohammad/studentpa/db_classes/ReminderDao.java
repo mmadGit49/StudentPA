@@ -17,7 +17,7 @@ public interface ReminderDao {
     void insertReminder(ReminderEntity reminderEntity);
 
     @Query("SELECT * FROM reminderentity")//Method to get all notes
-    LiveData<List<ReminderEntity>> getAllReminderItems();
+    LiveData<List<ReminderEntity>> getAllReminders();
 
     @Query("SELECT reminderID, reminder_title FROM reminderentity")//Method to get all notes
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)

@@ -28,10 +28,8 @@ public class Milestones extends Fragment {
 
     private View mileView;
     private LinearLayoutManager layoutManager;
-    private List<MilestoneEntity> milestones = new ArrayList<>();
     private MilestoneViewModel milestoneViewModel;
     private FloatingActionButton fab;
-    private MilestoneEntity milestoneEntity ;
 
    // public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private static final String TAG = "milestone fragment";
@@ -73,8 +71,8 @@ public class Milestones extends Fragment {
                 = new MilestoneRecyclerViewAdapter(this.getActivity(),
                 new ArrayList<MilestoneEntity>());
         recyclerView.setAdapter(adapter);
-        milestoneViewModel = ViewModelProviders.of(this).get(MilestoneViewModel.class);
 
+        milestoneViewModel = ViewModelProviders.of(this).get(MilestoneViewModel.class);
         milestoneViewModel.getAllMilestones().observe(this, new Observer<List<MilestoneEntity>>() {
             @Override
             public void onChanged(@Nullable List<MilestoneEntity> milestoneEntities) {

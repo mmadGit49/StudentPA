@@ -8,6 +8,15 @@ import io.reactivex.annotations.NonNull;
 
 @Entity
 public class ScheduleEntity {
+
+    public ScheduleEntity(String scheduleTitle, String dayOfWeek, String timeFrom, String duration, String date) {
+        this.scheduleTitle = scheduleTitle;
+        this.dayOfWeek = dayOfWeek;
+        this.timeFrom = timeFrom;
+        this.duration = duration;
+        this.date = date;
+    }
+
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
     @NonNull//Obvious
     @ColumnInfo(name="scheduleID")//Not necessary unless you want column name to differ from variable
@@ -46,13 +55,13 @@ public class ScheduleEntity {
         this.timeFrom = timeFrom;
     }
 
-    @ColumnInfo (name = "time_to")
-    private String timeTo;
-    public String getTimeTo() {
-        return timeTo;
+    @ColumnInfo (name = "duration")
+    private String duration;
+    public String getDuration() {
+        return duration;
     }
-    public void setTimeTo(String timeTo) {
-        this.timeTo = timeTo;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     @ColumnInfo (name = "optional_date")

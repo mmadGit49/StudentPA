@@ -6,6 +6,14 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class ReminderEntity {
+
+    public ReminderEntity(String reminderTitle, String reminderDetails, String reminderDate, String reminderTime) {
+        this.reminderTitle = reminderTitle;
+        this.reminderDetails = reminderDetails;
+        this.reminderDate = reminderDate;
+        this.reminderTime = reminderTime;
+    }
+
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
     @ColumnInfo(name="reminderID")//Not necessary unless you want column name to differ from variable
     private int reminderID;

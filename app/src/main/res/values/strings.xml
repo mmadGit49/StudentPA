@@ -53,14 +53,14 @@
     <!--FOR REMINDERS MODULE-->
     <string name= "Alert_name">Title of Reminder</string>
     <string name= "Alert_details">Extra details</string>
-    <string name= "set_Alert_date">Set Reminder date</string>
+    <string name= "set_Alert_date">Set date</string>
     <string name= "Alert_date">Reminder date</string>
-    <string name= "set_Alert_time">Set Reminder time</string>
+    <string name= "set_Alert_time">Set time</string>
     <string name= "Alert_time">Reminder time</string>
     <!--FOR SCHEDULE MODULE-->
     <string name= "schedule_title">Class/Event/Title</string>
     <string name= "prompt_time_from">From</string>
-    <string name= "prompt_time_to">To</string>
+    <string name= "prompt_duration">Duration</string>
     <string name= "prompt_date">Date (optional)</string>>
     <string name= "time_select">Select time</string>
     <string name= "date_select">Select date</string>

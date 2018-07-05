@@ -33,20 +33,20 @@ android:layout_height="wrap_content">
         android:text="@string/prompt_time_from" />
 
     <TextView
-        android:id="@+id/textViewScheduleTimeToDisplay"
+        android:id="@+id/textViewScheduleDurationDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="8dp"
         android:layout_toRightOf="@+id/textViewScheduleTimeFromDisplay"
-        android:text="@string/prompt_time_to" />
+        android:text="@string/prompt_duration" />
     <TextView
         android:id="@+id/textViewScheduleDateDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="8dp"
-        android:layout_toRightOf="@+id/textViewScheduleTimeToDisplay"
+        android:layout_toRightOf="@+id/textViewScheduleDurationDisplay"
         android:text="@string/spending_date" />
 
 </RelativeLayout>

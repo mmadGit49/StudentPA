@@ -17,7 +17,6 @@ public class MilestoneViewModel extends AndroidViewModel {
         super(application);
         milestoneRepository = new MilestoneRepository(application);
         allMilestones = milestoneRepository.getAllMilestones();
-
     }
 
     //The following getters are used to add EVEN MORE abstraction to the repository and DB

@@ -64,9 +64,7 @@ public class MilestoneRecyclerViewAdapter
                     return true;
                 }
             });
-            //TODO: REMOVE ME
-            Toast.makeText(context, milestones.get(position).getMilestoneDetails(),
-                    Toast.LENGTH_SHORT).show();
+
         }else{
             //If data is not ready yet
             holder.textViewTitle.setText("No notes");

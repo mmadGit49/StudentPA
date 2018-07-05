@@ -58,8 +58,10 @@ public class TakeMilestoneNote extends AppCompatActivity {
                     }*/
                     //To save data to the db via the ViewModel
                     milestoneViewModel.insert(new MilestoneEntity(noteTitle, noteDetails));
+                    Toast.makeText(getApplicationContext(), "Milestone saved!",
+                            Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(getApplicationContext(), "Milestones saved", Toast.LENGTH_SHORT).show();
+
                 finish();
 
             }

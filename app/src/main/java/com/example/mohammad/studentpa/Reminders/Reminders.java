@@ -1,8 +1,11 @@
 package com.example.mohammad.studentpa.Reminders;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -15,8 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.ReminderEntity;
+import com.example.mohammad.studentpa.db_classes.ReminderViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Reminders extends Fragment {
@@ -25,14 +31,14 @@ public class Reminders extends Fragment {
     private Context context;
     private FloatingActionButton fab;
     private LinearLayoutManager layoutManager;
-    private ArrayList<String> titleNames= new ArrayList<>();
-    private ArrayList<String> remindDetails = new ArrayList<>();
+    private ReminderViewModel reminderViewModel;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         remindView = inflater.inflate(R.layout.fragment_reminders, container, false);
+
         Toolbar toolbar = remindView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
@@ -46,16 +52,6 @@ public class Reminders extends Fragment {
             public void onClick(View view) {
                 Intent reminderIntent = new Intent (getActivity(), TakeReminder.class);
                 startActivity(reminderIntent);
-                String title = null;
-                String details= null;
-                if(getArguments() != null) {
-                    details = getArguments().getString("reminder_details");
-                    title = getArguments().getString("reminder_title");
-                    String date = getArguments().getString("reminder_date");
-                    String time = getArguments().getString("reminder_time");
-                }
-                titleNames.add(title);
-                remindDetails.add(details);
                 initRecyclerView();
             }
         });
@@ -66,8 +62,17 @@ public class Reminders extends Fragment {
         RecyclerView recyclerView = remindView.findViewById(R.id.recycler_view_reminders);
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        RemindersRecyclerViewAdapter adapter = new RemindersRecyclerViewAdapter(this.getActivity(), titleNames, remindDetails);
+        final RemindersRecyclerViewAdapter adapter = new RemindersRecyclerViewAdapter(this.getActivity(),
+                new ArrayList<ReminderEntity>());
         recyclerView.setAdapter(adapter);
+
+        reminderViewModel = ViewModelProviders.of(this).get(ReminderViewModel.class);
+        reminderViewModel.getAllReminders().observe(this, new Observer<List<ReminderEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<ReminderEntity> reminderEntities) {
+                adapter.setReminders(reminderEntities);
+            }
+        });
     }
 
     public void setContext(Context context) {

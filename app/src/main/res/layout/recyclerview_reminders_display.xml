@@ -30,22 +30,31 @@
             android:padding="8dp"
             android:text="@string/Alert_details" />
 
-        <TextView
-            android:id="@+id/textViewDisplayDate"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            android:layout_toRightOf="@+id/textViewReminderDetails"
-            android:text="@string/Alert_date" />
-        <TextView
-            android:id="@+id/textViewDisplayTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            android:layout_toRightOf="@+id/textViewDisplayDate"
-            android:text="@string/Alert_time" />
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp">
+            <TextView
+                android:id="@+id/textViewDisplayDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:layout_toRightOf="@+id/textViewReminderDetails"
+                android:text="@string/Alert_date" />
+            <TextView
+                android:id="@+id/textViewDisplayTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:layout_toRightOf="@+id/textViewDisplayDate"
+                android:text="@string/Alert_time" />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 

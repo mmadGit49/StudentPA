@@ -10,7 +10,7 @@ import android.content.Context;
                     MilestoneEntity.class,
                     ScheduleEntity.class,
                     SpendingEntity.class,
-                    ReminderEntity.class}, version= 2, exportSchema = false)
+                    ReminderEntity.class}, version= 3, exportSchema = false)
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();

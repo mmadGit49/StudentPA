@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.ScheduleEntity;
 
 import java.util.List;
 
@@ -21,11 +22,11 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
     private static final String TAG = "ScheduleRecyclerViewAda";
 
     private Context context;
-    private List<String> titleDisplay;
+    private List<ScheduleEntity> schedules;
 
-    public ScheduleRecyclerViewAdapter(Context context, List<String> titleDisplay) {
+    public ScheduleRecyclerViewAdapter(Context context, List<ScheduleEntity> schedules) {
         this.context = context;
-        this.titleDisplay = titleDisplay;
+        this.schedules = schedules;
     }
 
     @NonNull
@@ -41,30 +42,51 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
     public void onBindViewHolder(@NonNull ScheduleRecyclerViewAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
 
-        holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //On item click, start note taker activity
-                Intent scheduleIntent= new Intent(context, TakeSchedule.class);
-                context.startActivity(scheduleIntent);
-                Toast.makeText(context, "Edit class", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (schedules != null) {
+            holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle().toString());
+            holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate().toString());
+            holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getDate().toString());
+            holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration().toString());
+            holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //On item click, start note taker activity
+                    Intent scheduleIntent= new Intent(context, TakeSchedule.class);
+                    context.startActivity(scheduleIntent);
+                    Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
+                }
+            });
+            holder.scheduleLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    //TODO: SETUP TO PROMPT AND DELETE
+                    Toast.makeText(context, "Long click!",
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
 
-        holder.textViewScheduleTitleDisplay.setText(titleDisplay.get(position));
+        } else {
+            //If data is not ready yet
+            holder.textViewScheduleTitleDisplay.setText("No notes");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return titleDisplay.size();
+        return schedules.size();
     }
 
+    void setMilestone(List<ScheduleEntity> scheduleEntities){
+        this.schedules = scheduleEntities;
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewScheduleTitleDisplay;
         TextView textViewScheduleTimeFromDisplay;
-        TextView textViewScheduleTimeToDisplay;
+        TextView textViewScheduleDurationDisplay;
         TextView textViewScheduleDateDisplay;
         LinearLayout scheduleLayout;
 
@@ -72,7 +94,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
             super(itemView);
             textViewScheduleTitleDisplay = itemView.findViewById(R.id.textViewScheduleTitleDisplay);
             textViewScheduleTimeFromDisplay = itemView.findViewById(R.id.textViewScheduleTimeFromDisplay);
-            textViewScheduleTimeToDisplay = itemView.findViewById(R.id.textViewScheduleTimeToDisplay);
+            textViewScheduleDurationDisplay = itemView.findViewById(R.id.textViewScheduleDurationDisplay);
             textViewScheduleDateDisplay = itemView.findViewById(R.id.textViewScheduleDateDisplay);
             scheduleLayout = itemView.findViewById(R.id.recyclerview_schedule_display);
         }

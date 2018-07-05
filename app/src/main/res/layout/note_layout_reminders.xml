@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:padding="8dp"
     android:layout_margin="8dp"
+    android:layout_marginLeft="4dp"
     android:background="@drawable/list_view_design"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -26,56 +27,65 @@
         android:layout_margin="8dp"
         android:hint="@string/Alert_details"
         android:inputType="textMultiLine" />
-    <RelativeLayout
-        android:layout_width="wrap_content"
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="8dp">
+        android:orientation="horizontal"
+        android:weightSum="100">
 
         <TextView
             android:id="@+id/textViewReminderDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_margin="8dp"
+            android:layout_weight="40"
             android:padding="8dp"
             android:text="@string/Alert_date"
             android:textAlignment="center"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/buttonReminderDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewReminderDate"
-            android:ems="10"
-            android:onClick="showDatePickerDialog"
-            android:text="@string/set_Alert_date" />
-
         <TextView
             android:id="@+id/textViewReminderTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/buttonReminderTime"
             android:layout_margin="8dp"
-            android:layout_toRightOf="@+id/textViewReminderDate"
+            android:layout_weight="40"
             android:padding="8dp"
             android:text="@string/Alert_time"
             android:textAlignment="center"
             android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <Button
+            android:id="@+id/buttonReminderDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="40"
+            android:ems="10"
+            android:onClick="showDatePickerDialog"
+            android:text="@string/set_Alert_date" />
 
         <Button
             android:id="@+id/buttonReminderTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/textViewReminderTime"
+            android:layout_margin="8dp"
+            android:layout_weight="40"
             android:ems="10"
             android:onClick="showTimePickerDialog"
             android:text="@string/set_Alert_time" />
-    </RelativeLayout>
 
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_save_reminder"

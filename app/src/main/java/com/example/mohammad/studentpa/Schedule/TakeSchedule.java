@@ -2,21 +2,26 @@ package com.example.mohammad.studentpa.Schedule;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.Util.DatePickerFragment;
 import com.example.mohammad.studentpa.Util.TimePickerFragment;
+import com.example.mohammad.studentpa.db_classes.ScheduleEntity;
+import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 
 public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener{
@@ -30,7 +35,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
     private FloatingActionButton fab;
     private String timeFrom;
 
-    String classTitle;
+    private ScheduleViewModel scheduleViewModel;
 
 
     @Override
@@ -45,6 +50,9 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
         buttonScheduleDate = findViewById(R.id.buttonScheduleDate);
         buttonScheduleTimeFrom = findViewById(R.id.buttonScheduleTimeFrom);
         fab = findViewById(R.id.fab_save_schedule);
+
+        scheduleViewModel = ViewModelProviders.of(TakeSchedule.this).
+                get(ScheduleViewModel.class);
 
         buttonScheduleDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +71,24 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if( TextUtils.isEmpty( editTextScheduleTitle.getText().toString() ) ){
+                    // setResult(RESULT_CANCELED, replyIntent);
+                }else{
+                    String scheduleTitle = editTextScheduleTitle.getText().toString();
+                    String scheduleTime = textViewScheduleTimeFrom.getText().toString();
+                    String optionalDate = textViewScheduleDate.getText().toString();
+                    String duration = textViewScheduleDuration.getText().toString();
+
+                    //To save data to the db via the ViewModel
+                    scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, null, scheduleTime,
+                            optionalDate, duration));
+                    Toast.makeText(getApplicationContext(), "Item saved!",
+                            Toast.LENGTH_SHORT).show();
+                }
+
                 finish();
             }
         });
-
-        classTitle = editTextScheduleTitle.getText().toString();
 
     }
 

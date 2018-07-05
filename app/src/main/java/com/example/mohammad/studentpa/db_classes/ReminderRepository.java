@@ -8,7 +8,8 @@ import java.util.List;
 
 public class ReminderRepository {
     private ReminderDao repoReminderDao;
-    private LiveData<List<ReminderEntity>> allRemiderTitles;
+    private LiveData<List<ReminderEntity>> allReminders;
+    private LiveData<List<ReminderEntity>> allReminderTitles;
     private LiveData<List<ReminderEntity>> allReminderDetails;
     private LiveData<List<ReminderEntity>> allReminderDates;
     private LiveData<List<ReminderEntity>> allReminderTimes;
@@ -17,7 +18,8 @@ public class ReminderRepository {
     public ReminderRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoReminderDao = db.reminderDao();
-        allRemiderTitles = repoReminderDao.getAllReminderTitles();
+        allReminders = repoReminderDao.getAllReminders();
+        allReminderTitles = repoReminderDao.getAllReminderTitles();
         allReminderDetails = repoReminderDao.getAllReminderDetails();
         allReminderDates = repoReminderDao.getAllReminderDates();
         allReminderTimes = repoReminderDao.getAllReminderTimes();
@@ -25,8 +27,12 @@ public class ReminderRepository {
     }
 
     //For abstraction, we wrap the getters as follows
+    public LiveData<List<ReminderEntity>> getAllReminders() {
+        return allReminders;
+    }
+
     LiveData<List<ReminderEntity>> getAllReminderTitles (){
-        return allRemiderTitles;
+        return allReminderTitles;
     }
 
     LiveData<List<ReminderEntity>> getAllReminderDetails (){
@@ -37,13 +43,19 @@ public class ReminderRepository {
         return allReminderDates;
     }
 
-    LiveData<List<ReminderEntity>> getAllReminderTime (){
+    LiveData<List<ReminderEntity>> getAllReminderTimes (){
         return allReminderTimes;
     }
 
     public void insertReminder (ReminderEntity reminderEntity) {
         new insertAsyncTask(repoReminderDao).execute(reminderEntity);
     }
+
+    public void deleteReminder (ReminderEntity reminderEntity){
+        new insertDeleteAsyncTask(repoReminderDao).execute(reminderEntity);
+    }
+
+    //Insert and delete from database Asynctask methods
 
     private static class insertAsyncTask extends AsyncTask<ReminderEntity, Void, Void> {
 
@@ -56,6 +68,21 @@ public class ReminderRepository {
         @Override
         protected Void doInBackground(ReminderEntity... reminderEntities) {
             mAsyncTaskDao.insertReminder(reminderEntities[0]);
+            return null;
+        }
+    }
+
+    private static class insertDeleteAsyncTask extends AsyncTask<ReminderEntity, Void, Void> {
+
+        private ReminderDao mAsyncTaskDao;
+
+        insertDeleteAsyncTask(ReminderDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final ReminderEntity... params) {
+            mAsyncTaskDao.delete(params[0]);
             return null;
         }
     }
