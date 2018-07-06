@@ -4,6 +4,9 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.example.mohammad.studentpa.db_classes.DAOs.ScheduleDao;
+import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
+
 import java.util.List;
 
 public class ScheduleRepository {
@@ -52,7 +55,7 @@ public class ScheduleRepository {
 
     public void deleteSchedule (ScheduleEntity scheduleEntity) {
         //starts the async task which, in this case, inserts a milestone to the db
-        new insertDeleteAsyncTask(repoScheduleDao).execute(scheduleEntity);
+        new deleteAsyncTask(repoScheduleDao).execute(scheduleEntity);
     }
 
 
@@ -72,11 +75,11 @@ public class ScheduleRepository {
         }
     }
 
-    private static class insertDeleteAsyncTask extends AsyncTask<ScheduleEntity, Void, Void> {
+    private static class deleteAsyncTask extends AsyncTask<ScheduleEntity, Void, Void> {
 
         private ScheduleDao mAsyncTaskDao;
 
-        insertDeleteAsyncTask(ScheduleDao dao) {
+        deleteAsyncTask(ScheduleDao dao) {
             mAsyncTaskDao = dao;
         }
 

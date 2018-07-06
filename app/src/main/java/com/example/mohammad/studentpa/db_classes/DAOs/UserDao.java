@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.db_classes;
+package com.example.mohammad.studentpa.db_classes.DAOs;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -8,6 +8,8 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.RoomWarnings;
 import android.arch.persistence.room.Update;
+
+import com.example.mohammad.studentpa.db_classes.Entities.User;
 
 import java.util.List;
 
@@ -27,9 +29,17 @@ public interface UserDao {
     @Query("SELECT * FROM user")//Method to get all emails/usernames
     LiveData<List<User>> getAllUsers();
 
-    @Query("SELECT userID, email, password FROM user WHERE email = :email")//Method to get all user names
+    @Query("SELECT userID, password FROM user WHERE email = :email")//Method to get all user names
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<User>> getUserPassword(String email);//Get the PW from DB to check if match
+    LiveData<List<User>> getUserPasswordLogin(String email);//Get the PW from DB to check if match
+
+    @Query("SELECT userID, email FROM user")//Method to get all user names
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    LiveData<List<User>> getUserEmail();//
+
+    @Query("SELECT userID, password FROM user")//Method to get all user names
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    LiveData<List<User>> getUserPassword();//
 
     @Update
     void updateList(User user);//Update the table

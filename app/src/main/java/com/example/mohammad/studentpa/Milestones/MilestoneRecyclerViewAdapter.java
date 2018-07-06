@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 
 import java.util.List;
 
@@ -25,12 +25,13 @@ public class MilestoneRecyclerViewAdapter
 
     private List<MilestoneEntity> milestones;
     private Context context;
+    private MilestoneViewModel milestoneViewModel;
+
 
     public MilestoneRecyclerViewAdapter(Context context, List<MilestoneEntity> milestones) {
         this.milestones = milestones;
         this.context = context;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,15 +56,6 @@ public class MilestoneRecyclerViewAdapter
                     context.startActivity(noteIntent);
                 }
             });
-            holder.milestoneLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    //TODO: SETUP TO PROMPT AND DELETE
-                    Toast.makeText(context, "Long click!",
-                            Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-            });
 
         }else{
             //If data is not ready yet
@@ -75,6 +67,10 @@ public class MilestoneRecyclerViewAdapter
     void setMilestone(List<MilestoneEntity> milestoneEntities){
         this.milestones = milestoneEntities;
         notifyDataSetChanged();
+    }
+
+    public MilestoneEntity getMilestonesAtPosition (int position) {
+        return milestones.get(position);
     }
 
     @Override

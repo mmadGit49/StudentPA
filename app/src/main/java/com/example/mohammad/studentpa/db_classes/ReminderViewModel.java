@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
+import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
+
 import java.util.List;
 
 public class ReminderViewModel extends AndroidViewModel {

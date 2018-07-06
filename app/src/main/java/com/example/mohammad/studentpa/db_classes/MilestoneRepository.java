@@ -4,6 +4,9 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.example.mohammad.studentpa.db_classes.DAOs.MilestoneDao;
+import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
+
 import java.util.List;
 
 public class MilestoneRepository {
@@ -38,7 +41,7 @@ public class MilestoneRepository {
 
     public void deleteMilestone (MilestoneEntity milestoneEntity) {
         //starts the async task which, in this case, inserts a milestone to the db
-        new insertDeleteAsyncTask(repoMilestoneDao).execute(milestoneEntity);
+        new deleteAsyncTask(repoMilestoneDao).execute(milestoneEntity);
     }
 
 
@@ -58,11 +61,11 @@ public class MilestoneRepository {
         }
     }
 
-    private static class insertDeleteAsyncTask extends AsyncTask<MilestoneEntity, Void, Void> {
+    private static class deleteAsyncTask extends AsyncTask<MilestoneEntity, Void, Void> {
 
         private MilestoneDao mAsyncTaskDao;
 
-        insertDeleteAsyncTask(MilestoneDao dao) {
+        deleteAsyncTask(MilestoneDao dao) {
             mAsyncTaskDao = dao;
         }
 

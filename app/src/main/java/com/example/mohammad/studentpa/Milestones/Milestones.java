@@ -12,13 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 
 import java.util.ArrayList;
@@ -81,6 +83,30 @@ public class Milestones extends Fragment {
                 Log.i("##############",milestoneEntities.size()+"");
             }
         });
+
+        // Add the functionality to swipe items in the recycler view to delete that item
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                         int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        MilestoneEntity milestone = adapter.getMilestonesAtPosition(position);
+                        // Delete the word
+                        milestoneViewModel.delete(milestone);
+                        Toast.makeText(getContext(), "Note deleted!", Toast.LENGTH_SHORT).show();
+                        Log.i(TAG, "onSwiped: Note Deleted");
+                    }
+                });
+        helper.attachToRecyclerView(recyclerView);
     }
 
     /*@Override

@@ -13,12 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.ReminderEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
 import com.example.mohammad.studentpa.db_classes.ReminderViewModel;
 
 import java.util.ArrayList;
@@ -73,6 +75,28 @@ public class Reminders extends Fragment {
                 adapter.setReminders(reminderEntities);
             }
         });
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                         int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        ReminderEntity reminder = adapter.getReminderAtPosition(position);
+                        // Delete the word
+                        reminderViewModel.delete(reminder);
+                        Toast.makeText(getContext(), "Reminder deleted!", Toast.LENGTH_SHORT).show();
+
+                        }
+                });
+        helper.attachToRecyclerView(recyclerView);
     }
 
     public void setContext(Context context) {

@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 
 public class TakeMilestoneNote extends AppCompatActivity {

@@ -1,14 +1,22 @@
 //This class is one of the entities of the database
-package com.example.mohammad.studentpa.db_classes;
+package com.example.mohammad.studentpa.db_classes.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import javax.annotation.Nullable;
-
 @Entity
 public class User {
+
+    public User(String firstName, String lastName, String email, String password, String dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+
     @PrimaryKey (autoGenerate = true) //Obvious,and it shall autoGenerate
     @ColumnInfo (name="userID")//Not necessary unless you want column name to differ from variable
     private int userID;

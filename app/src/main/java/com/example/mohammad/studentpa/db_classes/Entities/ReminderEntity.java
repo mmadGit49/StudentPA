@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.db_classes;
+package com.example.mohammad.studentpa.db_classes.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

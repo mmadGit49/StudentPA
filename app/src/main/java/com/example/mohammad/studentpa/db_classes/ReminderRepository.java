@@ -4,6 +4,9 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.example.mohammad.studentpa.db_classes.DAOs.ReminderDao;
+import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
+
 import java.util.List;
 
 public class ReminderRepository {
@@ -52,7 +55,7 @@ public class ReminderRepository {
     }
 
     public void deleteReminder (ReminderEntity reminderEntity){
-        new insertDeleteAsyncTask(repoReminderDao).execute(reminderEntity);
+        new deleteAsyncTask(repoReminderDao).execute(reminderEntity);
     }
 
     //Insert and delete from database Asynctask methods
@@ -72,11 +75,11 @@ public class ReminderRepository {
         }
     }
 
-    private static class insertDeleteAsyncTask extends AsyncTask<ReminderEntity, Void, Void> {
+    private static class deleteAsyncTask extends AsyncTask<ReminderEntity, Void, Void> {
 
         private ReminderDao mAsyncTaskDao;
 
-        insertDeleteAsyncTask(ReminderDao dao) {
+        deleteAsyncTask(ReminderDao dao) {
             mAsyncTaskDao = dao;
         }
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.ScheduleEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         if (schedules != null) {
             holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle().toString());
             holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate().toString());
-            holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getDate().toString());
+            holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom().toString());
             holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration().toString());
             holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,9 +77,13 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         return schedules.size();
     }
 
-    void setMilestone(List<ScheduleEntity> scheduleEntities){
+    public void setClass(List<ScheduleEntity> scheduleEntities){
         this.schedules = scheduleEntities;
         notifyDataSetChanged();
+    }
+
+    public ScheduleEntity getScheduleAtPosition(int position){
+        return schedules.get(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

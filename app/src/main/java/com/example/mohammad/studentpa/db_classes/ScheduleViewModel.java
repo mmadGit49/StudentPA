@@ -3,6 +3,9 @@ package com.example.mohammad.studentpa.db_classes;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+
+import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
+
 import java.util.List;
 
 public class ScheduleViewModel extends AndroidViewModel {

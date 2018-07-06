@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.db_classes;
+package com.example.mohammad.studentpa.db_classes.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -26,25 +26,30 @@ public class SpendingEntity {
     }
 
     @ColumnInfo (name = "spending_amount")
-    private String spendAmount;
-
-    public String getSpendAmount() {
+    private String[] spendAmount;
+    public String[] getSpendAmount() {
         return spendAmount;
     }
-
-    public void setSpendAmount(String spendAmount) {
+    public void setSpendAmount(String[] spendAmount) {
         this.spendAmount = spendAmount;
     }
 
     @ColumnInfo (name = "spending_details")
-    private String spendDetails;
-    public String getSpendDetails() {
+    private String[] spendDetails;
+    public String[] getSpendDetails() {
         return spendDetails;
     }
-    public void setSpendDetails(String spendDetails) {
+    public void setSpendDetails(String[] spendDetails) {
         this.spendDetails = spendDetails;
     }
 
-
+    @ColumnInfo (name = "spending_total")
+    private String spendTotal;
+    public String getSpendTotal() {
+        return spendTotal;
+    }
+    public void setSpendTotal(String spendTotal) {
+        this.spendTotal = spendTotal;
+    }
 }
 

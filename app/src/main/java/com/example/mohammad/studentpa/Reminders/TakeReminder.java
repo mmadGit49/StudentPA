@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.Util.DatePickerFragment;
 import com.example.mohammad.studentpa.Util.TimePickerFragment;
-import com.example.mohammad.studentpa.db_classes.ReminderEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
 import com.example.mohammad.studentpa.db_classes.ReminderViewModel;
 
 //For the not_reminder_layout xml layout

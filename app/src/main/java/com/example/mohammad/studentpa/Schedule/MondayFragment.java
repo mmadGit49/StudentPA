@@ -11,13 +11,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.ScheduleEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 
 import java.util.ArrayList;
@@ -56,8 +58,8 @@ public class MondayFragment extends Fragment {
                 mondayView.findViewById(R.id.recycler_view_schedule_monday);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final ScheduleRecyclerViewAdapter adapter =
-                new ScheduleRecyclerViewAdapter(getActivity(), new ArrayList<ScheduleEntity>());
+        final MondayAdapter adapter =
+                new MondayAdapter(getActivity(), new ArrayList<ScheduleEntity>());
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
@@ -65,10 +67,32 @@ public class MondayFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
                 //Update the cached copy of words in the adapter
-                adapter.setMilestone(scheduleEntities);
+                adapter.setClass(scheduleEntities);
                 Log.i("##############",scheduleEntities.size()+"");
             }
         });
+
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                         int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        ScheduleEntity scheduleEntity = adapter.getScheduleAtPosition(position);
+                        // Delete the word
+                        scheduleViewModel.delete(scheduleEntity);
+                        Toast.makeText(getContext(), "Class deleted!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        helper.attachToRecyclerView(recyclerView);
     }
 
 }

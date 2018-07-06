@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.ReminderEntity;
+import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
 
 import java.util.List;
 
@@ -73,6 +73,11 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
         this.reminders = reminderEntity;
         notifyDataSetChanged();
     }
+
+    public ReminderEntity getReminderAtPosition(int position){//pretty self explanatory
+        return reminders.get(position);
+    }
+
     @Override
     public int getItemCount() {
         if (reminders != null) {

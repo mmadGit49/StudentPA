@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
+import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
+
 import java.util.List;
 
 public class MilestoneViewModel extends AndroidViewModel {
@@ -24,11 +26,9 @@ public class MilestoneViewModel extends AndroidViewModel {
     public LiveData<List<MilestoneEntity>> getAllMilestoneTitles() {
         return allMilestoneTitles;
     }
-
     public LiveData<List<MilestoneEntity>> getAllMilestoneNotes() {
         return allMilestoneNotes;
     }
-
     public LiveData<List<MilestoneEntity>> getAllMilestones() {
         return allMilestones;
     }
