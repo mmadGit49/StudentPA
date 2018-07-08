@@ -24,30 +24,6 @@ public class AmountAdapter extends  RecyclerView.Adapter<AmountAdapter.ViewHolde
         this.context = context;
         this.spendingEntities = spendingEntities;
     }
-/*
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String amount = spendingEntities.get(position).getSpendAmount();
-        String details = spendingEntities.get(position).getSpendDetails();
-
-        ViewHolder holder;
-        if (convertView == null) {//Best practice
-            LayoutInflater inflater=  LayoutInflater.from(getContext());
-            convertView = inflater.inflate(resourceID, parent, false);
-            holder = new ViewHolder();
-            holder.textViewAmt= convertView.findViewById(R.id.txtViewSpendAmount);
-            holder.textViewDet= convertView.findViewById(R.id.txtViewSpendDetails);
-            convertView.setTag(holder);
-        }else{
-            holder= (ViewHolder) convertView.getTag();
-        }
-
-        holder.textViewAmt.setText(amount);
-        holder.textViewDet.setText(details);
-
-        return convertView;
-    }*/
 
     @NonNull
     @Override
@@ -78,6 +54,16 @@ public class AmountAdapter extends  RecyclerView.Adapter<AmountAdapter.ViewHolde
 
     public void setItems(List<SpendingEntity> spendingEntities){
         this.spendingEntities = spendingEntities;
+        notifyDataSetChanged();
+    }
+
+    public SpendingEntity getSpendingAtPosition(int position) {
+        return spendingEntities.get(position);
+    }
+
+    public List<SpendingEntity> getSpendingEntities() {
+        return spendingEntities;
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

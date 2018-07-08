@@ -13,19 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.Entities.SpendingEntity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SpendingRecyclerViewAdapter extends RecyclerView.Adapter<SpendingRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "SpendingRecycvAdapter";
 
-    private ArrayList<String> spendDates;
-    private ArrayList<String> spendTotals;
+    private List<SpendingEntity> spendingEntities;
     private Context context;
 
-    public SpendingRecyclerViewAdapter(Context context, ArrayList<String> spendDates, ArrayList<String> spendTotals) {
-        this.spendDates = spendDates;
-        this.spendTotals = spendTotals;
+    public SpendingRecyclerViewAdapter(Context context, List<SpendingEntity> spendingEntities) {
+        this.spendingEntities = spendingEntities;
         this.context = context;
     }
 
@@ -42,8 +41,8 @@ public class SpendingRecyclerViewAdapter extends RecyclerView.Adapter<SpendingRe
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");//log tag
 
-        holder.textViewSpendDate.setText(spendDates.get(position));
-        holder.textViewSpendTotal.setText(spendTotals.get(position));
+        holder.textViewSpendDate.setText(spendingEntities.get(position).getSpendDate());
+        holder.textViewSpendTotal.setText(spendingEntities.get(spendingEntities.size()-1).getSpendTotal());
 
         holder.spendingLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,15 +51,23 @@ public class SpendingRecyclerViewAdapter extends RecyclerView.Adapter<SpendingRe
                 Intent spendIntent= new Intent(context, TakeSpendingItems.class);
                 context.startActivity(spendIntent);
 
-                Toast.makeText(context, spendTotals.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "" + spendingEntities.size(), Toast.LENGTH_SHORT).show();
 
             }
         });
     }
+    public void setItems(List<SpendingEntity> spendingEntities){
+        this.spendingEntities = spendingEntities;
+        notifyDataSetChanged();
+    }
+
+    public SpendingEntity getSpendingAtPosition(int position) {
+        return spendingEntities.get(position);
+    }
 
     @Override
     public int getItemCount() {
-        return spendDates.size();
+        return spendingEntities.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
 

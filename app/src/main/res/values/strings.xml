@@ -57,7 +57,7 @@
     <string name= "Alert_date">Reminder date</string>
     <string name= "set_Alert_time">Set time</string>
     <string name= "Alert_time">Reminder time</string>
-    <!--FOR SCHEDULE MODULE-->
+    <!--FOR SPENDING MODULE-->
     <string name= "schedule_title">Class/Event/Title</string>
     <string name= "prompt_time_from">From</string>
     <string name= "prompt_duration">Duration</string>
@@ -65,5 +65,6 @@
     <string name= "time_select">Select time</string>
     <string name= "date_select">Select date</string>
     <string name = "duration">Duration (HH:MM)</string>
+    <string name = "spend_total">Today\'s total: </string>
 
 </resources>

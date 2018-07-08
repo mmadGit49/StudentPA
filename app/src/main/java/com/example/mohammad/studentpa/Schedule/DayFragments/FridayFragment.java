@@ -2,12 +2,15 @@ package com.example.mohammad.studentpa.Schedule.DayFragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -86,10 +89,26 @@ public class FridayFragment extends Fragment {
                     public void onSwiped(RecyclerView.ViewHolder viewHolder,
                                          int direction) {
                         int position = viewHolder.getAdapterPosition();
-                        ScheduleEntity scheduleEntity = adapter.getScheduleAtPosition(position);
-                        // Delete the word
-                        scheduleViewModel.delete(scheduleEntity);
-                        Toast.makeText(getContext(), "Class deleted!", Toast.LENGTH_SHORT).show();
+                        final ScheduleEntity scheduleEntity = adapter.getScheduleAtPosition(position);
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            builder = new AlertDialog.Builder(getContext());
+                        }
+                        builder.setTitle("Delete Item")
+                                .setMessage("Are you sure you want to delete?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        scheduleViewModel.delete(scheduleEntity);
+                                        Toast.makeText(getContext(), "Class deleted!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        scheduleViewModel.insert(scheduleEntity);
+                                    }
+                                }).show();
                     }
                 });
         helper.attachToRecyclerView(recyclerView);

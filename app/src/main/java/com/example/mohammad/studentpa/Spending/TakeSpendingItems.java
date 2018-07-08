@@ -3,13 +3,17 @@ package com.example.mohammad.studentpa.Spending;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -69,6 +73,8 @@ public class TakeSpendingItems extends AppCompatActivity
 
         spendingViewModel = ViewModelProviders.of(TakeSpendingItems.this).get(SpendingViewModel.class);
 
+        initRecyclerView();
+
         buttonAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,8 +98,8 @@ public class TakeSpendingItems extends AppCompatActivity
                 //add your new row to the TableLayout:
                 TableLayout table = findViewById(R.id.tableSpending);
                 table.addView(row);*/
-                if(TextUtils.isEmpty(editTextAmount.getText().toString()) &&
-                        TextUtils.isEmpty(editTextAmountDetails.getText().toString()) &&
+                if(TextUtils.isEmpty(editTextAmount.getText().toString()) ||
+                        TextUtils.isEmpty(editTextAmountDetails.getText().toString()) ||
                         TextUtils.isEmpty(textViewDate.getText().toString())){
                     Toast.makeText(TakeSpendingItems.this, "Required data missing",
                             Toast.LENGTH_SHORT).show();
@@ -104,7 +110,7 @@ public class TakeSpendingItems extends AppCompatActivity
                     double total = getTotalSpent();
                     String totalSpent = Double.toString(total);
 
-                    spendingViewModel.insert(new SpendingEntity(amount, details, date, totalSpent));
+                    spendingViewModel.insert(new SpendingEntity(date, amount, details, totalSpent));
                     editTextAmount.setText("");
                     editTextAmountDetails.setText("");
                 }
@@ -121,6 +127,8 @@ public class TakeSpendingItems extends AppCompatActivity
                 if (table.getChildCount()>0){
                     table.removeView(table.getChildAt(table.getChildCount()-1));
                 }*/
+                Toast.makeText(TakeSpendingItems.this, "Swipe item to delete...",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -128,7 +136,8 @@ public class TakeSpendingItems extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Double total= getTotalSpent();
-                spendingTotal.setText("Today's total: " + total);
+                String stringTotal = Double.toString(total);
+                spendingTotal.setText(R.string.spend_total + stringTotal);
             }
         });
 
@@ -156,6 +165,13 @@ public class TakeSpendingItems extends AppCompatActivity
 
     public double getTotalSpent(){
         double total = 0;
+        AmountAdapter adapter = new AmountAdapter(TakeSpendingItems.this,
+                new ArrayList<SpendingEntity>());
+        for (int i = 0 ; i<adapter.getSpendingEntities().size() ; i++){
+            String ttl = adapter.getSpendingEntities().get(i).getSpendAmount();
+            Double number = Double.parseDouble(ttl);
+            total += number;
+        }
         return total;
     }
     public void initRecyclerView(){
@@ -176,7 +192,7 @@ public class TakeSpendingItems extends AppCompatActivity
             }
         });
 
-        /*ItemTouchHelper helper = new ItemTouchHelper(
+        ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
                         ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
                     @Override
@@ -190,31 +206,33 @@ public class TakeSpendingItems extends AppCompatActivity
                     public void onSwiped(RecyclerView.ViewHolder viewHolder,
                                          int direction) {
                         int position = viewHolder.getAdapterPosition();
-                        final ScheduleEntity scheduleEntity = adapter.getScheduleAtPosition(position);
+                        final SpendingEntity spendingEntity = adapter.getSpendingAtPosition(position);
                         AlertDialog.Builder builder;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                            builder = new AlertDialog.Builder(TakeSpendingItems.this,
+                                    android.R.style.Theme_Material_Dialog_Alert);
                         } else {
-                            builder = new AlertDialog.Builder(getContext());
+                            builder = new AlertDialog.Builder(TakeSpendingItems.this);
                         }
                         builder.setTitle("Delete Item")
                                 .setMessage("Are you sure you want to delete?")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        scheduleViewModel.delete(scheduleEntity);
-                                        Toast.makeText(getContext(), "Class deleted!", Toast.LENGTH_SHORT).show();
+                                        spendingViewModel.delete(spendingEntity);
+                                        Toast.makeText(TakeSpendingItems.this,
+                                                "Item deleted!", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        scheduleViewModel.insert(scheduleEntity);
+                                        spendingViewModel.insert(spendingEntity);
                                     }
                                 }).show();
                         // Delete the word
 
                     }
                 });
-        helper.attachToRecyclerView(recyclerView);*/
+        helper.attachToRecyclerView(recyclerView);
     }
 
 }
