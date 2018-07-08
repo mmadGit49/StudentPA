@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.Schedule;
+package com.example.mohammad.studentpa.Schedule.DayFragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.Schedule.Adapters.ScheduleRecyclerViewAdapter;
+import com.example.mohammad.studentpa.Schedule.TakeSchedule;
 import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 

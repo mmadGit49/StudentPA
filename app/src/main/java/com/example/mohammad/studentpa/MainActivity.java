@@ -1,5 +1,7 @@
 package com.example.mohammad.studentpa;
 
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,6 +11,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,41 +34,35 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Toast.makeText(this, "Welcome! " +
-                "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
-        //for the toolbar, action bar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView= findViewById(R.id.navigation_view_main);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        /*TODO: Uncomment this once database has been made for login
-         *
-        if(SavedUserLogin.getUserName(MainActivity.this).length() == 0)//checks if user is logged in
+       /* if(SavedUserLogin.getUserName(MainActivity.this).length() == 0)//checks if user is logged in
         {//if not logged in this happens
             Intent login= new Intent(this, Login.class);
             startActivity(login);
         }
         else
-        {
-            // Stay at the current activity.
-        }
+        {*/
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-         */
+            Toast.makeText(this, "Welcome! " +
+                    "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
+            //for the toolbar, action bar
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            ActionBar actionbar = getSupportActionBar();
+            actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+            drawerLayout = findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawerLayout.addDrawerListener(toggle);
+            toggle.syncState();
+
+            NavigationView navigationView= findViewById(R.id.navigation_view_main);
+            navigationView.setNavigationItemSelectedListener(this);
+      //  }
+
     }
     public void replaceFrag(Fragment fragment){//to replace the selected fragment
         if (fragment != null) {
@@ -97,8 +94,23 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(MainActivity.this);
+            }
+            builder.setTitle("Exit")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null).show();
+            //            super.onBackPressed(); //no longer needed if finish() is used
         }
+
     }
 
     @Override

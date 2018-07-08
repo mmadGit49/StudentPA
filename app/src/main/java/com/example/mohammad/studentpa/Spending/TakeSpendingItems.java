@@ -1,24 +1,31 @@
 package com.example.mohammad.studentpa.Spending;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.GridLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.Util.DatePickerFragment;
+import com.example.mohammad.studentpa.db_classes.Entities.SpendingEntity;
+import com.example.mohammad.studentpa.db_classes.SpendingViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TakeSpendingItems extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener{
@@ -33,6 +40,8 @@ public class TakeSpendingItems extends AppCompatActivity
     private Button sumItems;
     private FloatingActionButton fab;
 
+    private SpendingViewModel spendingViewModel;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +52,9 @@ public class TakeSpendingItems extends AppCompatActivity
         textViewDate = findViewById(R.id.textViewSpendDate);
         spendingTotal= findViewById(R.id.textViewTotal);
         sumItems= findViewById(R.id.buttonSumItems);
+
+        spendingViewModel = ViewModelProviders.of(TakeSpendingItems.this).
+                get(SpendingViewModel.class);
 
         textViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,10 +67,12 @@ public class TakeSpendingItems extends AppCompatActivity
         buttonDeleteItem = findViewById(R.id.buttonRemoveItem);
         spendingTotal = findViewById(R.id.textViewTotal);
 
+        spendingViewModel = ViewModelProviders.of(TakeSpendingItems.this).get(SpendingViewModel.class);
+
         buttonAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: started add item onClick");
+                /*Log.d(TAG, "onClick: started add item onClick");
                 TableRow row = new TableRow(TakeSpendingItems.this);
 
                 //create a new row to add Layouts to your new row
@@ -77,21 +91,36 @@ public class TakeSpendingItems extends AppCompatActivity
                 row.addView(editTextAmountDetails);
                 //add your new row to the TableLayout:
                 TableLayout table = findViewById(R.id.tableSpending);
-                table.addView(row);
+                table.addView(row);*/
+                if(TextUtils.isEmpty(editTextAmount.getText().toString()) &&
+                        TextUtils.isEmpty(editTextAmountDetails.getText().toString()) &&
+                        TextUtils.isEmpty(textViewDate.getText().toString())){
+                    Toast.makeText(TakeSpendingItems.this, "Required data missing",
+                            Toast.LENGTH_SHORT).show();
+                }else{
+                    String amount = editTextAmount.getText().toString();
+                    String details = editTextAmountDetails.getText().toString();
+                    String date= textViewDate.getText().toString();
+                    double total = getTotalSpent();
+                    String totalSpent = Double.toString(total);
+
+                    spendingViewModel.insert(new SpendingEntity(amount, details, date, totalSpent));
+                    editTextAmount.setText("");
+                    editTextAmountDetails.setText("");
+                }
             }
         });
 
         buttonDeleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: started delete onclick");
+                /*Log.d(TAG, "onClick: started delete onclick");
 
                 TableLayout table = findViewById(R.id.tableSpending);
 
                 if (table.getChildCount()>0){
-                    TableRow row= new TableRow(TakeSpendingItems.this);
-                    table.removeView(row);
-                }
+                    table.removeView(table.getChildAt(table.getChildCount()-1));
+                }*/
             }
         });
 
@@ -127,15 +156,65 @@ public class TakeSpendingItems extends AppCompatActivity
 
     public double getTotalSpent(){
         double total = 0;
-        GridLayout gLayout = new GridLayout(TakeSpendingItems.this);
-        TableRow t ;
-
-        for ( int i = 0 ; i<gLayout.getRowCount(); i++){
-            String amount = gLayout.getChildAt(i).toString();
-            double parsedAmount = Double.parseDouble(amount);
-            total += parsedAmount;
-        }
         return total;
+    }
+    public void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_spending_items);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        final AmountAdapter adapter =
+                new AmountAdapter(TakeSpendingItems.this, new ArrayList<SpendingEntity>());
+        recyclerView.setAdapter(adapter);
+
+        spendingViewModel = ViewModelProviders.of(this).get(SpendingViewModel.class);
+        spendingViewModel.getAllSpendings().observe(this, new Observer<List<SpendingEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<SpendingEntity> spendingEntities) {
+                //Update the cached copy of words in the adapter
+                adapter.setItems(spendingEntities);
+                Log.i("##############", spendingEntities.size() + "");
+            }
+        });
+
+        /*ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                         int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        final ScheduleEntity scheduleEntity = adapter.getScheduleAtPosition(position);
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            builder = new AlertDialog.Builder(getContext());
+                        }
+                        builder.setTitle("Delete Item")
+                                .setMessage("Are you sure you want to delete?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        scheduleViewModel.delete(scheduleEntity);
+                                        Toast.makeText(getContext(), "Class deleted!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        scheduleViewModel.insert(scheduleEntity);
+                                    }
+                                }).show();
+                        // Delete the word
+
+                    }
+                });
+        helper.attachToRecyclerView(recyclerView);*/
     }
 
 }

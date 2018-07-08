@@ -53,7 +53,7 @@ public class Milestones extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //On item click, start note taker activity
+                //On button click, start note taker activity
                 Intent noteIntent = new Intent(getActivity(), TakeMilestoneNote.class);
                 startActivity(noteIntent);
             }

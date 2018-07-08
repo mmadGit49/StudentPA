@@ -1,16 +1,20 @@
-package com.example.mohammad.studentpa.Schedule;
+package com.example.mohammad.studentpa.Schedule.Adapters;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.mohammad.studentpa.Schedule.DayFragments.FridayFragment;
+import com.example.mohammad.studentpa.Schedule.DayFragments.MondayFragment;
+import com.example.mohammad.studentpa.Schedule.DayFragments.SaturdayFragment;
+import com.example.mohammad.studentpa.Schedule.DayFragments.ThursdayFragment;
+import com.example.mohammad.studentpa.Schedule.DayFragments.TuesdayFragment;
+import com.example.mohammad.studentpa.Schedule.DayFragments.WednesdayFragment;
+
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private static final String TAG = "SectionsPagerAdapter";
-
-    Context context;
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -27,11 +31,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             fragment=  new TuesdayFragment();
         } else if (position == 2){
             fragment = new WednesdayFragment();
-        }  else if (position == 3){
+        } else if (position == 3){
             fragment=  new ThursdayFragment();
         } else if (position == 4){
             fragment = new FridayFragment();
-        }else if(position == 5){
+        } else if(position == 5){
             fragment = new SaturdayFragment();
         }
 
@@ -63,4 +67,5 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         }
         return title;
     }
+
 }

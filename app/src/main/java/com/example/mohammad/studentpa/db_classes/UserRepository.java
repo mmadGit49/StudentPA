@@ -15,13 +15,17 @@ public class UserRepository {
     private LiveData<List<User>> allUsers;
     private LiveData<List<User>> allUserEmails;
     private LiveData<List<User>> allUserPasswords;
+    private LiveData<List<User>> allUserLoginPasswords;
+
 
     public UserRepository(Application application) {
+        String pw = null;
         AppDatabase db = AppDatabase.getDatabase(application);
         repoUserDao = db.userDao();
         allUsers = repoUserDao.getAllUsers();
         allUserEmails = repoUserDao.getUserEmail();
         allUserPasswords = repoUserDao.getUserPassword();
+        allUserLoginPasswords = repoUserDao.getUserPasswordLogin(pw);
     }
 
     public LiveData<List<User>> getAllUsers() {
@@ -32,6 +36,12 @@ public class UserRepository {
     }
     public LiveData<List<User>> getAllUserPasswords() {
         return allUserPasswords;
+    }
+    public LiveData<List<User>> getAllUserLoginPasswords() {
+        return allUserLoginPasswords;
+    }
+    public UserDao getRepoUserDao() {
+        return repoUserDao;
     }
 
     public void insert (User user) {

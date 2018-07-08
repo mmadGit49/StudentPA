@@ -6,6 +6,14 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class SpendingEntity {
+
+    public SpendingEntity(String spendDate, String spendAmount, String spendDetails, String spendTotal) {
+        this.spendDate = spendDate;
+        this.spendAmount = spendAmount;
+        this.spendDetails = spendDetails;
+        this.spendTotal = spendTotal;
+    }
+
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
     @ColumnInfo(name="spendingID")//Not necessary unless you want column name to differ from variable
     private int spendingID;
@@ -26,20 +34,20 @@ public class SpendingEntity {
     }
 
     @ColumnInfo (name = "spending_amount")
-    private String[] spendAmount;
-    public String[] getSpendAmount() {
+    private String spendAmount;
+    public String getSpendAmount() {
         return spendAmount;
     }
-    public void setSpendAmount(String[] spendAmount) {
+    public void setSpendAmount(String spendAmount) {
         this.spendAmount = spendAmount;
     }
 
     @ColumnInfo (name = "spending_details")
-    private String[] spendDetails;
-    public String[] getSpendDetails() {
+    private String spendDetails;
+    public String getSpendDetails() {
         return spendDetails;
     }
-    public void setSpendDetails(String[] spendDetails) {
+    public void setSpendDetails(String spendDetails) {
         this.spendDetails = spendDetails;
     }
 

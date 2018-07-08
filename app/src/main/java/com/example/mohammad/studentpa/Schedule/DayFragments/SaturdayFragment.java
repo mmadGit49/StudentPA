@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.Schedule;
+package com.example.mohammad.studentpa.Schedule.DayFragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -18,14 +18,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.Schedule.Adapters.ScheduleRecyclerViewAdapter;
+import com.example.mohammad.studentpa.Schedule.TakeSchedule;
 import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WednesdayFragment extends Fragment {
-    private View wednesdayView;
+public class SaturdayFragment extends Fragment {
+    private View saturdayView;
     private FloatingActionButton fab;
     private LinearLayoutManager layoutManager;
     private ScheduleViewModel scheduleViewModel;
@@ -35,8 +37,8 @@ public class WednesdayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        wednesdayView = inflater.inflate(R.layout.fragment_schedule_wednesday, container, false);
-        fab= wednesdayView.findViewById(R.id.fab);
+        saturdayView = inflater.inflate(R.layout.fragment_schedule_saturday, container, false);
+        fab= saturdayView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,12 +49,12 @@ public class WednesdayFragment extends Fragment {
         });
 
         initRecyclerView();
-        return wednesdayView;
+        return saturdayView;
     }
 
     public void initRecyclerView(){
         RecyclerView recyclerView =
-                wednesdayView.findViewById(R.id.recycler_view_schedule_wednesday);
+                saturdayView.findViewById(R.id.recycler_view_schedule_saturday);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         final ScheduleRecyclerViewAdapter adapter =
@@ -91,7 +93,5 @@ public class WednesdayFragment extends Fragment {
                     }
                 });
         helper.attachToRecyclerView(recyclerView);
-
     }
-
 }

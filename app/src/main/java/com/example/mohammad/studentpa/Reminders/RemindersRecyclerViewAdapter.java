@@ -57,13 +57,6 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
                     Toast.makeText(context, reminders.get(position).getReminderTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
-            holder.reminderLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    //Delete view and reminder
-                    return false;
-                }
-            });
         }else{
             holder.textViewReminderTitle.setText("No Reminders here!");
         }

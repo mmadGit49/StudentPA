@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.Schedule;
+package com.example.mohammad.studentpa.Schedule.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,33 +13,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.Schedule.TakeSchedule;
 import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 
 import java.util.List;
 
-public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRecyclerViewAdapter.ViewHolder>   {
+public class MondayAdapter extends RecyclerView.Adapter<MondayAdapter.ViewHolder>   {
 
-    private static final String TAG = "ScheduleRecyclerViewAda";
+    private static final String TAG = "TuesdayAdapterAdapter";
 
     private Context context;
     private List<ScheduleEntity> schedules;
 
-    public ScheduleRecyclerViewAdapter(Context context, List<ScheduleEntity> schedules) {
+    public MondayAdapter(Context context, List<ScheduleEntity> schedules) {
         this.context = context;
         this.schedules = schedules;
     }
 
     @NonNull
     @Override
-    public ScheduleRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext())
+    public MondayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(this.context)
                 .inflate(R.layout.recyclerview_schedule_display, parent, false);
-        ScheduleRecyclerViewAdapter.ViewHolder holder= new ScheduleRecyclerViewAdapter.ViewHolder(view);
+        MondayAdapter.ViewHolder holder= new MondayAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScheduleRecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MondayAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
 
         if (schedules != null) {
@@ -54,15 +55,6 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                     Intent scheduleIntent= new Intent(context, TakeSchedule.class);
                     context.startActivity(scheduleIntent);
                     Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
-                }
-            });
-            holder.scheduleLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    //TODO: SETUP TO PROMPT AND DELETE
-                    Toast.makeText(context, "Long click!",
-                            Toast.LENGTH_SHORT).show();
-                    return true;
                 }
             });
 

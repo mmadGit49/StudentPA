@@ -30,9 +30,9 @@ import java.util.List;
 public class Reminders extends Fragment {
 
     private View remindView;
-    private Context context;
     private FloatingActionButton fab;
     private LinearLayoutManager layoutManager;
+    private Context context;
     private ReminderViewModel reminderViewModel;
 
 
@@ -67,7 +67,7 @@ public class Reminders extends Fragment {
         final RemindersRecyclerViewAdapter adapter = new RemindersRecyclerViewAdapter(this.getActivity(),
                 new ArrayList<ReminderEntity>());
         recyclerView.setAdapter(adapter);
-
+        //where the db gets involved
         reminderViewModel = ViewModelProviders.of(this).get(ReminderViewModel.class);
         reminderViewModel.getAllReminders().observe(this, new Observer<List<ReminderEntity>>() {
             @Override
@@ -93,6 +93,7 @@ public class Reminders extends Fragment {
                         // Delete the word
                         reminderViewModel.delete(reminder);
                         Toast.makeText(getContext(), "Reminder deleted!", Toast.LENGTH_SHORT).show();
+                        NotificationScheduler.cancelReminder(getContext(), AlarmReceiver.class);
 
                         }
                 });

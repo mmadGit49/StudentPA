@@ -42,4 +42,8 @@ public class MilestoneViewModel extends AndroidViewModel {
         milestoneRepository.deleteMilestone(milestoneEntity);
     }
 
+    public  void update(MilestoneEntity milestoneEntity){
+        milestoneRepository.updateMilestone(milestoneEntity);
+    }
+
 }

@@ -37,7 +37,7 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
     private FloatingActionButton fab;
 
     private ReminderViewModel reminderViewModel;
-
+    private LocalData localData;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,8 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
         textViewSetReminderTime = findViewById(R.id.textViewReminderTime);
         Button buttonSetReminderTime = findViewById(R.id.buttonReminderTime);
 
+        localData = new LocalData(getApplicationContext());
+
         buttonSetReminderDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +61,7 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
         buttonSetReminderTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTimePickerDialog(v);
+                    showTimePickerDialog(v);
             }
         });
 
@@ -80,6 +82,11 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                     String reminderTime = textViewSetReminderTime.getText().toString();
                     reminderViewModel.insert(new ReminderEntity
                             (reminderTitle, reminderDetails, reminderDate, reminderTime));
+
+                    NotificationScheduler.setReminder(TakeReminder.this,AlarmReceiver.class,
+                            localData.get_hour(),localData.get_min(), localData.get_day(),
+                            localData.get_month(), localData.get_year());
+
                     Toast.makeText(getApplicationContext(),
                             "Reminder saved!", Toast.LENGTH_SHORT).show();
                 }
@@ -89,7 +96,7 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
 
     }
 
-    public void showTimePickerDialog(View v) {//onCliok for set date
+    public void showTimePickerDialog(View v) {//onClick for set date
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
 
@@ -103,11 +110,19 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String stringTime = hourOfDay + " : " + String.format("%02d", minute);
         textViewSetReminderTime.setText(stringTime);
+        localData.set_hour(hourOfDay);
+        localData.set_min(minute);
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String stringDate = dayOfMonth + " / " + month + " / " + year;
         textViewSetReminderDate.setText(stringDate);
+        localData.set_day(dayOfMonth);
+        localData.set_month(month);
+        localData.set_year(year);
     }
+
+
+
 }

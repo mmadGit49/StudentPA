@@ -33,17 +33,17 @@ public class MilestoneRecyclerViewAdapter
         this.context = context;
     }
     @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recyclerview_note_display, parent, false);
-        ViewHolder holder= new ViewHolder(view);
-        return holder;
-    }
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.recyclerview_note_display, parent, false);
+            ViewHolder holder= new ViewHolder(view);
+            return holder;
+        }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: called.");//log tag
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+            Log.d(TAG, "onBindViewHolder: called.");//log tag
 
         if(milestones != null) {
             holder.textViewTitle.setText(milestones.get(position).getMilestoneTitle());
@@ -72,6 +72,7 @@ public class MilestoneRecyclerViewAdapter
     public MilestoneEntity getMilestonesAtPosition (int position) {
         return milestones.get(position);
     }
+
 
     @Override
     public int getItemCount() {

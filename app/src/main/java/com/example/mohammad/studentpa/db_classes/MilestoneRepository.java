@@ -40,11 +40,14 @@ public class MilestoneRepository {
     }
 
     public void deleteMilestone (MilestoneEntity milestoneEntity) {
-        //starts the async task which, in this case, inserts a milestone to the db
+        //starts the async task which, in this case, deletes a milestone to the db
         new deleteAsyncTask(repoMilestoneDao).execute(milestoneEntity);
     }
 
-
+    public void updateMilestone (MilestoneEntity milestoneEntity) {
+        //starts the async task which, in this case, updates a milestone to the db
+        new deleteAsyncTask(repoMilestoneDao).execute(milestoneEntity);
+    }
 
     private static class insertAsyncTask extends AsyncTask<MilestoneEntity, Void, Void> {
 
@@ -72,6 +75,21 @@ public class MilestoneRepository {
         @Override
         protected Void doInBackground(final MilestoneEntity... params) {
             mAsyncTaskDao.delete(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<MilestoneEntity, Void, Void> {
+
+        private MilestoneDao mAsyncTaskDao;
+
+        updateAsyncTask(MilestoneDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final MilestoneEntity... params) {
+            mAsyncTaskDao.updateList(params[0]);
             return null;
         }
     }
