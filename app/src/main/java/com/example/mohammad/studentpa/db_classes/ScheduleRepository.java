@@ -58,7 +58,10 @@ public class ScheduleRepository {
         new deleteAsyncTask(repoScheduleDao).execute(scheduleEntity);
     }
 
-
+    public void updateSchedule (ScheduleEntity scheduleEntity) {
+        //starts the async task which, in this case, inserts a milestone to the db
+        new updateAsyncTask(repoScheduleDao).execute(scheduleEntity);
+    }
 
     private static class insertAsyncTask extends AsyncTask<ScheduleEntity, Void, Void> {
 
@@ -90,5 +93,19 @@ public class ScheduleRepository {
         }
     }
 
+    private static class updateAsyncTask extends AsyncTask<ScheduleEntity, Void, Void> {
+
+        private ScheduleDao mAsyncTaskDao;
+
+        updateAsyncTask(ScheduleDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final ScheduleEntity... params) {
+            mAsyncTaskDao.update(params[0]);
+            return null;
+        }
+    }
 
 }

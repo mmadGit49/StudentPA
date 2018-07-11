@@ -46,7 +46,7 @@ public class MilestoneRepository {
 
     public void updateMilestone (MilestoneEntity milestoneEntity) {
         //starts the async task which, in this case, updates a milestone to the db
-        new deleteAsyncTask(repoMilestoneDao).execute(milestoneEntity);
+        new updateAsyncTask(repoMilestoneDao).execute(milestoneEntity);
     }
 
     private static class insertAsyncTask extends AsyncTask<MilestoneEntity, Void, Void> {

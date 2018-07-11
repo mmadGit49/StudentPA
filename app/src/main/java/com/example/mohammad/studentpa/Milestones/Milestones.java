@@ -130,19 +130,4 @@ public class Milestones extends Fragment {
                 });
         helper.attachToRecyclerView(recyclerView);
     }
-
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode ==RESULT_OK) {
-            MilestoneEntity milestoneEntity = new MilestoneEntity(data.getStringExtra(TakeMilestoneNote.));
-            milestoneViewModel.insert(milestoneEntity);
-        } else {
-            Toast.makeText(
-                    getContext(),
-                    R.string.text_header,
-                    Toast.LENGTH_LONG).show();
-        }
-    }*/
-
 }

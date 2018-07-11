@@ -43,7 +43,7 @@ public interface ScheduleDao {
     LiveData<List<ScheduleEntity>> getAllScheduleDurations();
 
     @Update
-    void updateList(ScheduleEntity scheduleEntity);//Update the table
+    void update(ScheduleEntity scheduleEntity);//Update the table
 
     @Delete
     void delete(ScheduleEntity scheduleEntity);//Delete the row passed to param, I guess?*/

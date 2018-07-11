@@ -1,8 +1,9 @@
 package com.example.mohammad.studentpa.Reminders;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -35,14 +36,16 @@ public class Reminders extends Fragment {
     private View remindView;
     private FloatingActionButton fab;
     private LinearLayoutManager layoutManager;
-    private Context context;
     private ReminderViewModel reminderViewModel;
+    private final String CHANNEL_ID = "CHANNEL_ID";
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         remindView = inflater.inflate(R.layout.fragment_reminders, container, false);
+
+        createNotificationChannel();
 
         Toolbar toolbar = remindView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -122,9 +125,25 @@ public class Reminders extends Fragment {
         helper.attachToRecyclerView(recyclerView);
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }//not quite necessary
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            String name = getString(R.string.Alert_name);
+            String description = getString(R.string.Alert_details);
+
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
 
 }

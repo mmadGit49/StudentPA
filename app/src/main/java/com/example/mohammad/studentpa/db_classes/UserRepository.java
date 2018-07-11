@@ -15,17 +15,13 @@ public class UserRepository {
     private LiveData<List<User>> allUsers;
     private LiveData<List<User>> allUserEmails;
     private LiveData<List<User>> allUserPasswords;
-    private LiveData<List<User>> allUserLoginPasswords;
-
 
     public UserRepository(Application application) {
-        String pw = null;
         AppDatabase db = AppDatabase.getDatabase(application);
         repoUserDao = db.userDao();
         allUsers = repoUserDao.getAllUsers();
         allUserEmails = repoUserDao.getUserEmail();
         allUserPasswords = repoUserDao.getUserPassword();
-        allUserLoginPasswords = repoUserDao.getUserPasswordLogin(pw);
     }
 
     public LiveData<List<User>> getAllUsers() {
@@ -37,24 +33,24 @@ public class UserRepository {
     public LiveData<List<User>> getAllUserPasswords() {
         return allUserPasswords;
     }
-    public LiveData<List<User>> getAllUserLoginPasswords() {
-        return allUserLoginPasswords;
-    }
-    public UserDao getRepoUserDao() {
-        return repoUserDao;
-    }
 
     public void insert (User user) {
-        //starts the async task which, in this case, inserts a milestone to the db
+        //starts the async task which, in this case, inserts a user to the db
         new UserRepository.insertAsyncTask(repoUserDao).execute(user);
     }
 
     public void delete (User user) {
-        //starts the async task which, in this case, inserts a milestone to the db
+        //starts the async task which, in this case, deletes a user from the db
         new UserRepository.deleteAsyncTask(repoUserDao).execute(user);
     }
 
+    public LiveData<List<User>> getPasswordForEmail(String email) {
+        return repoUserDao.getUserPasswordLogin(email);
+    }
 
+    public LiveData<List<User>> getEmailForLogin(String email) {
+        return repoUserDao.getUserEmailsLogin(email);
+    }
 
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
 
@@ -85,4 +81,5 @@ public class UserRepository {
             return null;
         }
     }
+
 }

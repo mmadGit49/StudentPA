@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
@@ -53,8 +52,17 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
                 public void onClick(View v) {
                     //On item click, start note taker activity
                     Intent remindIntent= new Intent(context, TakeReminder.class);
+                    remindIntent.putExtra("remindTitle", reminders.get(position)
+                            .getReminderTitle());
+                    remindIntent.putExtra("remindDetails", reminders.get(position)
+                            .getReminderDetails());
+                    remindIntent.putExtra("remindDate", reminders.get(position)
+                            .getReminderDate());
+                    remindIntent.putExtra("remindTime", reminders.get(position)
+                            .getReminderTime());
+                    remindIntent.putExtra("remindID", reminders.get(position)
+                            .getReminderID());
                     context.startActivity(remindIntent);
-                    Toast.makeText(context, reminders.get(position).getReminderTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
         }else{

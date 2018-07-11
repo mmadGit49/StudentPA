@@ -53,6 +53,17 @@ public class MondayAdapter extends RecyclerView.Adapter<MondayAdapter.ViewHolder
                 public void onClick(View v) {
                     //On item click, start note taker activity
                     Intent scheduleIntent= new Intent(context, TakeSchedule.class);
+                    scheduleIntent.putExtra("schedTitle", schedules.get(position)
+                            .getScheduleTitle());
+                    scheduleIntent.putExtra("schedDate", schedules.get(position)
+                            .getDate());
+                    scheduleIntent.putExtra("schedTime", schedules.get(position)
+                            .getTimeFrom());
+                    scheduleIntent.putExtra("schedDuration", schedules.get(position)
+                            .getDuration());
+                    scheduleIntent.putExtra("schedID", schedules.get(position)
+                            .getScheduleID());
+
                     context.startActivity(scheduleIntent);
                     Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
                 }

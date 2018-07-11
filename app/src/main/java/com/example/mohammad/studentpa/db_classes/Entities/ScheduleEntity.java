@@ -2,6 +2,7 @@ package com.example.mohammad.studentpa.db_classes.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import io.reactivex.annotations.NonNull;
@@ -10,6 +11,16 @@ import io.reactivex.annotations.NonNull;
 public class ScheduleEntity {
 
     public ScheduleEntity(String scheduleTitle, String dayOfWeek, String timeFrom, String duration, String date) {
+        this.scheduleTitle = scheduleTitle;
+        this.dayOfWeek = dayOfWeek;
+        this.timeFrom = timeFrom;
+        this.duration = duration;
+        this.date = date;
+    }
+
+    @Ignore
+    public ScheduleEntity(int scheduleID, String scheduleTitle, String dayOfWeek, String timeFrom, String duration, String date) {
+        this.scheduleID = scheduleID;
         this.scheduleTitle = scheduleTitle;
         this.dayOfWeek = dayOfWeek;
         this.timeFrom = timeFrom;

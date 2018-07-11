@@ -16,7 +16,6 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-
     @PrimaryKey (autoGenerate = true) //Obvious,and it shall autoGenerate
     @ColumnInfo (name="userID")//Not necessary unless you want column name to differ from variable
     private int userID;

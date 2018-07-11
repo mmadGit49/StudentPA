@@ -2,12 +2,22 @@ package com.example.mohammad.studentpa.db_classes.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class ReminderEntity {
 
     public ReminderEntity(String reminderTitle, String reminderDetails, String reminderDate, String reminderTime) {
+        this.reminderTitle = reminderTitle;
+        this.reminderDetails = reminderDetails;
+        this.reminderDate = reminderDate;
+        this.reminderTime = reminderTime;
+    }
+
+    @Ignore
+    public ReminderEntity(int reminderID, String reminderTitle, String reminderDetails, String reminderDate, String reminderTime) {
+        this.reminderID = reminderID;
         this.reminderTitle = reminderTitle;
         this.reminderDetails = reminderDetails;
         this.reminderDate = reminderDate;

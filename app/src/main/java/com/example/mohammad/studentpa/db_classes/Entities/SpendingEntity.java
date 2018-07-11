@@ -2,12 +2,22 @@ package com.example.mohammad.studentpa.db_classes.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class SpendingEntity {
 
     public SpendingEntity(String spendDate, String spendAmount, String spendDetails, String spendTotal) {
+        this.spendDate = spendDate;
+        this.spendAmount = spendAmount;
+        this.spendDetails = spendDetails;
+        this.spendTotal = spendTotal;
+    }
+
+    @Ignore
+    public SpendingEntity(int spendingID, String spendDate, String spendAmount, String spendDetails, String spendTotal) {
+        this.spendingID = spendingID;
         this.spendDate = spendDate;
         this.spendAmount = spendAmount;
         this.spendDetails = spendDetails;

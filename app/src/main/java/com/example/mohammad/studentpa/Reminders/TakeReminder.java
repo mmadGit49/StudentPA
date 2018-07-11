@@ -33,7 +33,6 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
     private EditText editTextReminderDetails;
     private TextView textViewSetReminderDate;
     private TextView textViewSetReminderTime;
-    private Button buttonSetReminderTime;
     private FloatingActionButton fab;
 
     private ReminderViewModel reminderViewModel;
@@ -50,49 +49,104 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
         Button buttonSetReminderTime = findViewById(R.id.buttonReminderTime);
 
         localData = new LocalData(getApplicationContext());
-
-        buttonSetReminderDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog(v);
-            }
-        });
-
-        buttonSetReminderTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    showTimePickerDialog(v);
-            }
-        });
-
         reminderViewModel = ViewModelProviders.of
                 (TakeReminder.this).get(ReminderViewModel.class);
 
-        fab = findViewById(R.id.fab_save_reminder);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( TextUtils.isEmpty( editTextReminderTitle.getText().toString() ) &&
-                        TextUtils.isEmpty(editTextReminderDetails.getText().toString() )  ){
-                    // setResult(RESULT_CANCELED, replyIntent);
-                }else{
-                    String reminderTitle = editTextReminderTitle.getText().toString();
-                    String reminderDetails = editTextReminderDetails.getText().toString();
-                    String reminderDate= textViewSetReminderDate.getText().toString();
-                    String reminderTime = textViewSetReminderTime.getText().toString();
-                    reminderViewModel.insert(new ReminderEntity
-                            (reminderTitle, reminderDetails, reminderDate, reminderTime));
+        if (getIntent().hasExtra("remindID")) {
+            String reminderTitle = getIntent().getStringExtra("remindTitle");
+            String reminderDetails = getIntent().getStringExtra("remindDetails");
+            String reminderDate= getIntent().getStringExtra("remindDate");
+            String reminderTime = getIntent().getStringExtra("remindTime");
 
-                    NotificationScheduler.setReminder(TakeReminder.this,AlarmReceiver.class,
-                            localData.get_hour(),localData.get_min(), localData.get_day(),
-                            localData.get_month(), localData.get_year());
+            editTextReminderTitle.setText(reminderTitle);
+            editTextReminderDetails.setText(reminderDetails);
+            textViewSetReminderDate.setText(reminderDate);
+            textViewSetReminderTime.setText(reminderTime);
 
-                    Toast.makeText(getApplicationContext(),
-                            "Reminder saved!", Toast.LENGTH_SHORT).show();
+            buttonSetReminderDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDatePickerDialog(v);
                 }
-                finish();
-            }
-        });
+            });
+
+            buttonSetReminderTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showTimePickerDialog(v);
+                }
+            });
+
+            fab = findViewById(R.id.fab_save_reminder);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if( !TextUtils.isEmpty( editTextReminderTitle.getText().toString() ) &&
+                            !TextUtils.isEmpty(editTextReminderDetails.getText().toString() )  ){
+
+                        String reminderTitle = editTextReminderTitle.getText().toString();
+                        String reminderDetails = editTextReminderDetails.getText().toString();
+                        String reminderDate= textViewSetReminderDate.getText().toString();
+                        String reminderTime = textViewSetReminderTime.getText().toString();
+                        int remindID = getIntent().getIntExtra("remindID", 0);
+
+                        reminderViewModel.update(new ReminderEntity
+                                (remindID, reminderTitle, reminderDetails, reminderDate, reminderTime));
+
+                        localData.setTitle(reminderTitle);//For notification
+
+                        NotificationScheduler.setReminder(TakeReminder.this,AlarmReceiver.class,
+                                localData.get_hour(),localData.get_min(), localData.get_day(),
+                                localData.get_month(), localData.get_year());
+                        Toast.makeText(getApplicationContext(),
+                                "Reminder updated!", Toast.LENGTH_SHORT).show();
+                    }
+                    finish();
+                }
+            });
+
+        } else {
+            buttonSetReminderDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDatePickerDialog(v);
+                }
+            });
+
+            buttonSetReminderTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showTimePickerDialog(v);
+                }
+            });
+
+            fab = findViewById(R.id.fab_save_reminder);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if( TextUtils.isEmpty( editTextReminderTitle.getText().toString() ) &&
+                            TextUtils.isEmpty(editTextReminderDetails.getText().toString() )  ){
+                        // setResult(RESULT_CANCELED, replyIntent);
+                    }else{
+                        String reminderTitle = editTextReminderTitle.getText().toString();
+                        String reminderDetails = editTextReminderDetails.getText().toString();
+                        String reminderDate= textViewSetReminderDate.getText().toString();
+                        String reminderTime = textViewSetReminderTime.getText().toString();
+                        reminderViewModel.insert(new ReminderEntity
+                                (reminderTitle, reminderDetails, reminderDate, reminderTime));
+
+                        localData.setTitle(reminderTitle);
+                        NotificationScheduler.setReminder(TakeReminder.this,AlarmReceiver.class,
+                                localData.get_hour(),localData.get_min(), localData.get_day(),
+                                localData.get_month(), localData.get_year());
+
+                        Toast.makeText(getApplicationContext(),
+                                "Reminder saved!", Toast.LENGTH_SHORT).show();
+                    }
+                    finish();
+                }
+            });
+        }
 
     }
 

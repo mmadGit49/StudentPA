@@ -1,5 +1,7 @@
 package com.example.mohammad.studentpa;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,14 +25,11 @@ import com.example.mohammad.studentpa.Reminders.Reminders;
 import com.example.mohammad.studentpa.Schedule.Schedule;
 import com.example.mohammad.studentpa.Spending.Spending;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity started";
     private DrawerLayout drawerLayout;
-    private ArrayList<String> titleNames= new ArrayList<>();
-    private ArrayList<String> notes = new ArrayList<>();
+    private final String CHANNEL_ID = "CHANNEL_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,9 @@ public class MainActivity extends AppCompatActivity
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
-            Toast.makeText(this, "Welcome! " +
+        createNotificationChannel();
+
+        Toast.makeText(this, "Welcome! " +
                     "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
             //for the toolbar, action bar
             Toolbar toolbar = findViewById(R.id.toolbar);
@@ -59,8 +60,13 @@ public class MainActivity extends AppCompatActivity
             drawerLayout.addDrawerListener(toggle);
             toggle.syncState();
 
+            Fragment fragment;
+            fragment= new Milestones();
+            replaceFrag(fragment);
+
             NavigationView navigationView= findViewById(R.id.navigation_view_main);
             navigationView.setNavigationItemSelectedListener(this);
+
       //  }
 
     }
@@ -138,6 +144,25 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Spending!", Toast.LENGTH_SHORT).show();
         }
         return true;
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String name = getString(R.string.Alert_name);
+            String description = getString(R.string.Alert_details);
+
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }

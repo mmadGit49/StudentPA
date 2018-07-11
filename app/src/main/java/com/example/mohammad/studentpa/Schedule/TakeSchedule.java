@@ -29,7 +29,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
     private EditText editTextScheduleTitle;
     private TextView textViewScheduleDate;
     private TextView textViewScheduleTimeFrom;
-    private TextView textViewScheduleDuration;
+    private EditText editTextSchedDuration;
     private Button buttonScheduleDate;
     private Button buttonScheduleTimeFrom;
     private FloatingActionButton fab;
@@ -46,7 +46,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
         editTextScheduleTitle = findViewById(R.id.editTextScheduleTitle);
         textViewScheduleDate = findViewById(R.id.textViewScheduleDate);
         textViewScheduleTimeFrom = findViewById(R.id.textViewScheduleTimeFrom);
-        textViewScheduleDuration = findViewById(R.id.textViewScheduleDuration);
+        editTextSchedDuration = findViewById(R.id.editTextScheduleDuration);
         buttonScheduleDate = findViewById(R.id.buttonScheduleDate);
         buttonScheduleTimeFrom = findViewById(R.id.buttonScheduleTimeFrom);
         fab = findViewById(R.id.fab_save_schedule);
@@ -54,41 +54,85 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
         scheduleViewModel = ViewModelProviders.of(TakeSchedule.this).
                 get(ScheduleViewModel.class);
 
-        buttonScheduleDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog(v);
-            }
-        });
+        if (getIntent().hasExtra("schedID")) {
+            String title = getIntent().getStringExtra("schedTitle");
+            String time = getIntent().getStringExtra("schedTime");
+            String date = getIntent().getStringExtra("schedDate");
+            String duration = getIntent().getStringExtra("schedDuration");
+            final int schedID = getIntent().getIntExtra("schedID", 0);
 
-        buttonScheduleTimeFrom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTimeFromPickerDialog(v);
-            }
-        });
+            editTextScheduleTitle.setText(title);
+            textViewScheduleTimeFrom.setText(time);
+            textViewScheduleDate.setText(date);
+            editTextSchedDuration.setText(duration);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( TextUtils.isEmpty( editTextScheduleTitle.getText().toString() ) ){
-                    // setResult(RESULT_CANCELED, replyIntent);
-                }else{
-                    String scheduleTitle = editTextScheduleTitle.getText().toString();
-                    String scheduleTime = textViewScheduleTimeFrom.getText().toString();
-                    String optionalDate = textViewScheduleDate.getText().toString();
-                    String duration = textViewScheduleDuration.getText().toString();
-
-                    //To save data to the db via the ViewModel
-                    scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, null, scheduleTime,
-                            optionalDate, duration));
-                    Toast.makeText(getApplicationContext(), "Item saved!",
-                            Toast.LENGTH_SHORT).show();
+            buttonScheduleDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDatePickerDialog(v);
                 }
+            });
 
-                finish();
-            }
-        });
+            buttonScheduleTimeFrom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showTimeFromPickerDialog(v);
+                }
+            });
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if( !TextUtils.isEmpty( editTextScheduleTitle.getText().toString() ) ){
+                        String scheduleTitle = editTextScheduleTitle.getText().toString();
+                        String scheduleTime = textViewScheduleTimeFrom.getText().toString();
+                        String optionalDate = textViewScheduleDate.getText().toString();
+                        String duration = editTextSchedDuration.getText().toString();
+
+                        //To save data to the db via the ViewModel
+                        scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
+                                null, scheduleTime, duration, optionalDate));
+                        Toast.makeText(getApplicationContext(), "Item updated!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    finish();
+                }
+            });
+        } else {
+            buttonScheduleDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDatePickerDialog(v);
+                }
+            });
+
+            buttonScheduleTimeFrom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showTimeFromPickerDialog(v);
+                }
+            });
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if( !TextUtils.isEmpty( editTextScheduleTitle.getText().toString() ) ){
+                        String scheduleTitle = editTextScheduleTitle.getText().toString();
+                        String scheduleTime = textViewScheduleTimeFrom.getText().toString();
+                        String optionalDate = textViewScheduleDate.getText().toString();
+                        String duration = editTextSchedDuration.getText().toString();
+
+                        //To save data to the db via the ViewModel
+                        scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, null,
+                                scheduleTime, duration, optionalDate));
+                        Toast.makeText(getApplicationContext(), "Item saved!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    finish();
+                }
+            });
+        }
 
     }
 

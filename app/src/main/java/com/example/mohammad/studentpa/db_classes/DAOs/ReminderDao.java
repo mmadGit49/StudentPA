@@ -38,7 +38,7 @@ public interface ReminderDao {
     LiveData<List<ReminderEntity>> getAllReminderTimes();
 
     @Update
-    void updateList(ReminderEntity reminderEntity);//Update the table
+    void update(ReminderEntity reminderEntity);//Update the table
 
     @Delete
     void delete(ReminderEntity reminderEntity);//Delete the row passed to param, I guess?*/

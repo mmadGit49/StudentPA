@@ -57,5 +57,9 @@ public class ReminderViewModel extends AndroidViewModel {
         reminderRepository.deleteReminder(milestoneEntity);
     }
 
+    public  void update(ReminderEntity milestoneEntity){
+        reminderRepository.updateReminder(milestoneEntity);
+    }
+
 
 }

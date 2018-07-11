@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
-import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class MilestoneRecyclerViewAdapter
 
     private List<MilestoneEntity> milestones;
     private Context context;
-    private MilestoneViewModel milestoneViewModel;
 
 
     public MilestoneRecyclerViewAdapter(Context context, List<MilestoneEntity> milestones) {
@@ -53,6 +51,15 @@ public class MilestoneRecyclerViewAdapter
                 public void onClick(View v) {
                     //Open note to edit
                     Intent noteIntent = new Intent(context, TakeMilestoneNote.class);
+                    int mileID = milestones.get(position).getMilestoneID();
+
+                    noteIntent.putExtra("title", milestones
+                            .get(position)
+                            .getMilestoneTitle());
+                    noteIntent.putExtra("details", milestones
+                            .get(position)
+                            .getMilestoneDetails());
+                    noteIntent.putExtra("mileID", mileID);
                     context.startActivity(noteIntent);
                 }
             });

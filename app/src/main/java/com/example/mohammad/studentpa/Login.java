@@ -13,8 +13,6 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.db_classes.UserViewModel;
 
 public class Login extends AppCompatActivity {
-    private Button register;
-    private Button login;
     private EditText username;
     private EditText password;
 
@@ -24,10 +22,11 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         //Remember to add a security mechanism to avoid brute force login
         //e.g. initialise a counter
-        register= findViewById(R.id.buttonSignUp);
-        login= findViewById(R.id.buttonLogin);
+        Button register = findViewById(R.id.buttonSignUp);
+        Button login = findViewById(R.id.buttonLogin);
         username= findViewById(R.id.editTextEmail);
         password= findViewById(R.id.editTextPassword);
 
@@ -37,7 +36,6 @@ public class Login extends AppCompatActivity {
             View regView;
             @Override
             public void onClick(View v) {//on button "Sign up" clicked, obvious
-                //TODO: store details to DB
                 startRegister(regView);//will start registration activity
             }
         });
@@ -47,28 +45,21 @@ public class Login extends AppCompatActivity {
             View view;
             @Override
             public void onClick(View v) {
-                String email;
-                String passwordString;
                 if(TextUtils.isEmpty(username.getText()) || TextUtils.isEmpty(password.getText())){
                     Toast.makeText(Login.this, "Missing Required Fields!",
                             Toast.LENGTH_SHORT).show();
                 }else{
-                    email = username.getText().toString();
-                    passwordString = password.getText().toString();
+                    String emailEntered = username.getText().toString();
+                    String passwordString = password.getText().toString();
 
-                    String checkPw= userViewModel.getUserRepository().getRepoUserDao()
-                            .getUserPasswordLogin(email).toString();
-
-                   // if(checkPw.equals(passwordString)){
-                        //SavedUserLogin savedUserLogin = new SavedUserLogin();
-                      //  savedUserLogin.setUserName(Login.this, email);
-                        startMain(view);//will start main activity
-
+                    //boolean verify = verifyLogin(emailEntered, passwordString);
+//                    if(verify){
+//                        SavedUserLogin.setUserName(Login.this, emailEntered);
+                        startMain(view);
                     //}else{
-                        Toast.makeText(Login.this, "Username or password incorrect",
+                        Toast.makeText(Login.this, "Something's not right...",
                                 Toast.LENGTH_SHORT).show();
                     //}
-
                 }
             }
         });
@@ -86,4 +77,20 @@ public class Login extends AppCompatActivity {
         startActivity(register);
         finish();//prevents user from returning to this screen
     }
+
+    public boolean verifyLogin(String email, String password){
+        String checkEmail = userViewModel.getLoginEmail(email);
+        String checkPw =  userViewModel.getPassword(email);
+
+        if(checkEmail.equals(email)){
+            if (checkPw.equals(password)){
+                return true;
+            }else{
+                Toast.makeText(Login.this, "Username or password incorrect",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+        return false;
+    }
+
 }

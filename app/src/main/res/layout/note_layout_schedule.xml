@@ -72,7 +72,7 @@ android:layout_height="match_parent">
             android:text="@string/time_select" />
 
         <EditText
-            android:id="@+id/textViewScheduleDuration"
+            android:id="@+id/editTextScheduleDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewScheduleTimeFrom"
@@ -83,16 +83,6 @@ android:layout_height="match_parent">
             android:padding="8dp"
             android:textSize="18sp"
             android:textStyle="" />
-<!--
-        <Button
-            android:id="@+id/buttonScheduleTimeTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/buttonScheduleTimeFrom"
-            android:ems="10"
-            android:onClick="showTimePickerDialog"
-            android:text="@string/time_select" />-->
     </RelativeLayout>
 
 

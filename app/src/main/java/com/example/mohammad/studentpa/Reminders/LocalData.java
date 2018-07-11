@@ -16,7 +16,7 @@ public class LocalData {
     private static final String day="day";
     private static final String month="month";
     private static final String year="year";
-
+    private String title;
 
 
     public LocalData(Context context)
@@ -109,4 +109,13 @@ public class LocalData {
         prefsEditor.commit();
 
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 }

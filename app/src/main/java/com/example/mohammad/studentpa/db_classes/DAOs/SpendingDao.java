@@ -34,7 +34,7 @@ public interface SpendingDao {
     LiveData<List<SpendingEntity>> getAllSpendingDetails();
 
     @Update
-    void updateList(SpendingEntity spendingEntity);//Update the table
+    void update(SpendingEntity spendingEntity);//Update the table
 
     @Delete
     void delete(SpendingEntity spendingEntity);//Delete the row passed to param, I guess?*/

@@ -58,6 +58,10 @@ public class ReminderRepository {
         new deleteAsyncTask(repoReminderDao).execute(reminderEntity);
     }
 
+    public void updateReminder (ReminderEntity reminderEntity){
+        new updateAsyncTask(repoReminderDao).execute(reminderEntity);
+    }
+
     //Insert and delete from database Asynctask methods
 
     private static class insertAsyncTask extends AsyncTask<ReminderEntity, Void, Void> {
@@ -89,4 +93,21 @@ public class ReminderRepository {
             return null;
         }
     }
+
+    private static class updateAsyncTask extends AsyncTask<ReminderEntity, Void, Void> {
+
+        private ReminderDao mAsyncTaskDao;
+
+        updateAsyncTask(ReminderDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final ReminderEntity... params) {
+            mAsyncTaskDao.update(params[0]);
+            return null;
+        }
+    }
+
 }
+

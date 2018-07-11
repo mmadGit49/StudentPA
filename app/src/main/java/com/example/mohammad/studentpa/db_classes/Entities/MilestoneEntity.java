@@ -2,12 +2,20 @@ package com.example.mohammad.studentpa.db_classes.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class MilestoneEntity {
 
     public MilestoneEntity(String milestoneTitle, String milestoneDetails) {
+        this.milestoneTitle = milestoneTitle;
+        this.milestoneDetails = milestoneDetails;
+    }
+
+    @Ignore
+    public MilestoneEntity(int milestoneID, String milestoneTitle, String milestoneDetails) {
+        this.milestoneID = milestoneID;
         this.milestoneTitle = milestoneTitle;
         this.milestoneDetails = milestoneDetails;
     }

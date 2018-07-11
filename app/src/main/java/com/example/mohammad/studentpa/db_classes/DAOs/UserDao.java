@@ -33,6 +33,10 @@ public interface UserDao {
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<User>> getUserPasswordLogin(String email);//Get the PW from DB to check if match
 
+    @Query("SELECT userID, email FROM user WHERE email = :email")//Method to get all user names
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    LiveData<List<User>> getUserEmailsLogin(String email);//Get the email from DB to check if match
+
     @Query("SELECT userID, email FROM user")//Method to get all user names
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<User>> getUserEmail();//

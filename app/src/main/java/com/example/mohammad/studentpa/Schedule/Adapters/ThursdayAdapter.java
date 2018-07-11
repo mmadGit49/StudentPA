@@ -52,14 +52,25 @@ public class ThursdayAdapter extends RecyclerView.Adapter<ThursdayAdapter.ViewHo
             holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom().toString());
             holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration().toString());
             holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-            //On item click, start note taker activity
-            Intent scheduleIntent= new Intent(context, TakeSchedule.class);
-            context.startActivity(scheduleIntent);
-            Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
-            }
-            });
+            @Override
+            public void onClick(View v) {
+                    //On item click, start note taker activity
+                //On item click, start note taker activity
+                Intent scheduleIntent= new Intent(context, TakeSchedule.class);
+                scheduleIntent.putExtra("schedTitle", schedules.get(position)
+                        .getScheduleTitle());
+                scheduleIntent.putExtra("schedDate", schedules.get(position)
+                        .getDate());
+                scheduleIntent.putExtra("schedTime", schedules.get(position)
+                        .getTimeFrom());
+                scheduleIntent.putExtra("schedDuration", schedules.get(position)
+                        .getDuration());
+                scheduleIntent.putExtra("schedID", schedules.get(position)
+                        .getScheduleID());
+
+                context.startActivity(scheduleIntent);
+                Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
+                    }});
 
             } else {
             //If data is not ready yet

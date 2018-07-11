@@ -14,7 +14,6 @@ public class UserViewModel extends AndroidViewModel {
     private LiveData<List<User>> allUsers;
     private LiveData<List<User>> allUserEmails;
     private LiveData<List<User>> allUserPasswords;
-    private LiveData<List<User>> allUserLoginPasswords;
 
 
     public UserViewModel (Application application){
@@ -23,7 +22,6 @@ public class UserViewModel extends AndroidViewModel {
         allUserEmails = userRepository.getAllUserEmails();
         allUserPasswords = userRepository.getAllUserPasswords();
         allUsers = userRepository.getAllUsers();
-        allUserPasswords = userRepository.getAllUserLoginPasswords();
     }
 
     public LiveData<List<User>> getAllUsers() {
@@ -35,9 +33,6 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<List<User>> getAllUserPasswords() {
         return allUserPasswords;
     }
-    public LiveData<List<User>> getAllUserLoginPasswords() {
-        return allUserLoginPasswords;
-    }
     public UserRepository getUserRepository() {
         return userRepository;
     }
@@ -48,6 +43,14 @@ public class UserViewModel extends AndroidViewModel {
 
     public  void delete(User user){
         userRepository.delete(user);
+    }
+
+    public String getPassword(String email){
+        return userRepository.getPasswordForEmail(email).toString();
+    }
+
+    public String getLoginEmail(String email){
+        return userRepository.getEmailForLogin(email).toString();
     }
 
 }

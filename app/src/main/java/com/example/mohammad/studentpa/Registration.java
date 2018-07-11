@@ -63,6 +63,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                 boolean checkEmptyPassword = TextUtils.isEmpty(password.getText());
                 boolean checkEmptyConfirm = TextUtils.isEmpty(confirmPassword.getText());
                 boolean checkEmptyDob = TextUtils.isEmpty(dob.getText());
+
                 if(checkEmptyFname || checkEmptySurname || checkEmptyEmail || checkEmptyPassword ||
                         checkEmptyConfirm || checkEmptyDob){
                     Toast.makeText(Registration.this, "Ensure all details are filled in!",

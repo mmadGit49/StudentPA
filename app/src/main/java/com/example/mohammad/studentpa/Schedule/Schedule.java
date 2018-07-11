@@ -118,7 +118,6 @@ public class Schedule extends Fragment {
                     }
                 });
         helper.attachToRecyclerView(mRecyclerView);
-
     }
 
 }
