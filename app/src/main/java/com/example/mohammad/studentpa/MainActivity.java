@@ -1,7 +1,5 @@
 package com.example.mohammad.studentpa;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity started";
     private DrawerLayout drawerLayout;
-    private final String CHANNEL_ID = "CHANNEL_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +39,6 @@ public class MainActivity extends AppCompatActivity
         {*/
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-
-        createNotificationChannel();
 
         Toast.makeText(this, "Welcome! " +
                     "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
@@ -146,23 +141,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String name = getString(R.string.Alert_name);
-            String description = getString(R.string.Alert_details);
-
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
 }

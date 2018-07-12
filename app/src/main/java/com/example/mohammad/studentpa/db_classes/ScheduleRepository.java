@@ -49,17 +49,14 @@ public class ScheduleRepository {
     }
 
     public void insertSchedule (ScheduleEntity scheduleEntity) {
-        //starts the async task which, in this case, inserts a milestone to the db
         new insertAsyncTask(repoScheduleDao).execute(scheduleEntity);
     }
 
     public void deleteSchedule (ScheduleEntity scheduleEntity) {
-        //starts the async task which, in this case, inserts a milestone to the db
         new deleteAsyncTask(repoScheduleDao).execute(scheduleEntity);
     }
 
     public void updateSchedule (ScheduleEntity scheduleEntity) {
-        //starts the async task which, in this case, inserts a milestone to the db
         new updateAsyncTask(repoScheduleDao).execute(scheduleEntity);
     }
 

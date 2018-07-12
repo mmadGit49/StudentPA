@@ -13,8 +13,6 @@
     <string name="confirm_password_prompt">Confirm your Password</string>
     <string name="dob_prompt">Date of Birth</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name = "welcome">Hello! Open Navigation drawer and select category to begin...</string>
-    <string name = "Copyright">2018 Organ Eyes, Get Organised today...</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -50,6 +48,7 @@
     <string name= "Thursday">Thur</string>
     <string name= "Friday">Fri</string>
     <string name= "Saturday">Sat</string>
+    <string name= "no_notes_info">No Notes yet…</string>
     <!--FOR REMINDERS MODULE-->
     <string name= "Alert_name">Title of Reminder</string>
     <string name= "Alert_details">Extra details</string>

@@ -58,13 +58,12 @@ public class Schedule extends Fragment {
         TabLayout tabLayout = schedView.findViewById(R.id.scheduleTabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-        int position = tabLayout.getSelectedTabPosition();
-
         return schedView;
     }
 
     public void initRecyclerView() {
-        final ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(), new ArrayList<ScheduleEntity>());
+        final ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(),
+                new ArrayList<ScheduleEntity>());
         mRecyclerView.setAdapter(adapter);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -94,9 +93,11 @@ public class Schedule extends Fragment {
                                          int direction) {
                         int position = viewHolder.getAdapterPosition();
                         final ScheduleEntity scheduleEntity = adapter.getScheduleAtPosition(position);
+
                         AlertDialog.Builder builder;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                            builder = new AlertDialog.Builder(getContext(),
+                                    android.R.style.Theme_Material_Dialog_Alert);
                         } else {
                             builder = new AlertDialog.Builder(getContext());
                         }
@@ -106,7 +107,8 @@ public class Schedule extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         scheduleViewModel.delete(scheduleEntity);
                                         // Delete the word
-                                        Toast.makeText(getContext(), "Class deleted!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Class deleted!",
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

@@ -10,7 +10,6 @@ public class LocalData {
     private SharedPreferences appSharedPrefs;
     private SharedPreferences.Editor prefsEditor;
 
-    private static final String reminderStatus="reminderStatus";
     private static final String hour="hour";
     private static final String min="min";
     private static final String day="day";
@@ -23,19 +22,6 @@ public class LocalData {
     {
         this.appSharedPrefs = context.getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
         this.prefsEditor = appSharedPrefs.edit();
-    }
-
-    // Settings Page Set Reminder
-
-    public boolean getReminderStatus()
-    {
-        return appSharedPrefs.getBoolean(reminderStatus, false);
-    }
-
-    public void setReminderStatus(boolean status)
-    {
-        prefsEditor.putBoolean(reminderStatus, status);
-        prefsEditor.commit();
     }
 
     // Settings Page Reminder Time (Hour)

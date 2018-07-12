@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.Schedule.Adapters.ScheduleRecyclerViewAdapter;
+import com.example.mohammad.studentpa.Schedule.Adapters.SaturdayAdapter;
 import com.example.mohammad.studentpa.Schedule.TakeSchedule;
 import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
@@ -51,17 +51,12 @@ public class SaturdayFragment extends Fragment {
             }
         });
 
-        initRecyclerView();
-        return saturdayView;
-    }
-
-    public void initRecyclerView(){
         RecyclerView recyclerView =
                 saturdayView.findViewById(R.id.recycler_view_schedule_saturday);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final ScheduleRecyclerViewAdapter adapter =
-                new ScheduleRecyclerViewAdapter(getActivity(), new ArrayList<ScheduleEntity>());
+        final SaturdayAdapter adapter = new SaturdayAdapter(getActivity(),
+                new ArrayList<ScheduleEntity>());
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
@@ -112,5 +107,7 @@ public class SaturdayFragment extends Fragment {
                     }
                 });
         helper.attachToRecyclerView(recyclerView);
+        return saturdayView;
     }
+
 }

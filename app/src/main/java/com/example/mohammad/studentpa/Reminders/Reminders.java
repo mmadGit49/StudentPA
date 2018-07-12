@@ -1,7 +1,5 @@
 package com.example.mohammad.studentpa.Reminders;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
@@ -37,15 +35,12 @@ public class Reminders extends Fragment {
     private FloatingActionButton fab;
     private LinearLayoutManager layoutManager;
     private ReminderViewModel reminderViewModel;
-    private final String CHANNEL_ID = "CHANNEL_ID";
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         remindView = inflater.inflate(R.layout.fragment_reminders, container, false);
-
-        createNotificationChannel();
 
         Toolbar toolbar = remindView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -100,7 +95,8 @@ public class Reminders extends Fragment {
 
                         AlertDialog.Builder builder;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                            builder = new AlertDialog.Builder(getContext(),
+                                    android.R.style.Theme_Material_Dialog_Alert);
                         } else {
                             builder = new AlertDialog.Builder(getContext());
                         }
@@ -109,9 +105,11 @@ public class Reminders extends Fragment {
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         reminderViewModel.delete(reminder);
-                                        NotificationScheduler.cancelReminder(getContext(), AlarmReceiver.class);
+                                        NotificationScheduler.cancelReminder(getContext(),
+                                                AlarmReceiver.class);
                                         // Delete the item
-                                        Toast.makeText(getContext(), "Reminder deleted!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Reminder deleted!",
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -125,25 +123,7 @@ public class Reminders extends Fragment {
         helper.attachToRecyclerView(recyclerView);
     }
 
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            String name = getString(R.string.Alert_name);
-            String description = getString(R.string.Alert_details);
-
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
 
 }

@@ -14,7 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,17 +51,11 @@ public class TuesdayFragment extends Fragment {
             }
         });
 
-        initRecyclerView();
-        return tuesdayView;
-    }
-
-    public void initRecyclerView() {
-        RecyclerView recyclerView =
-                tuesdayView.findViewById(R.id.recycler_view_schedule_tuesday);
-        layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+        RecyclerView recyclerView = tuesdayView.findViewById(R.id.recycler_view_schedule_tuesday);
+        layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final TuesdayAdapter adapter =
-                new TuesdayAdapter(getActivity(), new ArrayList<ScheduleEntity>());
+        final TuesdayAdapter adapter = new TuesdayAdapter(getContext(),
+                new ArrayList<ScheduleEntity>());
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
@@ -71,7 +64,6 @@ public class TuesdayFragment extends Fragment {
             public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
                 //Update the cached copy of words in the adapter
                 adapter.setClass(scheduleEntities);
-                Log.i("##############", scheduleEntities.size() + "");
             }
         });
 
@@ -114,7 +106,7 @@ public class TuesdayFragment extends Fragment {
                     }
                 });
         helper.attachToRecyclerView(recyclerView);
-
+        return tuesdayView;
     }
 
 }

@@ -68,4 +68,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return title;
     }
 
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
 }

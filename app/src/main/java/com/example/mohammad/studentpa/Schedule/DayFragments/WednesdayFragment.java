@@ -14,14 +14,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.Schedule.Adapters.ScheduleRecyclerViewAdapter;
+import com.example.mohammad.studentpa.Schedule.Adapters.WednesdayAdapter;
 import com.example.mohammad.studentpa.Schedule.TakeSchedule;
 import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
@@ -51,17 +50,11 @@ public class WednesdayFragment extends Fragment {
             }
         });
 
-        initRecyclerView();
-        return wednesdayView;
-    }
-
-    public void initRecyclerView(){
-        RecyclerView recyclerView =
-                wednesdayView.findViewById(R.id.recycler_view_schedule_wednesday);
+        RecyclerView recyclerView = wednesdayView.findViewById(R.id.recycler_view_schedule_wednesday);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final ScheduleRecyclerViewAdapter adapter =
-                new ScheduleRecyclerViewAdapter(getActivity(), new ArrayList<ScheduleEntity>());
+        final WednesdayAdapter adapter = new WednesdayAdapter(getActivity(),
+                new ArrayList<ScheduleEntity>());
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
@@ -70,7 +63,6 @@ public class WednesdayFragment extends Fragment {
             public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
                 //Update the cached copy of words in the adapter
                 adapter.setClass(scheduleEntities);
-                Log.i("##############",scheduleEntities.size()+"");
             }
         });
 
@@ -111,8 +103,6 @@ public class WednesdayFragment extends Fragment {
                                 }).show();
                     }
                 });
-        helper.attachToRecyclerView(recyclerView);
-
+        helper.attachToRecyclerView(recyclerView);        return wednesdayView;
     }
-
 }

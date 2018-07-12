@@ -1,9 +1,14 @@
 package com.example.mohammad.studentpa.Schedule.Adapters;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.Schedule.Schedule;
 import com.example.mohammad.studentpa.Schedule.TakeSchedule;
 import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
@@ -32,10 +38,6 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         this.context = context;
         this.schedules = schedules;
     }
-    public ScheduleRecyclerViewAdapter() {
-        this.context = context;
-        this.schedules = schedules;
-    }
 
     @NonNull
     @Override
@@ -47,7 +49,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScheduleRecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ScheduleRecyclerViewAdapter.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
 
         if (schedules != null) {
@@ -60,22 +62,22 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                 public void onClick(View v) {
                     //On item click, start note taker activity
                     Intent scheduleIntent= new Intent(context, TakeSchedule.class);
-                    scheduleIntent.putExtra("schedTitle", schedules.get(position)
+                    scheduleIntent.putExtra("schedTitle", schedules.get(holder.getAdapterPosition())
                             .getScheduleTitle());
-                    scheduleIntent.putExtra("schedDate", schedules.get(position)
+                    scheduleIntent.putExtra("schedDate", schedules.get(holder.getAdapterPosition())
                             .getDate());
-                    scheduleIntent.putExtra("schedTime", schedules.get(position)
+                    scheduleIntent.putExtra("schedTime", schedules.get(holder.getAdapterPosition())
                             .getTimeFrom());
-                    scheduleIntent.putExtra("schedDuration", schedules.get(position)
+                    scheduleIntent.putExtra("schedDuration", schedules.get(holder.getAdapterPosition())
                             .getDuration());
-                    scheduleIntent.putExtra("schedID", schedules.get(position)
+                    scheduleIntent.putExtra("schedID", schedules.get(holder.getAdapterPosition())
                             .getScheduleID());
                     context.startActivity(scheduleIntent);
                     Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
                 }
             });
 
-/*
+
             holder.scheduleLayout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -121,7 +123,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                             });
                     return true;
                 }
-            });*/
+            });
 
         } else {
             //If data is not ready yet
@@ -139,10 +141,6 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         notifyDataSetChanged();
     }
 
-    public ViewHolder getHolder(View view){
-        ScheduleRecyclerViewAdapter.ViewHolder holder= new ScheduleRecyclerViewAdapter.ViewHolder(view);
-        return holder;
-    }
     public ScheduleEntity getScheduleAtPosition(int position){
         return schedules.get(position);
     }

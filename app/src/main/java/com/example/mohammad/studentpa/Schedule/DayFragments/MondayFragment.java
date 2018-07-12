@@ -54,17 +54,11 @@ public class MondayFragment extends Fragment {
             }
         });
 
-        initRecyclerView();
-        return mondayView;
-    }
-
-    public void initRecyclerView(){
         RecyclerView recyclerView =
                 mondayView.findViewById(R.id.recycler_view_schedule_monday);
-        layoutManager = new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final MondayAdapter adapter =
-                new MondayAdapter(getActivity(), new ArrayList<ScheduleEntity>());
+        final MondayAdapter adapter = new MondayAdapter(getActivity(), new ArrayList<ScheduleEntity>());
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
@@ -115,14 +109,9 @@ public class MondayFragment extends Fragment {
                     }
                 });
         helper.attachToRecyclerView(recyclerView);
-    }
-
-    public View getMondayView() {
         return mondayView;
     }
 
-    public void setMondayView(View mondayView) {
-        this.mondayView = mondayView;
-    }
+
 }
 

@@ -3,10 +3,12 @@ package com.example.mohammad.studentpa.Reminders;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -37,6 +39,9 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
 
     private ReminderViewModel reminderViewModel;
     private LocalData localData;
+    private ReminderNotification reminderNotification;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +82,7 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                 }
             });
 
+            reminderNotification = new ReminderNotification(this);
             fab = findViewById(R.id.fab_save_reminder);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,8 +104,14 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                         NotificationScheduler.setReminder(TakeReminder.this,AlarmReceiver.class,
                                 localData.get_hour(),localData.get_min(), localData.get_day(),
                                 localData.get_month(), localData.get_year());
+
                         Toast.makeText(getApplicationContext(),
                                 "Reminder updated!", Toast.LENGTH_SHORT).show();
+
+                        ReminderNotification reminderNotification = new ReminderNotification(TakeReminder.this);
+                        NotificationCompat.Builder nb;
+                        nb = reminderNotification.getChannelNotification(reminderTitle, reminderDetails);
+                        reminderNotification.getManager().notify(100, nb.build());
                     }
                     finish();
                 }
@@ -124,10 +136,8 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if( TextUtils.isEmpty( editTextReminderTitle.getText().toString() ) &&
-                            TextUtils.isEmpty(editTextReminderDetails.getText().toString() )  ){
-                        // setResult(RESULT_CANCELED, replyIntent);
-                    }else{
+                    if( !TextUtils.isEmpty( editTextReminderTitle.getText().toString() ) &&
+                            !TextUtils.isEmpty(editTextReminderDetails.getText().toString() )  ){
                         String reminderTitle = editTextReminderTitle.getText().toString();
                         String reminderDetails = editTextReminderDetails.getText().toString();
                         String reminderDate= textViewSetReminderDate.getText().toString();
@@ -136,7 +146,8 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                                 (reminderTitle, reminderDetails, reminderDate, reminderTime));
 
                         localData.setTitle(reminderTitle);
-                        NotificationScheduler.setReminder(TakeReminder.this,AlarmReceiver.class,
+
+                        NotificationScheduler.setReminder(TakeReminder.this, AlarmReceiver.class,
                                 localData.get_hour(),localData.get_min(), localData.get_day(),
                                 localData.get_month(), localData.get_year());
 
@@ -166,6 +177,11 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
         textViewSetReminderTime.setText(stringTime);
         localData.set_hour(hourOfDay);
         localData.set_min(minute);
+        Intent timeIntent = new Intent(TakeReminder.this, NotificationScheduler.class);
+        timeIntent.putExtra("hour", hourOfDay);
+        timeIntent.putExtra("minute", minute);
+
+
     }
 
     @Override
@@ -175,8 +191,11 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
         localData.set_day(dayOfMonth);
         localData.set_month(month);
         localData.set_year(year);
+        Intent timeIntent = new Intent(TakeReminder.this, NotificationScheduler.class);
+        timeIntent.putExtra("year", year);
+        timeIntent.putExtra("month", month);
+        timeIntent.putExtra("day", dayOfMonth);
+
     }
-
-
 
 }

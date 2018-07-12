@@ -43,28 +43,28 @@ public class WednesdayAdapter extends RecyclerView.Adapter<WednesdayAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WednesdayAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final WednesdayAdapter.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
 
         if (schedules != null) {
-            holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle().toString());
-            holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate().toString());
-            holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom().toString());
-            holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration().toString());
+            holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle());
+            holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate());
+            holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom());
+            holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration());
             holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //On item click, start note taker activity
                     Intent scheduleIntent= new Intent(context, TakeSchedule.class);
-                    scheduleIntent.putExtra("schedTitle", schedules.get(position)
+                    scheduleIntent.putExtra("schedTitle", schedules.get(holder.getAdapterPosition())
                             .getScheduleTitle());
-                    scheduleIntent.putExtra("schedDate", schedules.get(position)
+                    scheduleIntent.putExtra("schedDate", schedules.get(holder.getAdapterPosition())
                             .getDate());
-                    scheduleIntent.putExtra("schedTime", schedules.get(position)
+                    scheduleIntent.putExtra("schedTime", schedules.get(holder.getAdapterPosition())
                             .getTimeFrom());
-                    scheduleIntent.putExtra("schedDuration", schedules.get(position)
+                    scheduleIntent.putExtra("schedDuration", schedules.get(holder.getAdapterPosition())
                             .getDuration());
-                    scheduleIntent.putExtra("schedID", schedules.get(position)
+                    scheduleIntent.putExtra("schedID", schedules.get(holder.getAdapterPosition())
                             .getScheduleID());
 
                     context.startActivity(scheduleIntent);
@@ -74,7 +74,7 @@ public class WednesdayAdapter extends RecyclerView.Adapter<WednesdayAdapter.View
 
         } else {
             //If data is not ready yet
-            holder.textViewScheduleTitleDisplay.setText("No notes");
+            holder.textViewScheduleTitleDisplay.setText(R.string.no_notes_info);
         }
     }
 

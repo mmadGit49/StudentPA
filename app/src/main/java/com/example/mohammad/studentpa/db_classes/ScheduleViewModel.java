@@ -48,8 +48,7 @@ public class ScheduleViewModel extends AndroidViewModel {
     }
 
     public void insert(ScheduleEntity scheduleEntity) {
-        scheduleRepository.insertSchedule(scheduleEntity);
-    }
+        scheduleRepository.insertSchedule(scheduleEntity);    }
 
     public  void delete(ScheduleEntity scheduleEntity){
         scheduleRepository.deleteSchedule(scheduleEntity);    }

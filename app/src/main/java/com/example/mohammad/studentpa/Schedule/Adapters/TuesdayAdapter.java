@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.Schedule.DayFragments.TuesdayFragment;
 import com.example.mohammad.studentpa.Schedule.TakeSchedule;
 import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
 
@@ -24,13 +25,14 @@ public class TuesdayAdapter extends RecyclerView.Adapter<TuesdayAdapter.ViewHold
 
     private Context context;
     private List<ScheduleEntity> schedules;
+    private TuesdayFragment tF = new TuesdayFragment();
+    private SectionsPagerAdapter sectionsPagerAdapter =
+            new SectionsPagerAdapter(tF.getFragmentManager());
+
 
     public TuesdayAdapter(Context context, List<ScheduleEntity> schedules) {
         this.context = context;
         this.schedules = schedules;
-    }
-
-    public TuesdayAdapter() {
     }
 
     @NonNull
@@ -38,43 +40,44 @@ public class TuesdayAdapter extends RecyclerView.Adapter<TuesdayAdapter.ViewHold
     public TuesdayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context.getApplicationContext())
                 .inflate(R.layout.recyclerview_schedule_display, parent, false);
-        TuesdayAdapter.ViewHolder holder= new TuesdayAdapter.ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TuesdayAdapter.ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
+    public void onBindViewHolder(@NonNull final TuesdayAdapter.ViewHolder holder, final int position) {
+        Log.d(TAG, "onBindViewHolder: called.");//log tag
 
         if (schedules != null) {
-            holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle().toString());
-            holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate().toString());
-            holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom().toString());
-            holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration().toString());
-            holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //On item click, start note taker activity
-                    Intent scheduleIntent= new Intent(context, TakeSchedule.class);
-                    scheduleIntent.putExtra("schedTitle", schedules.get(position)
-                            .getScheduleTitle());
-                    scheduleIntent.putExtra("schedDate", schedules.get(position)
-                            .getDate());
-                    scheduleIntent.putExtra("schedTime", schedules.get(position)
-                            .getTimeFrom());
-                    scheduleIntent.putExtra("schedDuration", schedules.get(position)
-                            .getDuration());
-                    scheduleIntent.putExtra("schedID", schedules.get(position)
-                            .getScheduleID());
+            if (sectionsPagerAdapter.getPageTitle(1) == "Tue") {
+                holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle());
+                holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate());
+                holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom());
+                holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration());
+                holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //On item click, start note taker activity
+                        Intent scheduleIntent= new Intent(context, TakeSchedule.class);
+                        scheduleIntent.putExtra("schedTitle", schedules.get(holder.getAdapterPosition())
+                                .getScheduleTitle());
+                        scheduleIntent.putExtra("schedDate", schedules.get(holder.getAdapterPosition())
+                                .getDate());
+                        scheduleIntent.putExtra("schedTime", schedules.get(holder.getAdapterPosition())
+                                .getTimeFrom());
+                        scheduleIntent.putExtra("schedDuration", schedules.get(holder.getAdapterPosition())
+                                .getDuration());
+                        scheduleIntent.putExtra("schedID", schedules.get(holder.getAdapterPosition())
+                                .getScheduleID());
 
-                    context.startActivity(scheduleIntent);
-                    Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
-                }
-            });
+                        context.startActivity(scheduleIntent);
+                        Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
         } else {
             //If data is not ready yet
-            holder.textViewScheduleTitleDisplay.setText("No notes");
+            holder.textViewScheduleTitleDisplay.setText(R.string.no_notes_info);
         }
     }
 
