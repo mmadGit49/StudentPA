@@ -16,6 +16,7 @@ android:layout_height="match_parent">
         android:layout_margin="8dp"
         android:background="@drawable/note_custom_design"
         android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
         android:hint="@string/schedule_title"
         android:inputType="textMultiLine" />
 
@@ -77,10 +78,11 @@ android:layout_height="match_parent">
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewScheduleTimeFrom"
             android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
             android:hint="@string/duration"
             android:inputType="time"
-            android:layout_margin="8dp"
             android:padding="8dp"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="" />
     </RelativeLayout>

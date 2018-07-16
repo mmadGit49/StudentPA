@@ -16,16 +16,16 @@
     android:gravity="start">
 
     <TextView
+        android:id="@+id/textViewSpendDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewSpendDate"
-        android:ems="10"
         android:layout_margin="8dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="@string/spending_date_format"
         android:padding="8dp"
         android:textAlignment="center"
-        android:textSize="18sp"
-        android:hint="@string/spending_date_format"
-        />
+        android:textSize="18sp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -131,7 +131,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:padding="8dp"
+        android:textSize="18sp"
         tools:text="@string/spending_total" />
 
     <android.support.design.widget.FloatingActionButton

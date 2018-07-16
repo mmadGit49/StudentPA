@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 
 import java.util.List;
 

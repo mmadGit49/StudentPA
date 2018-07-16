@@ -14,8 +14,11 @@
         android:layout_margin="8dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/note_custom_design"
-        android:padding="8dp"
-        android:text="@string/spending_date" />
+        android:fontFamily="sans-serif-smallcaps"
+        android:padding="2dp"
+        android:text="@string/spending_date"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textViewSpendTotal"
@@ -24,7 +27,9 @@
         android:layout_margin="8dp"
         android:layout_marginTop="0dp"
         android:background="@drawable/note_custom_design"
-        android:padding="8dp"
-        android:text="@string/spending_total" />
+        android:fontFamily="sans-serif-smallcaps"
+        android:padding="2dp"
+        android:text="@string/spending_total"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -11,17 +11,18 @@ import com.example.mohammad.studentpa.db_classes.DAOs.ReminderDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.ScheduleDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.SpendingDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.UserDao;
-import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
-import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
-import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
-import com.example.mohammad.studentpa.db_classes.Entities.SpendingEntity;
-import com.example.mohammad.studentpa.db_classes.Entities.User;
+import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.entities.ReminderEntity;
+import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
+import com.example.mohammad.studentpa.db_classes.entities.SpendingEntity;
+import com.example.mohammad.studentpa.db_classes.entities.User;
 
 @Database(entities={User.class,
                     MilestoneEntity.class,
                     ScheduleEntity.class,
                     SpendingEntity.class,
-                    ReminderEntity.class}, version= 2, exportSchema = false)
+                    ReminderEntity.class,
+                    /*MondaySchedule.class*/}, version= 2, exportSchema = false)
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
@@ -29,6 +30,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ScheduleDao scheduleDao();
     public abstract ReminderDao reminderDao();
     public abstract SpendingDao spendingDao();
+//    public abstract MondayDao mondayDao();
+
 
     private static AppDatabase DB_INSTANCE;//Database instance
 

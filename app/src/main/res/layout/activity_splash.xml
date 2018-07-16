@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
     android:background="@color/ic_launcher_background"
-    tools:context=".Util.Splash">
+    tools:context=".util.Splash">
 
     <ImageView
         android:id="@+id/imageViewLogo"

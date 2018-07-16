@@ -13,8 +13,9 @@
         android:id="@+id/editTextReminderTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_margin="8dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-smallcaps"
         android:hint="@string/Alert_name"
         android:inputType="textPersonName" />
 
@@ -22,9 +23,10 @@
         android:id="@+id/editTextReminderDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:background="@drawable/note_custom_design"
         android:ems="10"
-        android:layout_margin="8dp"
+        android:fontFamily="sans-serif"
         android:hint="@string/Alert_details"
         android:inputType="textMultiLine" />
 

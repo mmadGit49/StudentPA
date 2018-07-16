@@ -15,8 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:padding="8dp"
-        android:text="@string/Alert_name" />
+        android:text="@string/Alert_name"
+        android:textSize="18sp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -28,12 +30,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:padding="8dp"
-            android:text="@string/Alert_details" />
+            android:text="@string/Alert_details"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_alignParentEnd="true"
             android:layout_margin="8dp">
             <TextView
@@ -41,16 +44,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:padding="8dp"
-                android:layout_toRightOf="@+id/textViewReminderDetails"
+                android:padding="2dp"
                 android:text="@string/Alert_date" />
             <TextView
                 android:id="@+id/textViewDisplayTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:padding="8dp"
-                android:layout_toRightOf="@+id/textViewDisplayDate"
+                android:padding="2dp"
                 android:text="@string/Alert_time" />
 
         </LinearLayout>

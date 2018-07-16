@@ -5,7 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.example.mohammad.studentpa.db_classes.DAOs.ScheduleDao;
-import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
+import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
 
 import java.util.List;
 

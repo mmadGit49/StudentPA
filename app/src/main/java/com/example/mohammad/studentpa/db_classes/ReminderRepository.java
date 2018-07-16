@@ -5,27 +5,27 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.example.mohammad.studentpa.db_classes.DAOs.ReminderDao;
-import com.example.mohammad.studentpa.db_classes.Entities.ReminderEntity;
+import com.example.mohammad.studentpa.db_classes.entities.ReminderEntity;
 
 import java.util.List;
 
 public class ReminderRepository {
     private ReminderDao repoReminderDao;
-    private LiveData<List<ReminderEntity>> allReminders;
+    private LiveData<List<ReminderEntity>> allReminders;/*
     private LiveData<List<ReminderEntity>> allReminderTitles;
     private LiveData<List<ReminderEntity>> allReminderDetails;
     private LiveData<List<ReminderEntity>> allReminderDates;
-    private LiveData<List<ReminderEntity>> allReminderTimes;
+    private LiveData<List<ReminderEntity>> allReminderTimes;*/
 
 
     public ReminderRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoReminderDao = db.reminderDao();
-        allReminders = repoReminderDao.getAllReminders();
+        allReminders = repoReminderDao.getAllReminders();/*
         allReminderTitles = repoReminderDao.getAllReminderTitles();
         allReminderDetails = repoReminderDao.getAllReminderDetails();
         allReminderDates = repoReminderDao.getAllReminderDates();
-        allReminderTimes = repoReminderDao.getAllReminderTimes();
+        allReminderTimes = repoReminderDao.getAllReminderTimes();*/
 
     }
 
@@ -33,7 +33,7 @@ public class ReminderRepository {
     public LiveData<List<ReminderEntity>> getAllReminders() {
         return allReminders;
     }
-
+/*
     LiveData<List<ReminderEntity>> getAllReminderTitles (){
         return allReminderTitles;
     }
@@ -48,7 +48,7 @@ public class ReminderRepository {
 
     LiveData<List<ReminderEntity>> getAllReminderTimes (){
         return allReminderTimes;
-    }
+    }*/
 
     public void insertReminder (ReminderEntity reminderEntity) {
         new insertAsyncTask(repoReminderDao).execute(reminderEntity);

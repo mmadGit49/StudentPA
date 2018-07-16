@@ -9,7 +9,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.RoomWarnings;
 import android.arch.persistence.room.Update;
 
-import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
+import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
 
 import java.util.List;
 

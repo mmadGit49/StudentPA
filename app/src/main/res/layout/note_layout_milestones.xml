@@ -15,15 +15,15 @@
         android:id="@+id/editTextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="2dp"
         android:background="@drawable/note_custom_design"
         android:ems="10"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:hint="@string/Title_header"
         android:inputType="textPersonName"
         android:padding="8dp"
-        android:layout_margin="2dp"
         android:textAlignment="viewStart"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText

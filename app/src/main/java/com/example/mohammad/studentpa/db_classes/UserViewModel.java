@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-import com.example.mohammad.studentpa.db_classes.Entities.User;
+import com.example.mohammad.studentpa.db_classes.entities.User;
 
 import java.util.List;
 
@@ -45,12 +45,12 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.delete(user);
     }
 
-    public String getPassword(String email){
-        return userRepository.getPasswordForEmail(email).toString();
+    public LiveData<List<User>> getPassword(String email){
+        return userRepository.getPasswordForEmail(email);
     }
 
-    public String getLoginEmail(String email){
-        return userRepository.getEmailForLogin(email).toString();
+    public LiveData<List<User>> getLoginEmail(String email){
+        return userRepository.getEmailForLogin(email);
     }
 
 }

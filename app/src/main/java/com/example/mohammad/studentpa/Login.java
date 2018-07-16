@@ -1,6 +1,5 @@
 package com.example.mohammad.studentpa;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,13 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mohammad.studentpa.db_classes.UserViewModel;
+import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class Login extends AppCompatActivity {
     private EditText username;
     private EditText password;
-
-    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +27,6 @@ public class Login extends AppCompatActivity {
         username= findViewById(R.id.editTextEmail);
         password= findViewById(R.id.editTextPassword);
 
-        userViewModel = ViewModelProviders.of(Login.this).get(UserViewModel.class);
 
         register.setOnClickListener(new View.OnClickListener() {//method to start next activity
             View regView;
@@ -52,14 +48,14 @@ public class Login extends AppCompatActivity {
                     String emailEntered = username.getText().toString();
                     String passwordString = password.getText().toString();
 
-                    //boolean verify = verifyLogin(emailEntered, passwordString);
-//                    if(verify){
-//                        SavedUserLogin.setUserName(Login.this, emailEntered);
+                    boolean verify = verifyLogin(emailEntered, passwordString);
+                    if(verify){
+                        SavedUserLogin.setUserName(Login.this, emailEntered);
                         startMain(view);
-                    //}else{
+                    }else{
                         Toast.makeText(Login.this, "Something's not right...",
                                 Toast.LENGTH_SHORT).show();
-                    //}
+                    }
                 }
             }
         });
@@ -79,12 +75,16 @@ public class Login extends AppCompatActivity {
     }
 
     public boolean verifyLogin(String email, String password){
-        String checkEmail = userViewModel.getLoginEmail(email);
-        String checkPw =  userViewModel.getPassword(email);
+        String checkEmail;
+        String checkPw;
+
+        checkEmail = SavedUserLogin.getEmail(Login.this);
+        checkPw = SavedUserLogin.getPassword(Login.this);
 
         if(checkEmail.equals(email)){
             if (checkPw.equals(password)){
                 return true;
+
             }else{
                 Toast.makeText(Login.this, "Username or password incorrect",
                         Toast.LENGTH_SHORT).show();

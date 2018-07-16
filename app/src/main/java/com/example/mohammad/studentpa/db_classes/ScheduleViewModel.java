@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-import com.example.mohammad.studentpa.db_classes.Entities.ScheduleEntity;
+import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
 
 import java.util.List;
 

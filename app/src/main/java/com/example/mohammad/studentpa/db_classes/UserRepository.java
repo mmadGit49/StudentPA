@@ -5,7 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.example.mohammad.studentpa.db_classes.DAOs.UserDao;
-import com.example.mohammad.studentpa.db_classes.Entities.User;
+import com.example.mohammad.studentpa.db_classes.entities.User;
 
 import java.util.List;
 
@@ -16,12 +16,14 @@ public class UserRepository {
     private LiveData<List<User>> allUserEmails;
     private LiveData<List<User>> allUserPasswords;
 
+
     public UserRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoUserDao = db.userDao();
         allUsers = repoUserDao.getAllUsers();
         allUserEmails = repoUserDao.getUserEmail();
         allUserPasswords = repoUserDao.getUserPassword();
+
     }
 
     public LiveData<List<User>> getAllUsers() {

@@ -18,10 +18,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.mohammad.studentpa.Milestones.Milestones;
-import com.example.mohammad.studentpa.Reminders.Reminders;
-import com.example.mohammad.studentpa.Schedule.Schedule;
-import com.example.mohammad.studentpa.Spending.Spending;
+import com.example.mohammad.studentpa.milestones.Milestones;
+import com.example.mohammad.studentpa.reminders.Reminders;
+import com.example.mohammad.studentpa.schedule.Schedule;
+import com.example.mohammad.studentpa.spending.Spending;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,17 +30,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       /* if(SavedUserLogin.getUserName(MainActivity.this).length() == 0)//checks if user is logged in
-        {//if not logged in this happens
-            Intent login= new Intent(this, Login.class);
-            startActivity(login);
-        }
-        else
-        {*/
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
-        Toast.makeText(this, "Welcome! " +
+            Toast.makeText(this, "Welcome! " +
                     "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
             //for the toolbar, action bar
             Toolbar toolbar = findViewById(R.id.toolbar);
@@ -124,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.Milestones) {
             fragment= new Milestones();
             replaceFrag(fragment);
-            Toast.makeText(this, "Milestones!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "milestones!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.Schedule) {
             fragment= new Schedule();
             replaceFrag(fragment);
@@ -132,11 +125,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.Reminders) {
             fragment= new Reminders();
             replaceFrag(fragment);
-            Toast.makeText(this, "Reminders!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "reminders!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.Spending) {
             fragment= new Spending();
             replaceFrag(fragment);
-            Toast.makeText(this, "Spending!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "spending!", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

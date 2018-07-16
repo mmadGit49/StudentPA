@@ -5,7 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.example.mohammad.studentpa.db_classes.DAOs.MilestoneDao;
-import com.example.mohammad.studentpa.db_classes.Entities.MilestoneEntity;
+import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 
 import java.util.List;
 

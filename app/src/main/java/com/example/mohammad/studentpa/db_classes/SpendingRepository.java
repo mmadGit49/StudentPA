@@ -5,7 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.example.mohammad.studentpa.db_classes.DAOs.SpendingDao;
-import com.example.mohammad.studentpa.db_classes.Entities.SpendingEntity;
+import com.example.mohammad.studentpa.db_classes.entities.SpendingEntity;
 
 import java.util.List;
 
