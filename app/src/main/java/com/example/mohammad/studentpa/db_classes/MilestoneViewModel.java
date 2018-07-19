@@ -11,8 +11,8 @@ import java.util.List;
 public class MilestoneViewModel extends AndroidViewModel {
 
     private MilestoneRepository milestoneRepository;
-    private LiveData<List<MilestoneEntity>> allMilestoneTitles;
-    private LiveData<List<MilestoneEntity>> allMilestoneNotes;
+//    private LiveData<List<MilestoneEntity>> allMilestoneTitles;
+//    private LiveData<List<MilestoneEntity>> allMilestoneNotes;
     private LiveData<List<MilestoneEntity>> allMilestones;
 
     public MilestoneViewModel (Application application){
@@ -23,12 +23,12 @@ public class MilestoneViewModel extends AndroidViewModel {
 
     //The following getters are used to add EVEN MORE abstraction to the repository and DB
 
-    public LiveData<List<MilestoneEntity>> getAllMilestoneTitles() {
-        return allMilestoneTitles;
-    }
-    public LiveData<List<MilestoneEntity>> getAllMilestoneNotes() {
-        return allMilestoneNotes;
-    }
+//    public LiveData<List<MilestoneEntity>> getAllMilestoneTitles() {
+//        return allMilestoneTitles;
+//    }
+//    public LiveData<List<MilestoneEntity>> getAllMilestoneNotes() {
+//        return allMilestoneNotes;
+//    }
     public LiveData<List<MilestoneEntity>> getAllMilestones() {
         return allMilestones;
     }

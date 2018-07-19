@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
-import com.example.mohammad.studentpa.schedule.DayFragments.MondayFragment;
 import com.example.mohammad.studentpa.schedule.TakeSchedule;
 
 import java.util.List;
@@ -24,9 +23,6 @@ public class MondayAdapter extends RecyclerView.Adapter<MondayAdapter.ViewHolder
 
     private Context context;
     private List<ScheduleEntity> schedules;
-    private MondayFragment mf = new MondayFragment();
-    private SectionsPagerAdapter sectionsPagerAdapter =
-            new SectionsPagerAdapter(mf.getFragmentManager());
 
     public MondayAdapter(Context context, List<ScheduleEntity> schedules) {
         this.context = context;
@@ -46,7 +42,6 @@ public class MondayAdapter extends RecyclerView.Adapter<MondayAdapter.ViewHolder
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
 
         if (schedules != null) {
-            if (sectionsPagerAdapter.getPageTitle(0) == "Mon") {
                 holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle());
                 holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate());
                 holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom());
@@ -71,7 +66,6 @@ public class MondayAdapter extends RecyclerView.Adapter<MondayAdapter.ViewHolder
                         Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
 
         } else {
             //If data is not ready yet

@@ -61,6 +61,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
             String duration = getIntent().getStringExtra("schedDuration");
             final int schedID = getIntent().getIntExtra("schedID", 0);
 
+
             editTextScheduleTitle.setText(title);
             textViewScheduleTimeFrom.setText(time);
             textViewScheduleDate.setText(date);
@@ -89,9 +90,17 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                         String optionalDate = textViewScheduleDate.getText().toString();
                         String duration = editTextSchedDuration.getText().toString();
 
-                        //To save data to the db via the ViewModel
-                        scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
-                                null, scheduleTime, duration, optionalDate));
+                        Bundle dayBundle = getIntent().getExtras();
+                        String day = getIntent().getStringExtra("schedDayOfWeek");
+                        if(dayBundle != null) {
+                            day = dayBundle.getString("dayOfWeek");
+                            //To save data to the db via the ViewModel
+                            scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
+                                    day, scheduleTime, duration, optionalDate));
+                        }else{
+                            scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
+                                    day, scheduleTime, duration, optionalDate));
+                        }
                         Toast.makeText(getApplicationContext(), "Item updated!",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -123,9 +132,16 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                         String optionalDate = textViewScheduleDate.getText().toString();
                         String duration = editTextSchedDuration.getText().toString();
 
+                        Bundle dayBundle = getIntent().getExtras();
+                        String day = null;
+                        if(dayBundle != null) {
+                            day = dayBundle.getString("dayOfWeek");
+                            //To save data to the db via the ViewModel
+                            scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, day,
+                                    scheduleTime, duration, optionalDate));
+                        }
                         //To save data to the db via the ViewModel
-                        scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, null,
-                                scheduleTime, duration, optionalDate));
+
                         Toast.makeText(getApplicationContext(), "Item saved!",
                                 Toast.LENGTH_SHORT).show();
                     }

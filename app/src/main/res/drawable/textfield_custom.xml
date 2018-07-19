@@ -18,7 +18,7 @@
         android:angle="135"
         android:centerColor="#00e99014"
         android:endColor="#00e99014"
-        android:startColor="#e9900e99014014"
+        android:startColor="#00e99014"
         android:type="linear" />
 
 

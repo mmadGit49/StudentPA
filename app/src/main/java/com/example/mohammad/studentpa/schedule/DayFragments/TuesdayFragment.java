@@ -20,10 +20,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.schedule.Adapters.TuesdayAdapter;
-import com.example.mohammad.studentpa.schedule.TakeSchedule;
-import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
+import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
+import com.example.mohammad.studentpa.schedule.Adapters.ScheduleRecyclerViewAdapter;
+import com.example.mohammad.studentpa.schedule.TakeSchedule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,8 @@ public class TuesdayFragment extends Fragment {
     private FloatingActionButton fab;
     private LinearLayoutManager layoutManager;
     private ScheduleViewModel scheduleViewModel;
+    private String dayOfWeek = "Tuesday";
+
 
     @Nullable
     @Override
@@ -47,6 +49,9 @@ public class TuesdayFragment extends Fragment {
             public void onClick(View view) {
                 //On item click, start note taker activity
                 Intent scheduleIntent = new Intent(getActivity(), TakeSchedule.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("dayOfWeek", dayOfWeek);
+                scheduleIntent.putExtras(bundle);
                 startActivity(scheduleIntent);
             }
         });
@@ -54,18 +59,27 @@ public class TuesdayFragment extends Fragment {
         RecyclerView recyclerView = tuesdayView.findViewById(R.id.recycler_view_schedule_tuesday);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final TuesdayAdapter adapter = new TuesdayAdapter(getContext(),
+        final ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(),
                 new ArrayList<ScheduleEntity>());
         recyclerView.setAdapter(adapter);
 
+//        scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
+//        scheduleViewModel.getAllSchedules().observe(this, new Observer<List<ScheduleEntity>>() {
+//            @Override
+//            public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
+//                //Update the cached copy of words in the adapter
+//                adapter.setClass(scheduleEntities);
+//            }
+//        });
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
-        scheduleViewModel.getAllSchedules().observe(this, new Observer<List<ScheduleEntity>>() {
+        scheduleViewModel.getAllSchedulesByDay(dayOfWeek).observe(this, new Observer<List<ScheduleEntity>>() {
             @Override
             public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
                 //Update the cached copy of words in the adapter
                 adapter.setClass(scheduleEntities);
             }
         });
+
 
 
         ItemTouchHelper helper = new ItemTouchHelper(

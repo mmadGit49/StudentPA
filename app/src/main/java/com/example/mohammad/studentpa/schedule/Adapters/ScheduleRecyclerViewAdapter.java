@@ -72,6 +72,8 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                             .getDuration());
                     scheduleIntent.putExtra("schedID", schedules.get(holder.getAdapterPosition())
                             .getScheduleID());
+                    scheduleIntent.putExtra("schedDayOfWeek", schedules.get(holder.getAdapterPosition())
+                            .getDayOfWeek());
                     context.startActivity(scheduleIntent);
                     Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
                 }

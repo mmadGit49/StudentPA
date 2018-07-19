@@ -20,22 +20,6 @@ public interface ReminderDao {
     @Query("SELECT * FROM reminderentity")//Method to get all notes
     LiveData<List<ReminderEntity>> getAllReminders();
 
-/*    @Query("SELECT reminderID, reminder_title FROM reminderentity")//Method to get all notes
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<ReminderEntity>> getAllReminderTitles();
-
-    @Query("SELECT reminderID, reminder_details FROM reminderentity")//Method to get all notes
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<ReminderEntity>> getAllReminderDetails();
-
-    @Query("SELECT reminderID, reminder_date FROM reminderentity")//Method to get all notes
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<ReminderEntity>> getAllReminderDates();
-
-    @Query("SELECT reminderID, reminder_time FROM reminderentity")//Method to get all notes
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<ReminderEntity>> getAllReminderTimes();*/
-
     @Update
     void update(ReminderEntity reminderEntity);//Update the table
 

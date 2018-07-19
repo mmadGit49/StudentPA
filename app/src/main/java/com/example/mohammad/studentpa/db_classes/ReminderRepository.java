@@ -11,21 +11,12 @@ import java.util.List;
 
 public class ReminderRepository {
     private ReminderDao repoReminderDao;
-    private LiveData<List<ReminderEntity>> allReminders;/*
-    private LiveData<List<ReminderEntity>> allReminderTitles;
-    private LiveData<List<ReminderEntity>> allReminderDetails;
-    private LiveData<List<ReminderEntity>> allReminderDates;
-    private LiveData<List<ReminderEntity>> allReminderTimes;*/
+    private LiveData<List<ReminderEntity>> allReminders;
 
-
-    public ReminderRepository(Application application) {
+    ReminderRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoReminderDao = db.reminderDao();
-        allReminders = repoReminderDao.getAllReminders();/*
-        allReminderTitles = repoReminderDao.getAllReminderTitles();
-        allReminderDetails = repoReminderDao.getAllReminderDetails();
-        allReminderDates = repoReminderDao.getAllReminderDates();
-        allReminderTimes = repoReminderDao.getAllReminderTimes();*/
+        allReminders = repoReminderDao.getAllReminders();
 
     }
 
@@ -33,22 +24,7 @@ public class ReminderRepository {
     public LiveData<List<ReminderEntity>> getAllReminders() {
         return allReminders;
     }
-/*
-    LiveData<List<ReminderEntity>> getAllReminderTitles (){
-        return allReminderTitles;
-    }
 
-    LiveData<List<ReminderEntity>> getAllReminderDetails (){
-        return allReminderDetails;
-    }
-
-    LiveData<List<ReminderEntity>> getAllReminderDates (){
-        return allReminderDates;
-    }
-
-    LiveData<List<ReminderEntity>> getAllReminderTimes (){
-        return allReminderTimes;
-    }*/
 
     public void insertReminder (ReminderEntity reminderEntity) {
         new insertAsyncTask(repoReminderDao).execute(reminderEntity);
@@ -62,7 +38,7 @@ public class ReminderRepository {
         new updateAsyncTask(repoReminderDao).execute(reminderEntity);
     }
 
-    //Insert and delete from database Asynctask methods
+    //Insert and delete from database AsyncTask methods
 
     private static class insertAsyncTask extends AsyncTask<ReminderEntity, Void, Void> {
 

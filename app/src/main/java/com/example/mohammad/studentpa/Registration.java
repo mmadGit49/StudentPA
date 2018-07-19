@@ -19,13 +19,11 @@ import com.example.mohammad.studentpa.db_classes.entities.User;
 import com.example.mohammad.studentpa.util.DatePickerFragment;
 
 public class Registration extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    private Button register;
     private EditText firstName;
     private EditText lastName;
     private EditText email;
     private EditText password;
     private TextView dob;//date of birth
-    private Button setDob;
     private EditText confirmPassword;
 
     private UserViewModel userViewModel;
@@ -35,14 +33,14 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        register= findViewById(R.id.buttonRegister);
+        Button register = findViewById(R.id.buttonRegister);
         firstName= findViewById(R.id.editTextName);
         lastName= findViewById(R.id.editTextSurname);
         email= findViewById(R.id.editTextNewEmail);
         password= findViewById(R.id.editTextNewPassword);
         confirmPassword= findViewById(R.id.editTextconfirmNewPassword);
         dob= findViewById(R.id.textViewDob);
-        setDob = findViewById(R.id.buttonRegistrationDob);
+        Button setDob = findViewById(R.id.buttonRegistrationDob);
 
         userViewModel = ViewModelProviders.of(Registration.this).get(UserViewModel.class);
 

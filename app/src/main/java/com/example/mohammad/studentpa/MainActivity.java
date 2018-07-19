@@ -1,7 +1,6 @@
 package com.example.mohammad.studentpa;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,7 +22,6 @@ import com.example.mohammad.studentpa.milestones.Milestones;
 import com.example.mohammad.studentpa.reminders.Reminders;
 import com.example.mohammad.studentpa.schedule.Schedule;
 import com.example.mohammad.studentpa.spending.Spending;
-import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,34 +31,31 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(SavedUserLogin.getUserName(MainActivity.this).length() == 0){
-            Intent loginIntent = new Intent(MainActivity.this, Login.class);
-            startActivity(loginIntent);
-        }
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
 
-            Toast.makeText(this, "Welcome! " +
-                    "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
-            //for the toolbar, action bar
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            ActionBar actionbar = getSupportActionBar();
-            actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-            drawerLayout = findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawerLayout.addDrawerListener(toggle);
-            toggle.syncState();
+        Toast.makeText(this, "Welcome! " +
+                "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
+        //for the toolbar, action bar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-            Fragment fragment;
-            fragment= new Milestones();
-            replaceFrag(fragment);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-            NavigationView navigationView= findViewById(R.id.navigation_view_main);
-            navigationView.setNavigationItemSelectedListener(this);
+        Fragment fragment;
+        fragment= new Milestones();
+        replaceFrag(fragment);
+
+        NavigationView navigationView= findViewById(R.id.navigation_view_main);
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
     public void replaceFrag(Fragment fragment){//to replace the selected fragment

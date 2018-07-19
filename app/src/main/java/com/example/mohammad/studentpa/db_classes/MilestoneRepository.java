@@ -11,25 +11,15 @@ import java.util.List;
 
 public class MilestoneRepository {
     private MilestoneDao repoMilestoneDao;
-    private LiveData<List<MilestoneEntity>> allMilestoneTitles;
-    private LiveData<List<MilestoneEntity>> allMilestoneDetails;
     private LiveData<List<MilestoneEntity>> allMilestones;
 
 
-    public MilestoneRepository(Application application) {
+    MilestoneRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoMilestoneDao = db.milestoneDao();
-        allMilestoneTitles = repoMilestoneDao.getAllMilestoneTitles();
-        allMilestoneDetails = repoMilestoneDao.getAllMilestoneDetails();
         allMilestones = repoMilestoneDao.getAllMilestones();
     }
 
-    public LiveData<List<MilestoneEntity>> getAllMilestoneTitles (){
-        return allMilestoneTitles;
-    }
-    public LiveData<List<MilestoneEntity>> getAllMilestoneDetails (){
-        return allMilestoneDetails;
-    }
     public LiveData<List<MilestoneEntity>> getAllMilestones() {
         return allMilestones;
     }
