@@ -1,7 +1,10 @@
 package com.example.mohammad.studentpa;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,12 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mohammad.studentpa.db_classes.UserViewModel;
+import com.example.mohammad.studentpa.db_classes.entities.User;
 import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class Login extends AppCompatActivity {
     private EditText username;
     private EditText password;
 
+    private UserViewModel userViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +37,7 @@ public class Login extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {//method to start next activity
             View regView;
             @Override
-            public void onClick(View v) {//on button "Sign up" clicked, obvious
+            public void onClick(View v) {//on button "Sign up" clicked
                 startRegister(regView);//will start registration activity
             }
         });
@@ -45,17 +51,37 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Missing Required Fields!",
                             Toast.LENGTH_SHORT).show();
                 }else{
-                    String emailEntered = username.getText().toString();
-                    String passwordString = password.getText().toString();
+                    final String emailEntered = username.getText().toString();
+                    final String passwordString = password.getText().toString();
 
-                    boolean verify = verifyLogin(emailEntered, passwordString);
-                    if(verify){
-                        SavedUserLogin.setUserName(Login.this, emailEntered);
-                        startMain(view);
-                    }else{
-                        Toast.makeText(Login.this, "Something's not right...",
-                                Toast.LENGTH_SHORT).show();
-                    }
+                    userViewModel = ViewModelProviders.of(Login.this).get(UserViewModel.class);
+
+                    userViewModel.getCredentials(emailEntered, passwordString).observe(Login.this, new Observer<User>() {
+                        @Override
+                        public void onChanged(@Nullable User user) {
+                            if (user != null) {
+                                String checkEmail = user.getEmail();
+                                String checkPw = user.getPassword();
+                                if (checkEmail.equals(emailEntered)){
+                                    if(checkPw.equals(passwordString)){
+                                        SavedUserLogin.setUserName(Login.this, emailEntered);
+                                        startMain(view);
+                                        Toast.makeText(Login.this, "Welcome " + user.getFirstName(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(Login.this, "Username or password incorrect",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }else{
+                                    Toast.makeText(Login.this, "Username or password incorrect",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        }
+                    });
+
                 }
             }
         });
@@ -72,25 +98,6 @@ public class Login extends AppCompatActivity {
         Intent register= new Intent(this, Registration.class);
         startActivity(register);
         finish();//prevents user from returning to this screen
-    }
-
-    public boolean verifyLogin(String email, String password){
-        String checkEmail;
-        String checkPw;
-
-        checkEmail = SavedUserLogin.getEmail(Login.this);
-        checkPw = SavedUserLogin.getPassword(Login.this);
-
-        if(checkEmail.equals(email)){
-            if (checkPw.equals(password)){
-                return true;
-
-            }else{
-                Toast.makeText(Login.this, "Username or password incorrect",
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-        return false;
     }
 
 }

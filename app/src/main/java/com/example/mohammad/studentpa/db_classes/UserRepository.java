@@ -46,12 +46,8 @@ public class UserRepository {
         new UserRepository.deleteAsyncTask(repoUserDao).execute(user);
     }
 
-    public LiveData<List<User>> getPasswordForEmail(String email) {
-        return repoUserDao.getUserPasswordLogin(email);
-    }
-
-    public LiveData<List<User>> getEmailForLogin(String email) {
-        return repoUserDao.getUserEmailsLogin(email);
+    public LiveData<User> getUserCredentials(String email, String password){
+        return repoUserDao.getUserCredentialsLogin(email, password);
     }
 
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {

@@ -49,7 +49,7 @@ public class Milestones extends Fragment {
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        toolbar.setTitle("milestones");
+        toolbar.setTitle("Milestones");
 
         //for the floating action button:
         fab = mileView.findViewById(R.id.fab_add_note);

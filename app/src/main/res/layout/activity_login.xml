@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSwitchUp"
+    android:background = "@color/colorLogin"
     tools:context=".Login">
 
     <Button
@@ -15,9 +15,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="96dp"
         android:background="@drawable/button_custom"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/login_prompt"
         android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -26,14 +27,14 @@
 
     <Button
         android:id="@+id/buttonSignUp"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_custom"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/signup_prompt"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -84,6 +85,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="52dp"
+        android:fontFamily="monospace"
         android:text="@string/textviewregister_prompt"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

@@ -29,13 +29,10 @@ public interface UserDao {
     @Query("SELECT * FROM user")//Method to get all emails/usernames
     LiveData<List<User>> getAllUsers();
 
-    @Query("SELECT userID, password FROM user WHERE email = :email")//Method to get all user names
+    //Method to get all user credentials for login
+    @Query("SELECT userID,first_name, email, password FROM user WHERE email = :email AND password = :password")
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<User>> getUserPasswordLogin(String email);//Get the PW from DB to check if match
-
-    @Query("SELECT userID, email FROM user WHERE email = :email")//Method to get all user names
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<User>> getUserEmailsLogin(String email);//Get the email from DB to check if match
+    LiveData<User> getUserCredentialsLogin(String email, String password);//Get the email from DB to check if match
 
     @Query("SELECT userID, email FROM user")//Method to get all user names
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)

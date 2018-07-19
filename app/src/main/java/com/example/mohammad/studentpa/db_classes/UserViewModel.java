@@ -45,12 +45,8 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.delete(user);
     }
 
-    public LiveData<List<User>> getPassword(String email){
-        return userRepository.getPasswordForEmail(email);
-    }
-
-    public LiveData<List<User>> getLoginEmail(String email){
-        return userRepository.getEmailForLogin(email);
+    public LiveData<User> getCredentials(String email, String password){
+        return userRepository.getUserCredentials(email, password);
     }
 
 }

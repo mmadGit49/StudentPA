@@ -9,16 +9,16 @@
         />
 
     <stroke
-        android:color="#68cc14e9"
-        android:width="0dp"
+        android:color="#e99014"
+        android:width="1dp"
         />
 
 
     <gradient
         android:angle="135"
-        android:centerColor="#a014e970"
-        android:endColor="#a014e970"
-        android:startColor="#a014e970"
+        android:centerColor="#00e99014"
+        android:endColor="#00e99014"
+        android:startColor="#e9900e99014014"
         android:type="linear" />
 
 

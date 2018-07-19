@@ -14,10 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mohammad.studentpa.util.DatePickerFragment;
-import com.example.mohammad.studentpa.db_classes.entities.User;
 import com.example.mohammad.studentpa.db_classes.UserViewModel;
-import com.example.mohammad.studentpa.util.SavedUserLogin;
+import com.example.mohammad.studentpa.db_classes.entities.User;
+import com.example.mohammad.studentpa.util.DatePickerFragment;
 
 public class Registration extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private Button register;
@@ -84,8 +83,6 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         userViewModel.insert(new User(fName, surname, emailString, passWord, dateOfBirth));
                         Toast.makeText(Registration.this, "Successfully Registered!",
                                 Toast.LENGTH_SHORT).show();
-                        SavedUserLogin.setEmail(Registration.this, emailString);
-                        SavedUserLogin.setPassword(Registration.this, passWord);
                         startLogin(view);
                     }
 

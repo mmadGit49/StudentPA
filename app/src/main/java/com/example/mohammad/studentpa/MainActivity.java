@@ -1,6 +1,7 @@
 package com.example.mohammad.studentpa;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,14 +23,20 @@ import com.example.mohammad.studentpa.milestones.Milestones;
 import com.example.mohammad.studentpa.reminders.Reminders;
 import com.example.mohammad.studentpa.schedule.Schedule;
 import com.example.mohammad.studentpa.spending.Spending;
+import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity started";
     private DrawerLayout drawerLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(SavedUserLogin.getUserName(MainActivity.this).length() == 0){
+            Intent loginIntent = new Intent(MainActivity.this, Login.class);
+            startActivity(loginIntent);
+        }
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
@@ -54,8 +61,6 @@ public class MainActivity extends AppCompatActivity
 
             NavigationView navigationView= findViewById(R.id.navigation_view_main);
             navigationView.setNavigationItemSelectedListener(this);
-
-      //  }
 
     }
     public void replaceFrag(Fragment fragment){//to replace the selected fragment
@@ -102,7 +107,6 @@ public class MainActivity extends AppCompatActivity
                         }
                     })
                     .setNegativeButton(android.R.string.no, null).show();
-            //            super.onBackPressed(); //no longer needed if finish() is used
         }
 
     }
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.Milestones) {
             fragment= new Milestones();
             replaceFrag(fragment);
-            Toast.makeText(this, "milestones!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Milestones!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.Schedule) {
             fragment= new Schedule();
             replaceFrag(fragment);
@@ -125,11 +129,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.Reminders) {
             fragment= new Reminders();
             replaceFrag(fragment);
-            Toast.makeText(this, "reminders!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Reminders!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.Spending) {
             fragment= new Spending();
             replaceFrag(fragment);
-            Toast.makeText(this, "spending!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Spending!", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

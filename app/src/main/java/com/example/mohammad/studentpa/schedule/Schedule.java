@@ -48,7 +48,7 @@ public class Schedule extends Fragment {
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        toolbar.setTitle("schedule");
+        toolbar.setTitle("Schedule");
 
         //set up viewpager with sections adapter
         viewPager = schedView.findViewById(R.id.viewPagerContainer);
