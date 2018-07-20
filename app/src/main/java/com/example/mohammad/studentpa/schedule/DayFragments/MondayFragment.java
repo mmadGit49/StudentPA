@@ -116,6 +116,8 @@ public class MondayFragment extends Fragment {
                                 }).show();
                         // Delete the word
                     }
+
+
                 });
         helper.attachToRecyclerView(recyclerView);
         return mondayView;

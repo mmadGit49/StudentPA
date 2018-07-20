@@ -1,14 +1,9 @@
 package com.example.mohammad.studentpa.schedule.Adapters;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.schedule.Schedule;
-import com.example.mohammad.studentpa.schedule.TakeSchedule;
-import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
+import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
+import com.example.mohammad.studentpa.schedule.TakeSchedule;
 
 import java.util.List;
 
@@ -76,54 +70,6 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                             .getDayOfWeek());
                     context.startActivity(scheduleIntent);
                     Toast.makeText(context, "Edit Class", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-            holder.scheduleLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    ItemTouchHelper helper = new ItemTouchHelper(
-                            new ItemTouchHelper.SimpleCallback(0,
-                                    ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-                                @Override
-                                public boolean onMove(RecyclerView recyclerView,
-                                                      RecyclerView.ViewHolder viewHolder,
-                                                      RecyclerView.ViewHolder target) {
-                                    return false;
-                                }
-
-                                @Override
-                                public void onSwiped(RecyclerView.ViewHolder viewHolder,
-                                                     int direction) {
-                                    int position = viewHolder.getAdapterPosition();
-                                    final ScheduleEntity scheduleEntity = getScheduleAtPosition(position);
-                                    AlertDialog.Builder builder;
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                        builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Dialog_Alert);
-                                    } else {
-                                        builder = new AlertDialog.Builder(context);
-                                    }
-                                    scheduleViewModel = ViewModelProviders.of(new Schedule()).get(ScheduleViewModel.class);
-
-                                    builder.setTitle("Delete Item")
-                                            .setMessage("Are you sure you want to delete?")
-                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    scheduleViewModel.delete(scheduleEntity);
-                                                    // Delete the word
-                                                    Toast.makeText(context, "Class deleted!", Toast.LENGTH_SHORT).show();
-                                                }
-                                            })
-                                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    // Reinsert the word
-                                                    scheduleViewModel.insert(scheduleEntity);
-                                                }
-                                            }).show();
-                                }
-                            });
-                    return true;
                 }
             });
 
