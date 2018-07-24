@@ -39,8 +39,8 @@ public class AmountAdapter extends  RecyclerView.Adapter<AmountAdapter.ViewHolde
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
 
         if (spendingEntities != null) {
-            holder.textViewAmt.setText(spendingEntities.get(position).getSpendAmount().toString());
-            holder.textViewDet.setText(spendingEntities.get(position).getSpendDetails().toString());
+            holder.textViewAmt.setText(spendingEntities.get(position).getSpendAmount());
+            holder.textViewDet.setText(spendingEntities.get(position).getSpendDetails());
         } else {
             //If data is not ready yet
             holder.textViewDet.setText("No items");

@@ -25,6 +25,11 @@ public class ReminderViewModel extends AndroidViewModel {
         return allReminders;
     }
 
+    public LiveData<List<ReminderEntity>> getAllRemindersByID(int id) {
+        return reminderRepository.getAllRemindersbyID(id);
+    }
+
+
     //Again, for abstraction
     public void insert(ReminderEntity milestoneEntity) {
         reminderRepository.insertReminder(milestoneEntity);

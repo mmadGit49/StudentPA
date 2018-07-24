@@ -66,17 +66,12 @@ public class MondayFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
-//        scheduleViewModel.getAllSchedules().observe(this, new Observer<List<ScheduleEntity>>() {
-//            @Override
-//            public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
-//                //Update the cached copy of words in the adapter
-//                adapter.setClass(scheduleEntities);
-//            }
-//        });
+
         scheduleViewModel.getAllSchedulesByDay(dayOfWeek).observe(this, new Observer<List<ScheduleEntity>>() {
             @Override
             public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
                 adapter.setClass(scheduleEntities);
+                adapter.notifyDataSetChanged();
             }
         });
 

@@ -12,29 +12,16 @@ public class UserViewModel extends AndroidViewModel {
 
     private UserRepository userRepository;
     private LiveData<List<User>> allUsers;
-    private LiveData<List<User>> allUserEmails;
-    private LiveData<List<User>> allUserPasswords;
 
 
     public UserViewModel (Application application){
         super(application);
         userRepository = new UserRepository(application);
-        allUserEmails = userRepository.getAllUserEmails();
-        allUserPasswords = userRepository.getAllUserPasswords();
         allUsers = userRepository.getAllUsers();
     }
 
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
-    }
-    public LiveData<List<User>> getAllUserEmails() {
-        return allUserEmails;
-    }
-    public LiveData<List<User>> getAllUserPasswords() {
-        return allUserPasswords;
-    }
-    public UserRepository getUserRepository() {
-        return userRepository;
     }
 
     public void insert(User user) {

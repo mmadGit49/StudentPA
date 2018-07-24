@@ -17,8 +17,11 @@ public interface ReminderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertReminder(ReminderEntity reminderEntity);
 
-    @Query("SELECT * FROM reminderentity")//Method to get all notes
+    @Query("SELECT * FROM reminderentity")//Method to get all reminders
     LiveData<List<ReminderEntity>> getAllReminders();
+
+    @Query("SELECT * FROM reminderentity WHERE reminderID =:remindID")//Method to get all specific
+    LiveData<List<ReminderEntity>> getAllRemindersFromID(int remindID);
 
     @Update
     void update(ReminderEntity reminderEntity);//Update the table

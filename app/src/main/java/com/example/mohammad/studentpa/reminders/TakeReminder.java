@@ -3,6 +3,7 @@ package com.example.mohammad.studentpa.reminders;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -37,7 +38,6 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
 
     private ReminderViewModel reminderViewModel;
     private LocalData localData;
-//    private Bundle bundles = getIntent().getExtras();
 
 
     @Override
@@ -113,6 +113,24 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                             reminderViewModel.update(new ReminderEntity
                                     (remindID, reminderTitle, reminderDetails, reminderDate,
                                             reminderTime, hour, min, day, month, year));
+
+                        Intent reminderIntent = new Intent(TakeReminder.this, AlarmReceiver.class);
+//                        Bundle remindBundle = new Bundle();
+//                        remindBundle.putInt("remindID", remindID);
+//                        remindBundle.putString("title", reminderTitle);
+//                        remindBundle.putString("details", reminderDetails);
+                        reminderIntent.putExtra("remindID", remindID);
+                        reminderIntent.putExtra("title", remindID);
+                        reminderIntent.putExtra("details", remindID);
+
+//                        reminderIntent.putExtras(remindBundle);
+                        startActivity(reminderIntent);
+
+
+                        NotificationScheduler.setReminder(TakeReminder.this, AlarmReceiver.class,
+                                localData.get_hour(), localData.get_min(), localData.get_day(),
+                                localData.get_month(), localData.get_year());
+
 //                        }else{
 //                            Log.d(TAG, "onClick: No incoming time Intent found!");
 //
@@ -172,12 +190,15 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                                     (reminderTitle, reminderDetails, reminderDate, reminderTime,
                                             hour, min, day, month, year));
 
+                        NotificationScheduler.setReminder(TakeReminder.this, AlarmReceiver.class,
+                                localData.get_hour(), localData.get_min(), localData.get_day(),
+                                 localData.get_month(), localData.get_year());
+
 //                        }else{
 //                            Log.d(TAG, "onClick: No incoming time Intent found!");
 //
 //                        }
 
-//                        localData.setTitle(reminderTitle);
                         Toast.makeText(getApplicationContext(),
                                 "Reminder saved!", Toast.LENGTH_SHORT).show();
                     }
@@ -213,6 +234,7 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
 //
         localData.set_hour(hourOfDay);
         localData.set_min(minute);
+
     }
 
     @Override

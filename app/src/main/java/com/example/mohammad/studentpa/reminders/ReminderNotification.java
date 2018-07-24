@@ -3,6 +3,7 @@ package com.example.mohammad.studentpa.reminders;
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.media.RingtoneManager;
@@ -41,7 +42,8 @@ public class ReminderNotification extends ContextWrapper {
         return notificationManager;
     }
 
-    public NotificationCompat.Builder getChannelNotification(String title, String details){
+
+    public NotificationCompat.Builder getChannelNotification(String title, String details, PendingIntent pendingIntent){
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         return new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
@@ -51,6 +53,7 @@ public class ReminderNotification extends ContextWrapper {
                 .setSmallIcon(R.mipmap.ic_icon_image)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
     }
 

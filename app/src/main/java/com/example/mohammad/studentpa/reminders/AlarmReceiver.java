@@ -1,49 +1,60 @@
 package com.example.mohammad.studentpa.reminders;
 
+//        if (intent.getAction() != null && context != null) {
+//            if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
+//                // Set the alarm here.
+//                Log.d(TAG, "onReceive: BOOT_COMPLETED");
+//                LocalData localData = new LocalData(context);
+//                NotificationScheduler.setReminder(context, AlarmReceiver.class,
+//                        localData.get_hour(), localData.get_min(), localData.get_day(),
+//                        localData.get_month(), localData.get_year());
+////                int hour = reminder.getHourOfDay();
+////                int min = reminder.getMinute();
+////                int day = reminder.getDayOfMonth();
+////                int month = reminder.getMonth();
+////                int year = reminder.getYear();
+////
+////                NotificationScheduler.setReminder(context, AlarmReceiver.class, hour, min,
+////                        day, month, year);
+//
+//                return;
+//            }
+//
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.mohammad.studentpa.db_classes.entities.ReminderEntity;
-
-import java.util.ArrayList;
+import com.example.mohammad.studentpa.MainActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "AlarmReceiver class";
+    String TAG = "AlarmReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        RemindersRecyclerViewAdapter adapter = new RemindersRecyclerViewAdapter(context,
-                new ArrayList<ReminderEntity>());
-        int position = adapter.getReminderPosition();
-        ReminderEntity reminder = adapter.getReminderAtPosition(position);
-
         if (intent.getAction() != null && context != null) {
             if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
                 // Set the alarm here.
                 Log.d(TAG, "onReceive: BOOT_COMPLETED");
-//                LocalData localData = new LocalData(context);
-//                NotificationScheduler.setReminder(context, AlarmReceiver.class,
-//                        localData.get_hour(), localData.get_min(), localData.get_day(),
-//                        localData.get_month(), localData.get_year());
-                int hour = reminder.getHourOfDay();
-                int min = reminder.getMinute();
-                int day = reminder.getDayOfMonth();
-                int month = reminder.getMonth();
-                int year = reminder.getYear();
-
-                NotificationScheduler.setReminder(context, AlarmReceiver.class, hour, min,
-                        day, month, year);
-
+                LocalData localData = new LocalData(context);
+                NotificationScheduler.setReminder(context, AlarmReceiver.class, localData.get_hour(),
+                        localData.get_min(), localData.get_day(), localData.get_month(),
+                        localData.get_year());
                 return;
             }
+        }
 
-        }
+        Log.d(TAG, "onReceive: ");
         //Trigger the notification
-        NotificationScheduler.showNotification(context, Reminders.class,
-                reminder.getReminderTitle(), reminder.getReminderDetails());
+        if (intent.hasExtra("remindID")) {
+            NotificationScheduler.showNotification(context, MainActivity.class,
+                    intent.getStringExtra("title"), intent.getStringExtra("details"));
+        } else {
+            NotificationScheduler.showNotification(context, MainActivity.class,
+                    "FOOOOOOOOOOOOOOOOOOOOOO", "Watch them now?");
         }
+
+    }
 }

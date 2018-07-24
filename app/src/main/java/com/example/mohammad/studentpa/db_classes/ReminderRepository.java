@@ -25,6 +25,10 @@ public class ReminderRepository {
         return allReminders;
     }
 
+    public LiveData<List<ReminderEntity>> getAllRemindersbyID(int id) {
+        return repoReminderDao.getAllRemindersFromID(id);
+    }
+
 
     public void insertReminder (ReminderEntity reminderEntity) {
         new insertAsyncTask(repoReminderDao).execute(reminderEntity);

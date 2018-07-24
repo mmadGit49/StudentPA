@@ -18,10 +18,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
+import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
 import com.example.mohammad.studentpa.util.DatePickerFragment;
 import com.example.mohammad.studentpa.util.TimePickerFragment;
-import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
-import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 
 public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener{
@@ -97,12 +97,14 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                             //To save data to the db via the ViewModel
                             scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
                                     day, scheduleTime, duration, optionalDate));
+
+                            Toast.makeText(getApplicationContext(), "Item updated!",
+                                    Toast.LENGTH_SHORT).show();
                         }else{
                             scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
                                     day, scheduleTime, duration, optionalDate));
                         }
-                        Toast.makeText(getApplicationContext(), "Item updated!",
-                                Toast.LENGTH_SHORT).show();
+
                     }
 
                     finish();
@@ -139,6 +141,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                             //To save data to the db via the ViewModel
                             scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, day,
                                     scheduleTime, duration, optionalDate));
+
                         }
                         //To save data to the db via the ViewModel
 

@@ -24,26 +24,6 @@ public interface ScheduleDao {
     @Query("SELECT * FROM scheduleentity WHERE day_of_week = :dayOfWeek")//For specific day
     LiveData<List<ScheduleEntity>> getAllSchedulesSpecificDay(String dayOfWeek);
 
-//    @Query("SELECT scheduleID, schedule_title FROM scheduleentity")//Method to get all notes
-//    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-//    LiveData<List<ScheduleEntity>> getAllScheduleTitles();
-//
-//    @Query("SELECT scheduleID, day_of_week FROM scheduleentity")//Method to get all notes
-//    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-//    LiveData<List<ScheduleEntity>> getAllScheduleDayOfWeeks();
-//
-//    @Query("SELECT scheduleID, time_from FROM scheduleentity")//Method to get all notes
-//    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-//    LiveData<List<ScheduleEntity>> getAllScheduleTimes();
-//
-//    @Query("SELECT scheduleID, optional_date FROM scheduleentity")//Method to get all notes
-//    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-//    LiveData<List<ScheduleEntity>> getAllScheduleOptionalDates();
-//
-//    @Query("SELECT scheduleID, duration FROM scheduleentity")//Method to get all notes
-//    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-//    LiveData<List<ScheduleEntity>> getAllScheduleDurations();
-
     @Update
     void update(ScheduleEntity scheduleEntity);//Update the table
 
