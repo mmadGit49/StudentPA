@@ -1,5 +1,6 @@
 package com.example.mohammad.studentpa;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,15 +17,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.milestones.Milestones;
+import com.example.mohammad.studentpa.reminders.LocalData;
 import com.example.mohammad.studentpa.reminders.Reminders;
 import com.example.mohammad.studentpa.schedule.Schedule;
 import com.example.mohammad.studentpa.spending.Spending;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener {
     private static final String TAG = "MainActivity started";
     private DrawerLayout drawerLayout;
 
@@ -134,4 +137,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String stringDate= dayOfMonth + " / " + month + " / " + year;
+        LocalData localData = new LocalData(this);
+        localData.set_date(stringDate);
+    }
 }

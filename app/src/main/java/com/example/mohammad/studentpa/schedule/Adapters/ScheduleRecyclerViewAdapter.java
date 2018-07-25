@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
 import com.example.mohammad.studentpa.schedule.TakeSchedule;
 
@@ -25,8 +24,6 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
     private Context context;
     private List<ScheduleEntity> schedules;
-    private ScheduleViewModel scheduleViewModel;
-
 
     public ScheduleRecyclerViewAdapter(Context context, List<ScheduleEntity> schedules) {
         this.context = context;
@@ -38,8 +35,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
     public ScheduleRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recyclerview_schedule_display, parent, false);
-        ScheduleRecyclerViewAdapter.ViewHolder holder= new ScheduleRecyclerViewAdapter.ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -75,7 +71,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
         } else {
             //If data is not ready yet
-            holder.textViewScheduleTitleDisplay.setText("No notes");
+            holder.textViewScheduleTitleDisplay.setText(R.string.null_notes);
         }
     }
 

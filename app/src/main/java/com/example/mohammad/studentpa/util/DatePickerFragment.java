@@ -29,22 +29,8 @@ public class DatePickerFragment extends DialogFragment implements OnDateSetListe
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        //FIXME: Save Date to textView in Different classes
+        //This class is overridden in the intended classes
         stringDate = day + " / " + month + " / " + year;
-
-       /* Intent dateIntent = new Intent(context, TakeReminder.class);
-        dateIntent.putExtra("date", stringDate);
-
-        Intent registrationIntent = new Intent(getActivity().getBaseContext(), TakeReminder.class);
-        registrationIntent.putExtra("date", stringDate);
-
-        Bundle bundle = new Bundle();
-        if (bundle != null) {
-            bundle.putString("date", stringDate);
-            milestones milestones = new milestones();
-            milestones.setArguments(bundle);
-        }*/
-
     }
 
 }

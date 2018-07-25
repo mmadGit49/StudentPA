@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +25,7 @@ public class MilestoneRecyclerViewAdapter
     private Context context;
 
 
-    public MilestoneRecyclerViewAdapter(Context context, List<MilestoneEntity> milestones) {
+    MilestoneRecyclerViewAdapter(Context context, List<MilestoneEntity> milestones) {
         this.milestones = milestones;
         this.context = context;
     }
@@ -35,8 +34,7 @@ public class MilestoneRecyclerViewAdapter
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view= LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.recyclerview_note_display, parent, false);
-            ViewHolder holder= new ViewHolder(view);
-            return holder;
+        return new ViewHolder(view);
         }
 
         @Override
@@ -66,7 +64,7 @@ public class MilestoneRecyclerViewAdapter
 
         }else{
             //If data is not ready yet
-            holder.textViewTitle.setText("No notes");
+            holder.textViewTitle.setText(R.string.null_notes);
         }
 
     }
@@ -93,25 +91,15 @@ public class MilestoneRecyclerViewAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView textViewTitle;
         TextView textViewMilestone;
         LinearLayout milestoneLayout;
-        //For the create Milestone activity
-        EditText editTextTitle;
-        EditText editTextDetails;
-        LinearLayout milestoneNoteLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewMilestone = itemView.findViewById(R.id.textViewMilestone);
             milestoneLayout = itemView.findViewById(R.id.recyclerview_note_display);
-            //For the TakeMilestone activity:
-            editTextTitle = itemView.findViewById(R.id.editTextTitle);
-            editTextDetails = itemView.findViewById(R.id.editTextMilestone);
-            milestoneNoteLayout = itemView.findViewById(R.id.milestone_note_layout);
-
         }
     }
 

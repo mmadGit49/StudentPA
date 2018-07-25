@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -14,8 +15,8 @@ import android.support.v4.app.NotificationCompat;
 import com.example.mohammad.studentpa.R;
 
 public class ReminderNotification extends ContextWrapper {
-    public static final String CHANNEL_ID = "CHANNEL_ID";
-    public static final String CHANNEL_NAME = "REMINDER_NAME";
+    public static final String CHANNEL_ID = "Reminder_Notifications";
+    public static final String CHANNEL_NAME = "Reminders";
     private NotificationManager notificationManager;
 
     public ReminderNotification(Context base) {
@@ -50,8 +51,11 @@ public class ReminderNotification extends ContextWrapper {
                 .setContentTitle(title)
                 .setContentText(details)
                 .setSound(alarmSound)
-                .setSmallIcon(R.mipmap.ic_icon_image)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),
+                        R.mipmap.ic_logo))
+                .setColor(getResources().getColor(R.color.colorSwitchUp))
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);

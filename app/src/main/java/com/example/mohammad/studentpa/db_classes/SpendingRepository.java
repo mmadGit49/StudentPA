@@ -11,36 +11,40 @@ import java.util.List;
 
 public class SpendingRepository {
     private SpendingDao repoSpendingDao;
-    private LiveData<List<SpendingEntity>> allSpendingDates;
-    private LiveData<List<SpendingEntity>> allSpendingAmounts;
-    private LiveData<List<SpendingEntity>> allSpendingDetails;
-    private LiveData<List<SpendingEntity>> allSpendings;
+//    private LiveData<List<SpendingEntity>> allSpendingDates;
+//    private LiveData<List<SpendingEntity>> allSpendingAmounts;
+//    private LiveData<List<SpendingEntity>> allSpendingDetails;
+    private LiveData<List<SpendingEntity>> allSpending;
 
 
     public SpendingRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoSpendingDao = db.spendingDao();
-        allSpendingDates = repoSpendingDao.getAllSpendingDates();
-        allSpendingAmounts = repoSpendingDao.getAllSpendingAmounts();
-        allSpendingDetails = repoSpendingDao.getAllSpendingDetails();
-        allSpendings = repoSpendingDao.getAllSpendingItems();
+//        allSpendingDates = repoSpendingDao.getAllSpendingDates();
+//        allSpendingAmounts = repoSpendingDao.getAllSpendingAmounts();
+//        allSpendingDetails = repoSpendingDao.getAllSpendingDetails();
+        allSpending = repoSpendingDao.getAllSpendingItems();
     }
 
-    //For abstraction, we wrap the getters as follows
-    public LiveData<List<SpendingEntity>> getAllSpendingDates (){
-        return allSpendingDates;
+//    //For abstraction, we wrap the getters as follows
+//    public LiveData<List<SpendingEntity>> getAllSpendingDates (){
+//        return allSpendingDates;
+//    }
+//
+//    public LiveData<List<SpendingEntity>> getAllSpendingAmounts (){
+//        return allSpendingAmounts;
+//    }
+//
+//    public LiveData<List<SpendingEntity>> getAllSpendingDetails (){
+//        return allSpendingDetails;
+//    }
+
+    public LiveData<List<SpendingEntity>> getAllSpending() {
+        return allSpending;
     }
 
-    public LiveData<List<SpendingEntity>> getAllSpendingAmounts (){
-        return allSpendingAmounts;
-    }
-
-    public LiveData<List<SpendingEntity>> getAllSpendingDetails (){
-        return allSpendingDetails;
-    }
-
-    public LiveData<List<SpendingEntity>> getAllSpendings() {
-        return allSpendings;
+    public LiveData<List<SpendingEntity>> getAllSpendingbyDate(String date) {
+        return repoSpendingDao.getAllSpendingItemsByDate(date);
     }
 
     public void insertSpending (SpendingEntity spendingEntity) {
@@ -48,6 +52,9 @@ public class SpendingRepository {
     }
     public void deleteSpending (SpendingEntity spendingEntity) {
         new deleteAsyncTask(repoSpendingDao).execute(spendingEntity);
+    }
+    public void updateSpending (SpendingEntity spendingEntity){
+        new updateAsyncTask(repoSpendingDao).execute(spendingEntity);
     }
 
     private static class insertAsyncTask extends AsyncTask<SpendingEntity, Void, Void> {
@@ -64,6 +71,7 @@ public class SpendingRepository {
             return null;
         }
     }
+
     private static class deleteAsyncTask extends AsyncTask<SpendingEntity, Void, Void> {
 
         private SpendingDao mAsyncTaskDao;
@@ -78,4 +86,20 @@ public class SpendingRepository {
             return null;
         }
     }
+
+    private static class updateAsyncTask extends AsyncTask<SpendingEntity, Void, Void> {
+
+        private SpendingDao mAsyncTaskDao;
+
+        updateAsyncTask(SpendingDao dao){
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(SpendingEntity... spendingEntities) {
+            mAsyncTaskDao.update(spendingEntities[0]);
+            return null;
+        }
+    }
+
 }

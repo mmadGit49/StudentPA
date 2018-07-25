@@ -39,7 +39,7 @@
     <string name="spending_details">Details</string>
     <string name="spending_add_detail">Add an Item</string>
     <string name="spending_remove_detail">Delete Item</string>
-    <string name="spending_sum_detail">Calculate total</string>
+    <string name="spending_sum_detail">Calculate total (Selected Day)</string>
     <string name="spending_total">Total Spent Today: </string>
     <!--FOR SCHEDULE MODULE-->
     <string name= "Monday">Mon</string>
@@ -65,5 +65,6 @@
     <string name= "date_select">Select date</string>
     <string name = "duration">Duration (HH:MM)</string>
     <string name = "spend_total">Today\'s total: </string>
+    <string name="null_notes">No items  yet</string>
 
 </resources>

@@ -15,7 +15,11 @@ public class LocalData {
     private static final String day="day";
     private static final String month="month";
     private static final String year="year";
-    private String title;
+    private static final String titleKey= "title";
+    private static final String detailsKey= "details";
+    private static final String dateKey= "date";
+    private static final String amountKey= "amount";
+
 
 
     public LocalData(Context context)
@@ -83,25 +87,52 @@ public class LocalData {
         return appSharedPrefs.getInt(year, 0);
     }
 
-    public void set_year(int m)
-    {
+    public void set_year(int m) {
         prefsEditor.putInt(year, m);
         prefsEditor.commit();
     }
 
-    public void reset()
-    {
+    public void reset() {
         prefsEditor.clear();
         prefsEditor.commit();
 
     }
 
-    public String getTitle() {
-        return title;
+    public String get_title() {
+        return appSharedPrefs.getString(titleKey, "placeholder");
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void set_title(String title) {
+        prefsEditor.putString(titleKey, title);
+        prefsEditor.commit();
+    }
+
+    public String get_details() {
+        return appSharedPrefs.getString(detailsKey, "placeholder");
+    }
+
+    public void set_details(String details) {
+        prefsEditor.putString(detailsKey, details);
+        prefsEditor.commit();
+    }
+
+    public String get_date() {
+        return appSharedPrefs.getString(dateKey, "placeholder");
+    }
+
+    public void set_date(String date) {
+        prefsEditor.putString(dateKey, date);
+        prefsEditor.commit();
+    }
+
+    public float get_amount()
+    {
+        return appSharedPrefs.getFloat(amountKey, 0);
+    }
+
+    public void set_amount(float m) {
+        prefsEditor.putFloat(amountKey, m);
+        prefsEditor.commit();
     }
 
 }

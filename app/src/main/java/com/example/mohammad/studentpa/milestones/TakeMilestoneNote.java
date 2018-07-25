@@ -12,10 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
-
-import java.util.List;
+import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 
 public class TakeMilestoneNote extends AppCompatActivity {
 
@@ -23,11 +21,8 @@ public class TakeMilestoneNote extends AppCompatActivity {
 
     private EditText editTextTitle;
     private EditText editTextDetails;
-    private FloatingActionButton fab;
 
-    private List<MilestoneEntity> milestones;
     private MilestoneViewModel milestoneViewModel;
-    private MilestoneRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -35,7 +30,7 @@ public class TakeMilestoneNote extends AppCompatActivity {
         setContentView(R.layout.note_layout_milestones);
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDetails = findViewById(R.id.editTextMilestone);
-        fab = findViewById(R.id.fab_save);
+        FloatingActionButton fab = findViewById(R.id.fab_save);
 
         milestoneViewModel = ViewModelProviders.of(TakeMilestoneNote.this).
                 get(MilestoneViewModel.class);
@@ -51,13 +46,14 @@ public class TakeMilestoneNote extends AppCompatActivity {
                 public void onClick(View v) {
                     //textUtils is an android class used on strings,apparently is preferred for
                     //exception handling purposes
-                    Log.d(TAG, "onClick: save btn started");
+                    Log.d(TAG, "onClick: save btn started: update");
                     if(!TextUtils.isEmpty( editTextDetails.getText().toString() ) &&
                             !TextUtils.isEmpty(editTextTitle.getText().toString() )  ){
                         String noteTitle = editTextTitle.getText().toString();
                         String noteDetails = editTextDetails.getText().toString();
                         //To update data to the db via the ViewModel
                         milestoneViewModel.update(new MilestoneEntity(mileID, noteTitle, noteDetails));
+
                         Toast.makeText(getApplicationContext(), "Milestone updated!",
                                 Toast.LENGTH_SHORT).show();
                     }

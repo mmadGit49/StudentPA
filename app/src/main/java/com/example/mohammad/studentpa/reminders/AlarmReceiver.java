@@ -48,12 +48,19 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Log.d(TAG, "onReceive: ");
         //Trigger the notification
-        if (intent.hasExtra("remindID")) {
+
+        if (context != null) {
+            LocalData localData = new LocalData(context);
+            if (intent.hasExtra("remindID")) {
+                NotificationScheduler.showNotification(context, MainActivity.class,
+                        intent.getStringExtra("title"), intent.getStringExtra("details"));
+            } else {
+                NotificationScheduler.showNotification(context, MainActivity.class,
+                        localData.get_title(), localData.get_details());
+            }
+        }else{
             NotificationScheduler.showNotification(context, MainActivity.class,
-                    intent.getStringExtra("title"), intent.getStringExtra("details"));
-        } else {
-            NotificationScheduler.showNotification(context, MainActivity.class,
-                    "FOOOOOOOOOOOOOOOOOOOOOO", "Watch them now?");
+                   "Talk to me" , "Watch them now?");
         }
 
     }

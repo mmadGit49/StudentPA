@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mohammad.studentpa.R;
@@ -20,7 +20,7 @@ public class AmountAdapter extends  RecyclerView.Adapter<AmountAdapter.ViewHolde
     private List<SpendingEntity> spendingEntities;
 
     private static final String TAG = "AmountAdapter";
-    public AmountAdapter(Context context, List<SpendingEntity> spendingEntities) {
+    AmountAdapter(Context context, List<SpendingEntity> spendingEntities) {
         this.context = context;
         this.spendingEntities = spendingEntities;
     }
@@ -28,22 +28,21 @@ public class AmountAdapter extends  RecyclerView.Adapter<AmountAdapter.ViewHolde
     @NonNull
     @Override
     public AmountAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(this.context)
+        View view= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.spending_listview, parent, false);
-        AmountAdapter.ViewHolder holder= new AmountAdapter.ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AmountAdapter.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
-
         if (spendingEntities != null) {
+            holder.textViewDate.setText(spendingEntities.get(position).getSpendDate());
             holder.textViewAmt.setText(spendingEntities.get(position).getSpendAmount());
             holder.textViewDet.setText(spendingEntities.get(position).getSpendDetails());
         } else {
             //If data is not ready yet
-            holder.textViewDet.setText("No items");
+            holder.textViewDet.setText(R.string.null_notes);
         }
     }
 
@@ -61,19 +60,15 @@ public class AmountAdapter extends  RecyclerView.Adapter<AmountAdapter.ViewHolde
         return spendingEntities.get(position);
     }
 
-    public List<SpendingEntity> getSpendingEntities() {
-        return spendingEntities;
-
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView textViewAmt;
         TextView textViewDet;
-        RelativeLayout scheduleLayout;
+        TextView textViewDate;
+        LinearLayout scheduleLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            textViewDate = itemView.findViewById(R.id.textViewSpendDateView);
             textViewAmt = itemView.findViewById(R.id.txtViewSpendAmount);
             textViewDet = itemView.findViewById(R.id.txtViewSpendDetails);
             scheduleLayout = itemView.findViewById(R.id.recycler_view_amounts);

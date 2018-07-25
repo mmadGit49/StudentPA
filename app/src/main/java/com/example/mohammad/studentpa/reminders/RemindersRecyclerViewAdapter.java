@@ -24,7 +24,7 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
     private List<ReminderEntity> reminders;
     private Context context;
 
-    public RemindersRecyclerViewAdapter(Context context, List<ReminderEntity> reminders) {
+    RemindersRecyclerViewAdapter(Context context, List<ReminderEntity> reminders) {
         this.reminders = reminders;
         this.context = context;
     }
@@ -34,12 +34,11 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
     public RemindersRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recyclerview_reminders_display, parent, false);
-        RemindersRecyclerViewAdapter.ViewHolder holder= new RemindersRecyclerViewAdapter.ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
         if(reminders != null){
             //TODO: Possibly remove details and set text to "Click to view details"
@@ -52,21 +51,21 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
                 public void onClick(View v) {
                     //On item click, start note taker activity
                     Intent remindIntent= new Intent(context, TakeReminder.class);
-                    remindIntent.putExtra("remindTitle", reminders.get(position)
+                    remindIntent.putExtra("remindTitle", reminders.get(holder.getAdapterPosition())
                             .getReminderTitle());
-                    remindIntent.putExtra("remindDetails", reminders.get(position)
+                    remindIntent.putExtra("remindDetails", reminders.get(holder.getAdapterPosition())
                             .getReminderDetails());
-                    remindIntent.putExtra("remindDate", reminders.get(position)
+                    remindIntent.putExtra("remindDate", reminders.get(holder.getAdapterPosition())
                             .getReminderDate());
-                    remindIntent.putExtra("remindTime", reminders.get(position)
+                    remindIntent.putExtra("remindTime", reminders.get(holder.getAdapterPosition())
                             .getReminderTime());
-                    remindIntent.putExtra("remindID", reminders.get(position)
+                    remindIntent.putExtra("remindID", reminders.get(holder.getAdapterPosition())
                             .getReminderID());
                     context.startActivity(remindIntent);
                 }
             });
         }else{
-            holder.textViewReminderTitle.setText("No reminders here!");
+            holder.textViewReminderTitle.setText(R.string.null_notes);
         }
     }
 
@@ -78,13 +77,6 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
     public ReminderEntity getReminderAtPosition(int position){//pretty self explanatory
         return reminders.get(position);
     }
-
-    public int getReminderPosition(){//pretty self explanatory
-        View view = new View(context);
-        RecyclerView.ViewHolder holder = new RemindersRecyclerViewAdapter.ViewHolder(view);
-        return holder.getAdapterPosition();
-    }
-
 
     @Override
     public int getItemCount() {
