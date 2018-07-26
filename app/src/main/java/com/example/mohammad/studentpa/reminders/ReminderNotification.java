@@ -29,7 +29,7 @@ public class ReminderNotification extends ContextWrapper {
     @TargetApi(Build.VERSION_CODES.O)
     public void createNotificationChannel(){
         NotificationChannel channel = new NotificationChannel
-                        (CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+                        (CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
         channel.enableLights(true);
         channel.enableVibration(true);
         getManager().createNotificationChannel(channel);
@@ -52,8 +52,7 @@ public class ReminderNotification extends ContextWrapper {
                 .setContentText(details)
                 .setSound(alarmSound)
                 .setSmallIcon(R.drawable.ic_stat_name)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(),
-                        R.mipmap.ic_logo))
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_logo))
                 .setColor(getResources().getColor(R.color.colorSwitchUp))
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)

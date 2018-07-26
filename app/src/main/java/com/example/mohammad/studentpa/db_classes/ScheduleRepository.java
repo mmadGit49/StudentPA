@@ -27,6 +27,10 @@ public class ScheduleRepository {
         return repoScheduleDao.getAllSchedulesSpecificDay(dayOfWeek);
     }
 
+    public LiveData<List<ScheduleEntity>> getAllSpecificDays(int schedID){
+        return repoScheduleDao.getAllScheduleDays(schedID);
+    }
+
     public void insertSchedule (ScheduleEntity scheduleEntity) {
         new insertAsyncTask(repoScheduleDao).execute(scheduleEntity);
     }

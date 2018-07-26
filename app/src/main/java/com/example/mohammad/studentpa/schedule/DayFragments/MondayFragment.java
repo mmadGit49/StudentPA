@@ -45,9 +45,10 @@ public class MondayFragment extends Fragment {
         mondayView = inflater.inflate(R.layout.fragment_schedule_monday,
                 container, false);
         fab= mondayView.findViewById(R.id.fab_monday);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {//Only for new item, on update use stored value
                 //On item click, start note taker activity
                 Intent scheduleIntent = new Intent(getActivity(), TakeSchedule.class);
                 Bundle bundle = new Bundle();
@@ -73,10 +74,10 @@ public class MondayFragment extends Fragment {
                 adapter.setClass(scheduleEntities);
                 adapter.notifyDataSetChanged();
             }
+
         });
 
-        ItemTouchHelper helper = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(0,
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                         ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
                     @Override
                     public boolean onMove(RecyclerView recyclerView,

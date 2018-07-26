@@ -19,13 +19,13 @@ public class LocalData {
     private static final String detailsKey= "details";
     private static final String dateKey= "date";
     private static final String amountKey= "amount";
+    private static final String userKey = "user";
 
-
-
-    public LocalData(Context context)
-    {
+    public LocalData(Context context) {
         this.appSharedPrefs = context.getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
         this.prefsEditor = appSharedPrefs.edit();
+        prefsEditor.apply();
+
     }
 
     // Settings Page Reminder Time (Hour)
@@ -92,12 +92,14 @@ public class LocalData {
         prefsEditor.commit();
     }
 
+    //Probably useless
     public void reset() {
         prefsEditor.clear();
         prefsEditor.commit();
 
     }
 
+    //For notification
     public String get_title() {
         return appSharedPrefs.getString(titleKey, "placeholder");
     }
@@ -107,6 +109,7 @@ public class LocalData {
         prefsEditor.commit();
     }
 
+    //For notification
     public String get_details() {
         return appSharedPrefs.getString(detailsKey, "placeholder");
     }
@@ -116,6 +119,7 @@ public class LocalData {
         prefsEditor.commit();
     }
 
+    //for spending
     public String get_date() {
         return appSharedPrefs.getString(dateKey, "placeholder");
     }
@@ -132,6 +136,18 @@ public class LocalData {
 
     public void set_amount(float m) {
         prefsEditor.putFloat(amountKey, m);
+        prefsEditor.commit();
+    }
+
+    //To get current userID for reference
+    public int get_user()
+    {
+        return appSharedPrefs.getInt(userKey, 0);
+    }
+
+    public void set_user(int user)
+    {
+        prefsEditor.putInt(userKey, user);
         prefsEditor.commit();
     }
 

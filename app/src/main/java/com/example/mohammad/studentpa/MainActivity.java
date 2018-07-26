@@ -2,6 +2,7 @@ package com.example.mohammad.studentpa;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,7 +18,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.milestones.Milestones;
@@ -25,21 +28,27 @@ import com.example.mohammad.studentpa.reminders.LocalData;
 import com.example.mohammad.studentpa.reminders.Reminders;
 import com.example.mohammad.studentpa.schedule.Schedule;
 import com.example.mohammad.studentpa.spending.Spending;
+import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener {
     private static final String TAG = "MainActivity started";
     private DrawerLayout drawerLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        stayLoggedIn();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(this, "Welcome! " +
-                "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
+        runFirstTime();//When program is run for the first time
+
+        //Saves user to SharedPreferences
+        if(getIntent().hasExtra("user")){
+            SavedUserLogin.setUserName(MainActivity.this, getIntent().getStringExtra("user"));
+        }
+
         //for the toolbar, action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,6 +68,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView= findViewById(R.id.navigation_view_main);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView currentUser = headerView.findViewById(R.id.textViewUser);
+        currentUser.setText(SavedUserLogin.getUserName(MainActivity.this));
 
     }
     public void replaceFrag(Fragment fragment){//to replace the selected fragment
@@ -93,7 +106,8 @@ public class MainActivity extends AppCompatActivity
         } else {
             AlertDialog.Builder builder;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                builder = new AlertDialog.Builder(MainActivity.this,
+                        android.R.style.Theme_Material_Dialog_Alert);
             } else {
                 builder = new AlertDialog.Builder(MainActivity.this);
             }
@@ -143,4 +157,28 @@ public class MainActivity extends AppCompatActivity
         LocalData localData = new LocalData(this);
         localData.set_date(stringDate);
     }
+
+    public void runFirstTime(){
+        //Is supposed to run this for the first time
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
+        if (isFirstRun) {
+            Toast.makeText(this, "Welcome! " +
+                    "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
+        }
+
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("isFirstRun", false).apply();
+
+    }
+
+    public void stayLoggedIn(){
+        //checks if user is already logged in
+        if(SavedUserLogin.getUserName(MainActivity.this).length() == 0){
+            Intent loginIntent = new Intent(MainActivity.this, Login.class);
+            startActivity(loginIntent);
+        }
+    }
+
 }

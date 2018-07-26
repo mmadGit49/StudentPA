@@ -2,26 +2,40 @@ package com.example.mohammad.studentpa.db_classes.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity (foreignKeys = @ForeignKey(entity = User.class,
+        parentColumns = "userID",
+        childColumns = "spendingID",
+        onUpdate = CASCADE,
+        onDelete = CASCADE))
+
 public class SpendingEntity {
 
-    public SpendingEntity(String spendDate, String spendAmount, String spendDetails, String spendTotal) {
+    public SpendingEntity(String spendDate, String spendAmount, String spendDetails,
+                          String spendTotal, int userID) {
         this.spendDate = spendDate;
         this.spendAmount = spendAmount;
         this.spendDetails = spendDetails;
         this.spendTotal = spendTotal;
+        this.userID = userID;
+
     }
 
     @Ignore
-    public SpendingEntity(int spendingID, String spendDate, String spendAmount, String spendDetails, String spendTotal) {
+    public SpendingEntity(int spendingID, String spendDate, String spendAmount, String spendDetails,
+                          String spendTotal, int userID) {
         this.spendingID = spendingID;
         this.spendDate = spendDate;
         this.spendAmount = spendAmount;
         this.spendDetails = spendDetails;
         this.spendTotal = spendTotal;
+        this.userID = userID;
+
     }
 
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
@@ -69,5 +83,16 @@ public class SpendingEntity {
     public void setSpendTotal(String spendTotal) {
         this.spendTotal = spendTotal;
     }
+
+    //************************************FOREIGN KEYS*********************************************
+    @ColumnInfo(name = "userID")
+    private int userID;
+    public int getUserID() {
+        return userID;
+    }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
 }
 

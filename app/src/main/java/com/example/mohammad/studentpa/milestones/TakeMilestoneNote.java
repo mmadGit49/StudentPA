@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
+import com.example.mohammad.studentpa.reminders.LocalData;
 
 public class TakeMilestoneNote extends AppCompatActivity {
 
@@ -51,8 +52,12 @@ public class TakeMilestoneNote extends AppCompatActivity {
                             !TextUtils.isEmpty(editTextTitle.getText().toString() )  ){
                         String noteTitle = editTextTitle.getText().toString();
                         String noteDetails = editTextDetails.getText().toString();
+                        LocalData localData = new LocalData(TakeMilestoneNote.this);
+                        int user = localData.get_user();
+
                         //To update data to the db via the ViewModel
-                        milestoneViewModel.update(new MilestoneEntity(mileID, noteTitle, noteDetails));
+                        milestoneViewModel.update
+                                (new MilestoneEntity(mileID, noteTitle, noteDetails, user));
 
                         Toast.makeText(getApplicationContext(), "Milestone updated!",
                                 Toast.LENGTH_SHORT).show();
@@ -70,8 +75,11 @@ public class TakeMilestoneNote extends AppCompatActivity {
 
                         String noteTitle = editTextTitle.getText().toString();
                         String noteDetails = editTextDetails.getText().toString();
+                        LocalData localData = new LocalData(TakeMilestoneNote.this);
+                        int user = localData.get_user();//For current user
+
                         //To save data to the db via the ViewModel
-                        milestoneViewModel.insert(new MilestoneEntity(noteTitle, noteDetails));
+                        milestoneViewModel.insert(new MilestoneEntity(noteTitle, noteDetails, user));
                         Toast.makeText(getApplicationContext(), "Milestone saved!",
                                 Toast.LENGTH_SHORT).show();
                     }

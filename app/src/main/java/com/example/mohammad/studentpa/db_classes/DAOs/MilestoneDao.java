@@ -21,6 +21,9 @@ public interface MilestoneDao {
     @Query("SELECT * FROM milestoneentity")//Method to get all notes
     LiveData<List<MilestoneEntity>> getAllMilestones();
 
+    @Query("SELECT * FROM milestoneentity WHERE userID = :userID")//Method to get all notes
+    LiveData<List<MilestoneEntity>> getAllMilestonesPerUser(int userID);
+
     @Update
     void updateList(MilestoneEntity milestoneEntity);//Update the table
 

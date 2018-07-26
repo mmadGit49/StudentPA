@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
+import com.example.mohammad.studentpa.reminders.LocalData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,9 @@ import java.util.List;
 public class Milestones extends Fragment {
 
     private View mileView;
-    private LinearLayoutManager layoutManager;
     private MilestoneViewModel milestoneViewModel;
-    private FloatingActionButton fab;
 
-   // public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    // public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private static final String TAG = "milestone fragment";
 
     @Override
@@ -52,7 +51,7 @@ public class Milestones extends Fragment {
         toolbar.setTitle("Milestones");
 
         //for the floating action button:
-        fab = mileView.findViewById(R.id.fab_add_note);
+        FloatingActionButton fab = mileView.findViewById(R.id.fab_add_note);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +69,7 @@ public class Milestones extends Fragment {
     public void initRecyclerView() {//initialises adapters, views and what have you's
         Log.d(TAG, "initRecyclerView: started");
         RecyclerView recyclerView = mileView.findViewById(R.id.recycler_view);
-        layoutManager = new LinearLayoutManager(this.getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
         final MilestoneRecyclerViewAdapter adapter
                 = new MilestoneRecyclerViewAdapter(this.getActivity(),
@@ -78,12 +77,22 @@ public class Milestones extends Fragment {
         recyclerView.setAdapter(adapter);
 
         milestoneViewModel = ViewModelProviders.of(this).get(MilestoneViewModel.class);
-        milestoneViewModel.getAllMilestones().observe(this, new Observer<List<MilestoneEntity>>() {
+//        milestoneViewModel.getAllMilestones().observe(this, new Observer<List<MilestoneEntity>>() {
+//            @Override
+//            public void onChanged(@Nullable List<MilestoneEntity> milestoneEntities) {
+//                //Update the cached copy of words in the adapter
+//                adapter.setMilestone(milestoneEntities);
+//                Log.i("##############",milestoneEntities.size()+"");
+//            }
+//        });
+
+        //FIXME: ONLY SHOW ITEMS FOR CURRENT USER
+
+        LocalData local = new LocalData(getActivity());
+        milestoneViewModel.getAllMilestonesPerUser(local.get_user()).observe(this, new Observer<List<MilestoneEntity>>() {
             @Override
             public void onChanged(@Nullable List<MilestoneEntity> milestoneEntities) {
-                //Update the cached copy of words in the adapter
                 adapter.setMilestone(milestoneEntities);
-                Log.i("##############",milestoneEntities.size()+"");
             }
         });
 

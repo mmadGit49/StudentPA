@@ -2,6 +2,7 @@ package com.example.mohammad.studentpa.schedule;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,8 +21,11 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
+import com.example.mohammad.studentpa.reminders.LocalData;
 import com.example.mohammad.studentpa.util.DatePickerFragment;
 import com.example.mohammad.studentpa.util.TimePickerFragment;
+
+import java.util.List;
 
 public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener{
@@ -30,13 +34,8 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
     private TextView textViewScheduleDate;
     private TextView textViewScheduleTimeFrom;
     private EditText editTextSchedDuration;
-    private Button buttonScheduleDate;
-    private Button buttonScheduleTimeFrom;
-    private FloatingActionButton fab;
-    private String timeFrom;
 
     private ScheduleViewModel scheduleViewModel;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,9 +46,9 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
         textViewScheduleDate = findViewById(R.id.textViewScheduleDate);
         textViewScheduleTimeFrom = findViewById(R.id.textViewScheduleTimeFrom);
         editTextSchedDuration = findViewById(R.id.editTextScheduleDuration);
-        buttonScheduleDate = findViewById(R.id.buttonScheduleDate);
-        buttonScheduleTimeFrom = findViewById(R.id.buttonScheduleTimeFrom);
-        fab = findViewById(R.id.fab_save_schedule);
+        Button buttonScheduleDate = findViewById(R.id.buttonScheduleDate);
+        Button buttonScheduleTimeFrom = findViewById(R.id.buttonScheduleTimeFrom);
+        FloatingActionButton fab = findViewById(R.id.fab_save_schedule);
 
         scheduleViewModel = ViewModelProviders.of(TakeSchedule.this).
                 get(ScheduleViewModel.class);
@@ -85,28 +84,27 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                 @Override
                 public void onClick(View v) {
                     if( !TextUtils.isEmpty( editTextScheduleTitle.getText().toString() ) ){
-                        String scheduleTitle = editTextScheduleTitle.getText().toString();
-                        String scheduleTime = textViewScheduleTimeFrom.getText().toString();
-                        String optionalDate = textViewScheduleDate.getText().toString();
-                        String duration = editTextSchedDuration.getText().toString();
-
-                        Bundle dayBundle = getIntent().getExtras();
-                        String day = getIntent().getStringExtra("schedDayOfWeek");
-                        if(dayBundle != null) {
-                            day = dayBundle.getString("dayOfWeek");
-                            //To save data to the db via the ViewModel
-                            scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
-                                    day, scheduleTime, duration, optionalDate));
-
-                            Toast.makeText(getApplicationContext(), "Item updated!",
-                                    Toast.LENGTH_SHORT).show();
-                        }else{
-                            scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
-                                    day, scheduleTime, duration, optionalDate));
-                        }
-
+                        scheduleViewModel.getAllScheduleDays(schedID).observe(TakeSchedule.this,
+                                new Observer<List<ScheduleEntity>>() {
+                            @Override
+                            public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
+                                if(scheduleEntities != null){
+                                    String scheduleTitle = editTextScheduleTitle.getText().toString();
+                                    String scheduleTime = textViewScheduleTimeFrom.getText().toString();
+                                    String optionalDate = textViewScheduleDate.getText().toString();
+                                    String duration = editTextSchedDuration.getText().toString();
+                                    String day = scheduleEntities.get(0).getDayOfWeek();
+                                    LocalData localData = new LocalData(TakeSchedule.this);
+                                    int user = localData.get_user();
+                                    //To save data to the db via the ViewModel
+                                    scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
+                                            day, scheduleTime, duration, optionalDate, user));
+                                    Toast.makeText(getApplicationContext(), "Item updated!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
-
                     finish();
                 }
             });
@@ -133,18 +131,19 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                         String scheduleTime = textViewScheduleTimeFrom.getText().toString();
                         String optionalDate = textViewScheduleDate.getText().toString();
                         String duration = editTextSchedDuration.getText().toString();
+                        LocalData localData = new LocalData(TakeSchedule.this);
+                        int user = localData.get_user();
+
 
                         Bundle dayBundle = getIntent().getExtras();
-                        String day = null;
+                        String day;
                         if(dayBundle != null) {
                             day = dayBundle.getString("dayOfWeek");
                             //To save data to the db via the ViewModel
                             scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, day,
-                                    scheduleTime, duration, optionalDate));
-
+                                    scheduleTime, duration, optionalDate, user));
                         }
                         //To save data to the db via the ViewModel
-
                         Toast.makeText(getApplicationContext(), "Item saved!",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -175,7 +174,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        timeFrom = hourOfDay + " : " + String.format("%02d", minute);//just to format minute to 00
+        String timeFrom = hourOfDay + " : " + String.format("%02d", minute);
         textViewScheduleTimeFrom.setText(timeFrom);
 
     }

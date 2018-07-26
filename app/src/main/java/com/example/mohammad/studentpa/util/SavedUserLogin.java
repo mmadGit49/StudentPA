@@ -23,6 +23,13 @@ public class SavedUserLogin {//for auto login functionality
             return getSharedPreferences(ctx).getString(NAME_SAVED, "");
         }
 
+        //To log out
+        public static void clearUserName(Context ctx) {
+            SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+            editor.clear(); //clear all stored data
+            editor.apply();
+        }
+
 }
 
 

@@ -20,6 +20,8 @@
     <string name="nav_header_subtitle">Organise yourself Better</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="nav_header_user">Current user</string>
+
 
     <string name="Reminders">Reminders</string>
     <string name="Spending">Spending</string>

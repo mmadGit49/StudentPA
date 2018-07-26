@@ -10,13 +10,14 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import static android.content.Context.ALARM_SERVICE;
 
 
 public class NotificationScheduler
 {
-    public static final int REMINDER_REQUEST_CODE =100;
+    private static final int REMINDER_REQUEST_CODE = generateRandom();
     public static final String TAG="NotificationScheduler";
 
     public static void setReminder(Context context,Class<?> cls,int hour, int min,
@@ -49,7 +50,8 @@ public class NotificationScheduler
 
 
         Intent intent1 = new Intent(context, cls);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REMINDER_REQUEST_CODE,
+                intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         am.setExact(AlarmManager.RTC_WAKEUP, setCalendar.getTimeInMillis(), pendingIntent);
 
@@ -66,7 +68,8 @@ public class NotificationScheduler
                 PackageManager.DONT_KILL_APP);
 
         Intent intent1 = new Intent(context, cls);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REMINDER_REQUEST_CODE,
+                intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         am.cancel(pendingIntent);
         pendingIntent.cancel();
@@ -80,13 +83,21 @@ public class NotificationScheduler
         stackBuilder.addParentStack(cls);
         stackBuilder.addNextIntent(notificationIntent);
 
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(REMINDER_REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(REMINDER_REQUEST_CODE,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         ReminderNotification reminderNotification = new ReminderNotification(context);
         NotificationCompat.Builder nb;
         nb = reminderNotification.getChannelNotification(title, content, pendingIntent);
         reminderNotification.getManager().notify(REMINDER_REQUEST_CODE, nb.build());
 
+    }
+
+    //Generate random number so each notification has a unique ID,
+    //This way we can display multiple notifications at a time
+    private static int generateRandom(){
+        Random random = new Random();
+        return random.nextInt(9999 - 1000) + 1000;
     }
 
 }

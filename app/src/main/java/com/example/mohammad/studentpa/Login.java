@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,25 +15,25 @@ import android.widget.Toast;
 
 import com.example.mohammad.studentpa.db_classes.UserViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.User;
-import com.example.mohammad.studentpa.util.SavedUserLogin;
+import com.example.mohammad.studentpa.reminders.LocalData;
 
 public class Login extends AppCompatActivity {
     private EditText username;
     private EditText password;
 
     private UserViewModel userViewModel;
+
+    private static final String TAG = "Login Class started";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Remember to add a security mechanism to avoid brute force login
-        //e.g. initialise a counter
         Button register = findViewById(R.id.buttonSignUp);
-        Button login = findViewById(R.id.buttonLogin);
+        final Button login = findViewById(R.id.buttonLogin);
         username= findViewById(R.id.editTextEmail);
         password= findViewById(R.id.editTextPassword);
-
 
         register.setOnClickListener(new View.OnClickListener() {//method to start next activity
             View regView;
@@ -64,12 +65,9 @@ public class Login extends AppCompatActivity {
                                 String checkPw = user.getPassword();
                                 if (checkEmail.equals(emailEntered)){
                                     if(checkPw.equals(passwordString)){
-                                        SavedUserLogin.setUserName(Login.this, emailEntered);
-                                        startMain(view);
+//                                        SavedUserLogin.setUserName(Login.this, checkEmail);
+                                        startMain(view, checkEmail);
                                         Toast.makeText(Login.this, "Welcome " + user.getFirstName(),
-                                                Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        Toast.makeText(Login.this, "Username or password incorrect",
                                                 Toast.LENGTH_SHORT).show();
                                     }
 
@@ -77,7 +75,14 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(Login.this, "Username or password incorrect",
                                             Toast.LENGTH_SHORT).show();
                                 }
+                                LocalData localData = new LocalData(Login.this);
+                                int userID = user.getUserID();
+                                localData.set_user(userID);
+                                Log.d(TAG, "onChanged: UserID set");
 
+                            }else{
+                                Toast.makeText(Login.this, "Username or password incorrect",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -88,8 +93,9 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void startMain(View view){
+    public void startMain(View view, String email){
         Intent mainIntent= new Intent(this, MainActivity.class);
+        mainIntent.putExtra("user", email);
         startActivity(mainIntent);
         finish();//prevents user from returning to this screen
     }

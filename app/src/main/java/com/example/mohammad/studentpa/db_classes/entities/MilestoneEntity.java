@@ -2,22 +2,33 @@ package com.example.mohammad.studentpa.db_classes.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity (foreignKeys = @ForeignKey(entity = User.class,
+        parentColumns = "userID",
+        childColumns = "milestoneID",
+        onUpdate = CASCADE,
+        onDelete = CASCADE))
+
 public class MilestoneEntity {
 
-    public MilestoneEntity(String milestoneTitle, String milestoneDetails) {
+    public MilestoneEntity(String milestoneTitle, String milestoneDetails, int userID) {
         this.milestoneTitle = milestoneTitle;
         this.milestoneDetails = milestoneDetails;
+        this.userID = userID;
     }
 
     @Ignore
-    public MilestoneEntity(int milestoneID, String milestoneTitle, String milestoneDetails) {
+    public MilestoneEntity(int milestoneID, String milestoneTitle, String milestoneDetails, int userID) {
         this.milestoneID = milestoneID;
         this.milestoneTitle = milestoneTitle;
         this.milestoneDetails = milestoneDetails;
+        this.userID = userID;
+
     }
 
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
@@ -46,6 +57,16 @@ public class MilestoneEntity {
     }
     public void setMilestoneDetails(String milestoneDetails) {
         this.milestoneDetails = milestoneDetails;
+    }
+
+    //************************************FOREIGN KEYS*********************************************
+    @ColumnInfo(name = "userID")
+    private int userID;
+    public int getUserID() {
+        return userID;
+    }
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
 }

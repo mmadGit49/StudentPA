@@ -24,15 +24,15 @@ public interface SpendingDao {
     @Query("SELECT * FROM spendingentity WHERE spending_date = :date")//Method to get all notes
     LiveData<List<SpendingEntity>> getAllSpendingItemsByDate(String date);
 
-    @Query("SELECT spendingID, spending_date FROM spendingentity")
+    @Query("SELECT spendingID, spending_date, userID FROM spendingentity")
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<SpendingEntity>> getAllSpendingDates();
 
-    @Query("SELECT spendingID, spending_amount FROM spendingentity")
+    @Query("SELECT spendingID, spending_amount, userID FROM spendingentity")
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<SpendingEntity>> getAllSpendingAmounts();
 
-    @Query("SELECT spendingID, spending_details FROM spendingentity")
+    @Query("SELECT spendingID, spending_details, userID FROM spendingentity")
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<List<SpendingEntity>> getAllSpendingDetails();
 

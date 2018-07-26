@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.RoomWarnings;
 import android.arch.persistence.room.Update;
 
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
@@ -23,6 +24,11 @@ public interface ScheduleDao {
 
     @Query("SELECT * FROM scheduleentity WHERE day_of_week = :dayOfWeek")//For specific day
     LiveData<List<ScheduleEntity>> getAllSchedulesSpecificDay(String dayOfWeek);
+
+    //For specific day, to display respectively on fragments
+    @Query("SELECT scheduleID, day_of_week, userID FROM scheduleentity WHERE scheduleID = :schedID")
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    LiveData<List<ScheduleEntity>> getAllScheduleDays(int schedID);
 
     @Update
     void update(ScheduleEntity scheduleEntity);//Update the table

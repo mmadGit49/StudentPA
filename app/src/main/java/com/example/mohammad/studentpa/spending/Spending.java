@@ -116,8 +116,10 @@ public class Spending extends Fragment implements DatePickerDialog.OnDateSetList
                     double total = 0;
                     String totalSpent = Double.toString(total);
                     String date = localData.get_date();
+                    int user = localData.get_user();
 
-                    spendingViewModel.insert(new SpendingEntity(date, amount, details, totalSpent));
+                    spendingViewModel.insert
+                            (new SpendingEntity(date, amount, details, totalSpent, user));
 
                     editTextAmount.setText("");
                     editTextAmountDetails.setText("");
@@ -234,69 +236,3 @@ public class Spending extends Fragment implements DatePickerDialog.OnDateSetList
         helper.attachToRecyclerView(recyclerView);
     }
 }
-
-
-//    public void initSpendRecyclerView() {//initialises adapters, views and what have you'
-//        Log.d(TAG, "initSpendRecyclerView: initRecycStarted.");
-//        RecyclerView recyclerView = spendView.findViewById(R.id.spending_recycler_view);
-//        layoutManager = new LinearLayoutManager(this.getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//        final SpendingRecyclerViewAdapter adapter = new SpendingRecyclerViewAdapter(this.getActivity(),
-//                new ArrayList<SpendingEntity>());
-//        recyclerView.setAdapter(adapter);
-//
-//        spendingViewModel = ViewModelProviders.of(this).get(SpendingViewModel.class);
-//        spendingViewModel.getAllSpending().observe(this, new Observer<List<SpendingEntity>>() {
-//            @Override
-//            public void onChanged(@Nullable List<SpendingEntity> spendingEntities) {
-//                //Update the cached copy of words in the adapter
-//                adapter.setItems(spendingEntities);
-//                Log.i("##############",spendingEntities.size()+"");
-//            }
-//        });
-//
-//        // Add the functionality to swipe items in the recycler view to delete that item
-//        ItemTouchHelper helper = new ItemTouchHelper(
-//                new ItemTouchHelper.SimpleCallback(0,
-//                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//                    @Override
-//                    public boolean onMove(RecyclerView recyclerView,
-//                                          RecyclerView.ViewHolder viewHolder,
-//                                          RecyclerView.ViewHolder target) {
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
-//                                         int direction) {
-//                        // Delete the word
-//                        int position = viewHolder.getAdapterPosition();
-//                        final SpendingEntity spending = adapter.getSpendingAtPosition(position);
-//
-//
-//                        AlertDialog.Builder builder;
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
-//                        } else {
-//                            builder = new AlertDialog.Builder(getContext());
-//                        }
-//                        builder.setTitle("Delete Item")
-//                                .setMessage("Are you sure you want to delete?")
-//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        spendingViewModel.delete(spending);
-//                                        Toast.makeText(getContext(), "Item deleted!", Toast.LENGTH_SHORT).show();
-//                                        Log.i(TAG, "onSwiped: Item Deleted");
-//                                    }
-//                                })
-//                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        // Reinsert the item
-//                                        spendingViewModel.insert(spending);
-//                                    }
-//                                }).show();
-//                    }
-//
-//                });
-//        helper.attachToRecyclerView(recyclerView);
-//    }

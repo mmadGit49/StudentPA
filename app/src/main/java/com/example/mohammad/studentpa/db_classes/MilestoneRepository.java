@@ -24,6 +24,11 @@ public class MilestoneRepository {
         return allMilestones;
     }
 
+    public LiveData<List<MilestoneEntity>> getAllMilestonesPerUser(int userID) {
+        return repoMilestoneDao.getAllMilestonesPerUser(userID);
+    }
+
+
     public void insertMilestone (MilestoneEntity milestoneEntity) {
         //starts the async task which, in this case, inserts a milestone to the db
         new insertAsyncTask(repoMilestoneDao).execute(milestoneEntity);

@@ -2,24 +2,34 @@ package com.example.mohammad.studentpa.db_classes.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity (foreignKeys = @ForeignKey(entity = User.class,
+        parentColumns = "userID",
+        childColumns = "reminderID",
+        onUpdate = CASCADE,
+        onDelete = CASCADE))
+
 public class ReminderEntity {
 
     public ReminderEntity(String reminderTitle, String reminderDetails, String reminderDate,
-                          String reminderTime) {
+                          String reminderTime, int userID) {
         this.reminderTitle = reminderTitle;
         this.reminderDetails = reminderDetails;
         this.reminderDate = reminderDate;
         this.reminderTime = reminderTime;
+        this.userID = userID;
+
     }
 
     @Ignore
     public ReminderEntity(String reminderTitle, String reminderDetails, String reminderDate,
                           String reminderTime, int hourOfDay, int minute, int dayOfMonth,
-                          int month, int year) {
+                          int month, int year, int userID) {
         this.reminderTitle = reminderTitle;
         this.reminderDetails = reminderDetails;
         this.reminderDate = reminderDate;
@@ -29,12 +39,13 @@ public class ReminderEntity {
         this.dayOfMonth = dayOfMonth;
         this.month = month;
         this.year = year;
+        this.userID = userID;
     }
 
     @Ignore
     public ReminderEntity(int reminderID, String reminderTitle, String reminderDetails,
                           String reminderDate, String reminderTime, int hourOfDay, int minute,
-                          int dayOfMonth, int month, int year) {
+                          int dayOfMonth, int month, int year, int userID) {
         this.reminderID = reminderID;
         this.reminderTitle = reminderTitle;
         this.reminderDetails = reminderDetails;
@@ -45,6 +56,8 @@ public class ReminderEntity {
         this.dayOfMonth = dayOfMonth;
         this.month = month;
         this.year = year;
+        this.userID = userID;
+
     }
 
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
@@ -140,4 +153,15 @@ public class ReminderEntity {
     public void setYear(int year) {
         this.year = year;
     }
+
+    //************************************FOREIGN KEYS*********************************************
+    @ColumnInfo(name = "userID")
+    private int userID;
+    public int getUserID() {
+        return userID;
+    }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
 }
