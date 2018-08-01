@@ -65,23 +65,21 @@ public class Login extends AppCompatActivity {
                                 String checkPw = user.getPassword();
                                 if (checkEmail.equals(emailEntered)){
                                     if(checkPw.equals(passwordString)){
-//                                        SavedUserLogin.setUserName(Login.this, checkEmail);
+                                        LocalData localData = new LocalData(Login.this);
+                                        int userID = user.getUserID();
+                                        localData.set_user(userID);
                                         startMain(view, checkEmail);
                                         Toast.makeText(Login.this, "Welcome " + user.getFirstName(),
                                                 Toast.LENGTH_SHORT).show();
+                                        localData.set_name(user.getFirstName());
+                                        Log.d(TAG, "onChanged: UserID set");
                                     }
-
                                 }else{
                                     Toast.makeText(Login.this, "Username or password incorrect",
                                             Toast.LENGTH_SHORT).show();
                                 }
-                                LocalData localData = new LocalData(Login.this);
-                                int userID = user.getUserID();
-                                localData.set_user(userID);
-                                Log.d(TAG, "onChanged: UserID set");
-
                             }else{
-                                Toast.makeText(Login.this, "Username or password incorrect",
+                                Toast.makeText(Login.this, "Have you registered?...",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

@@ -11,20 +11,45 @@
     android:padding="8dp"
     android:id="@+id/milestone_note_layout">
 
-    <EditText
-        android:id="@+id/editTextTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:background="@drawable/note_custom_design"
-        android:ems="10"
-        android:fontFamily="sans-serif-smallcaps"
-        android:hint="@string/Title_header"
-        android:inputType="textPersonName"
-        android:padding="8dp"
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:weightSum="100">
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:layout_margin="2dp"
+            android:background="@drawable/note_custom_design"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:hint="@string/Title_header"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewCurrentUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="70"
+            android:background="@drawable/note_custom_design"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:hint="@string/user"
+            android:padding="8dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/ic_launcher_background"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editTextMilestone"

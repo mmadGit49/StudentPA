@@ -6,13 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.mohammad.studentpa.Login;
 import com.example.mohammad.studentpa.R;
 
 public class Splash extends AppCompatActivity {
-    private TextView textv;
     private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

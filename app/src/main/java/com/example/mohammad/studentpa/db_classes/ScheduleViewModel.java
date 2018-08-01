@@ -22,8 +22,8 @@ public class ScheduleViewModel extends AndroidViewModel {
         return allSchedules;
     }
 
-    public LiveData<List<ScheduleEntity>> getAllSchedulesByDay(String dayOfWeek){
-        return scheduleRepository.getAllSpecificDaySchedules(dayOfWeek);
+    public LiveData<List<ScheduleEntity>> getAllSchedulesByDay(String dayOfWeek, int userID){
+        return scheduleRepository.getAllSpecificDaySchedules(dayOfWeek, userID);
     }
 
     public LiveData<List<ScheduleEntity>> getAllScheduleDays(int schedID){

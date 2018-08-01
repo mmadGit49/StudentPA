@@ -20,8 +20,8 @@ public interface ReminderDao {
     @Query("SELECT * FROM reminderentity")//Method to get all reminders
     LiveData<List<ReminderEntity>> getAllReminders();
 
-    @Query("SELECT * FROM reminderentity WHERE reminderID =:remindID")//Method to get all specific
-    LiveData<List<ReminderEntity>> getAllRemindersFromID(int remindID);
+    @Query("SELECT * FROM reminderentity WHERE userID = :userID")//Method to get all specific
+    LiveData<List<ReminderEntity>> getAllRemindersFromID(int userID);
 
     @Update
     void update(ReminderEntity reminderEntity);//Update the table

@@ -8,25 +8,10 @@ import android.arch.persistence.room.PrimaryKey;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity (foreignKeys = @ForeignKey(entity = User.class,
-        parentColumns = "userID",
-        childColumns = "reminderID",
-        onUpdate = CASCADE,
-        onDelete = CASCADE))
+@Entity
 
 public class ReminderEntity {
 
-    public ReminderEntity(String reminderTitle, String reminderDetails, String reminderDate,
-                          String reminderTime, int userID) {
-        this.reminderTitle = reminderTitle;
-        this.reminderDetails = reminderDetails;
-        this.reminderDate = reminderDate;
-        this.reminderTime = reminderTime;
-        this.userID = userID;
-
-    }
-
-    @Ignore
     public ReminderEntity(String reminderTitle, String reminderDetails, String reminderDate,
                           String reminderTime, int hourOfDay, int minute, int dayOfMonth,
                           int month, int year, int userID) {
@@ -40,6 +25,7 @@ public class ReminderEntity {
         this.month = month;
         this.year = year;
         this.userID = userID;
+
     }
 
     @Ignore
@@ -57,7 +43,6 @@ public class ReminderEntity {
         this.month = month;
         this.year = year;
         this.userID = userID;
-
     }
 
     @PrimaryKey(autoGenerate = true) //Obvious,and it shall autoGenerate
@@ -155,6 +140,8 @@ public class ReminderEntity {
     }
 
     //************************************FOREIGN KEYS*********************************************
+    @ForeignKey(entity = User.class, parentColumns = "userID", childColumns = "reminderID",
+            onUpdate = CASCADE, deferred = true)
     @ColumnInfo(name = "userID")
     private int userID;
     public int getUserID() {

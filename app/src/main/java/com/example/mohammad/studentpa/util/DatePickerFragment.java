@@ -30,7 +30,7 @@ public class DatePickerFragment extends DialogFragment implements OnDateSetListe
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         //This class is overridden in the intended classes
-        stringDate = day + " / " + month + " / " + year;
+        stringDate = day + " / " + (month + 1) + " / " + year;
     }
 
 }

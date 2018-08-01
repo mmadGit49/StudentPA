@@ -23,8 +23,8 @@ public class ScheduleRepository {
         return allSchedules;
     }
 
-    public LiveData<List<ScheduleEntity>> getAllSpecificDaySchedules(String dayOfWeek){
-        return repoScheduleDao.getAllSchedulesSpecificDay(dayOfWeek);
+    public LiveData<List<ScheduleEntity>> getAllSpecificDaySchedules(String dayOfWeek, int userID){
+        return repoScheduleDao.getAllSchedulesSpecificDay(dayOfWeek, userID);
     }
 
     public LiveData<List<ScheduleEntity>> getAllSpecificDays(int schedID){

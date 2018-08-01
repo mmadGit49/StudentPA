@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
+import com.example.mohammad.studentpa.reminders.LocalData;
 import com.example.mohammad.studentpa.schedule.Adapters.ScheduleRecyclerViewAdapter;
 import com.example.mohammad.studentpa.schedule.TakeSchedule;
 
@@ -78,7 +79,9 @@ public class ThursdayFragment extends Fragment {
 //                adapter.setClass(scheduleEntities);
 //            }
 //        });
-        scheduleViewModel.getAllSchedulesByDay(dayOfWeek).observe(this, new Observer<List<ScheduleEntity>>() {
+        LocalData localData = new LocalData(getActivity());
+        int userID = localData.get_user();
+        scheduleViewModel.getAllSchedulesByDay(dayOfWeek, userID).observe(this, new Observer<List<ScheduleEntity>>() {
             @Override
             public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
                 //Update the cached copy of words in the adapter

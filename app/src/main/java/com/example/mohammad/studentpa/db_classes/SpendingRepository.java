@@ -11,40 +11,24 @@ import java.util.List;
 
 public class SpendingRepository {
     private SpendingDao repoSpendingDao;
-//    private LiveData<List<SpendingEntity>> allSpendingDates;
-//    private LiveData<List<SpendingEntity>> allSpendingAmounts;
-//    private LiveData<List<SpendingEntity>> allSpendingDetails;
     private LiveData<List<SpendingEntity>> allSpending;
 
 
     public SpendingRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoSpendingDao = db.spendingDao();
-//        allSpendingDates = repoSpendingDao.getAllSpendingDates();
-//        allSpendingAmounts = repoSpendingDao.getAllSpendingAmounts();
-//        allSpendingDetails = repoSpendingDao.getAllSpendingDetails();
         allSpending = repoSpendingDao.getAllSpendingItems();
     }
-
-//    //For abstraction, we wrap the getters as follows
-//    public LiveData<List<SpendingEntity>> getAllSpendingDates (){
-//        return allSpendingDates;
-//    }
-//
-//    public LiveData<List<SpendingEntity>> getAllSpendingAmounts (){
-//        return allSpendingAmounts;
-//    }
-//
-//    public LiveData<List<SpendingEntity>> getAllSpendingDetails (){
-//        return allSpendingDetails;
-//    }
 
     public LiveData<List<SpendingEntity>> getAllSpending() {
         return allSpending;
     }
 
-    public LiveData<List<SpendingEntity>> getAllSpendingbyDate(String date) {
-        return repoSpendingDao.getAllSpendingItemsByDate(date);
+    public LiveData<List<SpendingEntity>> getAllSpendingbyDate(String date, int userID) {
+        return repoSpendingDao.getAllSpendingItemsByDate(date, userID);
+    }
+    public LiveData<List<SpendingEntity>> getAllSpendingbyUser(int userID) {
+        return repoSpendingDao.getAllSpendingItemsByUser(userID);
     }
 
     public void insertSpending (SpendingEntity spendingEntity) {

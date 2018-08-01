@@ -17,7 +17,7 @@ import static android.content.Context.ALARM_SERVICE;
 
 public class NotificationScheduler
 {
-    private static final int REMINDER_REQUEST_CODE = generateRandom();
+    private static final int REMINDER_REQUEST_CODE = 0;
     public static final String TAG="NotificationScheduler";
 
     public static void setReminder(Context context,Class<?> cls,int hour, int min,
@@ -89,7 +89,7 @@ public class NotificationScheduler
         ReminderNotification reminderNotification = new ReminderNotification(context);
         NotificationCompat.Builder nb;
         nb = reminderNotification.getChannelNotification(title, content, pendingIntent);
-        reminderNotification.getManager().notify(REMINDER_REQUEST_CODE, nb.build());
+        reminderNotification.getManager().notify(generateRandom(), nb.build());
 
     }
 

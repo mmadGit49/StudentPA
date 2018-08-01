@@ -71,8 +71,9 @@ public class Reminders extends Fragment {
                 new ArrayList<ReminderEntity>());
         recyclerView.setAdapter(adapter);
         //where the db gets involved
+        LocalData localData = new LocalData(getActivity());
         reminderViewModel = ViewModelProviders.of(this).get(ReminderViewModel.class);
-        reminderViewModel.getAllReminders().observe(this, new Observer<List<ReminderEntity>>() {
+        reminderViewModel.getAllRemindersByID(localData.get_user()).observe(this, new Observer<List<ReminderEntity>>() {
             @Override
             public void onChanged(@Nullable List<ReminderEntity> reminderEntities) {
                 adapter.setReminders(reminderEntities);

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
@@ -31,10 +32,16 @@ public class TakeMilestoneNote extends AppCompatActivity {
         setContentView(R.layout.note_layout_milestones);
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDetails = findViewById(R.id.editTextMilestone);
+        TextView textViewUser = findViewById(R.id.textViewCurrentUser);
+
         FloatingActionButton fab = findViewById(R.id.fab_save);
 
         milestoneViewModel = ViewModelProviders.of(TakeMilestoneNote.this).
                 get(MilestoneViewModel.class);
+
+        final LocalData localData = new LocalData(this);
+//        String currentUser = Integer.toString(localData.get_user());
+        textViewUser.setText(localData.get_name());
 
         if(getIntent().hasExtra("mileID")){
 
@@ -52,12 +59,11 @@ public class TakeMilestoneNote extends AppCompatActivity {
                             !TextUtils.isEmpty(editTextTitle.getText().toString() )  ){
                         String noteTitle = editTextTitle.getText().toString();
                         String noteDetails = editTextDetails.getText().toString();
-                        LocalData localData = new LocalData(TakeMilestoneNote.this);
-                        int user = localData.get_user();
+                        int userID = localData.get_user();
 
                         //To update data to the db via the ViewModel
                         milestoneViewModel.update
-                                (new MilestoneEntity(mileID, noteTitle, noteDetails, user));
+                                (new MilestoneEntity(mileID, noteTitle, noteDetails, userID));
 
                         Toast.makeText(getApplicationContext(), "Milestone updated!",
                                 Toast.LENGTH_SHORT).show();
@@ -75,11 +81,9 @@ public class TakeMilestoneNote extends AppCompatActivity {
 
                         String noteTitle = editTextTitle.getText().toString();
                         String noteDetails = editTextDetails.getText().toString();
-                        LocalData localData = new LocalData(TakeMilestoneNote.this);
-                        int user = localData.get_user();//For current user
-
+                        int userID = localData.get_user();
                         //To save data to the db via the ViewModel
-                        milestoneViewModel.insert(new MilestoneEntity(noteTitle, noteDetails, user));
+                        milestoneViewModel.insert(new MilestoneEntity(noteTitle, noteDetails, userID));
                         Toast.makeText(getApplicationContext(), "Milestone saved!",
                                 Toast.LENGTH_SHORT).show();
                     }

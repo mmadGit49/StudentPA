@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        stayLoggedIn();
-
+//        stayLoggedIn();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -70,10 +69,14 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
 
+        //To display the current user in  navigation bar
         TextView currentUser = headerView.findViewById(R.id.textViewUser);
-        currentUser.setText(SavedUserLogin.getUserName(MainActivity.this));
+        LocalData localData = new LocalData(this);
+        currentUser.setText(localData.get_name());
 
     }
+
+    //change fragment according to what user selects
     public void replaceFrag(Fragment fragment){//to replace the selected fragment
         if (fragment != null) {
             Log.d(TAG, "replaceFrag: started");
@@ -153,7 +156,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String stringDate= dayOfMonth + " / " + month + " / " + year;
+        String stringDate= dayOfMonth + " / " + (month + 1) + " / " + year;
         LocalData localData = new LocalData(this);
         localData.set_date(stringDate);
     }
@@ -163,11 +166,10 @@ public class MainActivity extends AppCompatActivity
         boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 
-        if (isFirstRun) {
+        if (isFirstRun) {//display this info if run for the first time
             Toast.makeText(this, "Welcome! " +
                     "To begin, open navigation drawer and select a category", Toast.LENGTH_LONG).show();
         }
-
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", false).apply();
 

@@ -27,7 +27,6 @@ public class MilestoneViewModel extends AndroidViewModel {
         return milestoneRepository.getAllMilestonesPerUser(userID);
     }
 
-
     //Again, for abstraction
     public void insert(MilestoneEntity milestoneEntity) {
         milestoneRepository.insertMilestone(milestoneEntity);

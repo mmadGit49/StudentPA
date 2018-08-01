@@ -103,11 +103,11 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                             int year = localData.get_year();
                             localData.set_title(reminderTitle);
                             localData.set_details(reminderDetails);
-                            int user = localData.get_user();
+                            int userID = localData.get_user();
 
                             reminderViewModel.update(new ReminderEntity
                                     (remindID, reminderTitle, reminderDetails, reminderDate,
-                                            reminderTime, hour, min, day, month, year, user));
+                                            reminderTime, hour, min, day, month, year, userID));
 
                         Intent reminderIntent = new Intent(TakeReminder.this, AlarmReceiver.class);
                         reminderIntent.putExtra("remindID", remindID);
@@ -159,12 +159,11 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                             int year = localData.get_year();
                             localData.set_title(reminderTitle);
                             localData.set_details(reminderDetails);
-                            int user = localData.get_user();
-
+                            int userID = localData.get_user();
 
                         reminderViewModel.insert(new ReminderEntity
                                     (reminderTitle, reminderDetails, reminderDate, reminderTime,
-                                            hour, min, day, month, year, user));
+                                            hour, min, day, month, year, userID));
 
                         NotificationScheduler.setReminder(TakeReminder.this, AlarmReceiver.class,
                                 localData.get_hour(), localData.get_min(), localData.get_day(),
@@ -202,7 +201,7 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String stringDate = dayOfMonth + " / " + month + " / " + year;
+        String stringDate = dayOfMonth + " / " + (month + 1) + " / " + year;
         textViewSetReminderDate.setText(stringDate);
         localData.set_day(dayOfMonth);
         localData.set_month(month);

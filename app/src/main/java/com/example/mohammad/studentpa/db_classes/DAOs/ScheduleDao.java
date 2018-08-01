@@ -15,15 +15,15 @@ import java.util.List;
 
 @Dao
 public interface ScheduleDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertSchedule(ScheduleEntity scheduleEntity);
 
     @Query("SELECT * FROM scheduleentity")
     LiveData<List<ScheduleEntity>> getAllSchedules();
 
-    @Query("SELECT * FROM scheduleentity WHERE day_of_week = :dayOfWeek")//For specific day
-    LiveData<List<ScheduleEntity>> getAllSchedulesSpecificDay(String dayOfWeek);
+    //For specific day, specific user
+    @Query("SELECT * FROM scheduleentity WHERE day_of_week = :dayOfWeek AND userID = :userID")
+    LiveData<List<ScheduleEntity>> getAllSchedulesSpecificDay(String dayOfWeek, int userID);
 
     //For specific day, to display respectively on fragments
     @Query("SELECT scheduleID, day_of_week, userID FROM scheduleentity WHERE scheduleID = :schedID")
@@ -34,5 +34,5 @@ public interface ScheduleDao {
     void update(ScheduleEntity scheduleEntity);//Update the table
 
     @Delete
-    void delete(ScheduleEntity scheduleEntity);//Delete the row passed to param, I guess?*/
+    void delete(ScheduleEntity scheduleEntity);//Delete the row passed to param*/
 }

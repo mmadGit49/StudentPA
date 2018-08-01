@@ -95,10 +95,10 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                                     String duration = editTextSchedDuration.getText().toString();
                                     String day = scheduleEntities.get(0).getDayOfWeek();
                                     LocalData localData = new LocalData(TakeSchedule.this);
-                                    int user = localData.get_user();
+                                    int userID = localData.get_user();
                                     //To save data to the db via the ViewModel
                                     scheduleViewModel.update(new ScheduleEntity(schedID, scheduleTitle,
-                                            day, scheduleTime, duration, optionalDate, user));
+                                            day, scheduleTime, duration, optionalDate, userID));
                                     Toast.makeText(getApplicationContext(), "Item updated!",
                                             Toast.LENGTH_SHORT).show();
                                 }
@@ -132,8 +132,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                         String optionalDate = textViewScheduleDate.getText().toString();
                         String duration = editTextSchedDuration.getText().toString();
                         LocalData localData = new LocalData(TakeSchedule.this);
-                        int user = localData.get_user();
-
+                        int userID = localData.get_user();
 
                         Bundle dayBundle = getIntent().getExtras();
                         String day;
@@ -141,7 +140,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
                             day = dayBundle.getString("dayOfWeek");
                             //To save data to the db via the ViewModel
                             scheduleViewModel.insert(new ScheduleEntity(scheduleTitle, day,
-                                    scheduleTime, duration, optionalDate, user));
+                                    scheduleTime, duration, optionalDate, userID));
                         }
                         //To save data to the db via the ViewModel
                         Toast.makeText(getApplicationContext(), "Item saved!",
@@ -168,7 +167,7 @@ public class TakeSchedule extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String stringDate = dayOfMonth + " / " + month + " / " + year;
+        String stringDate = dayOfMonth + " / " + (month + 1) + " / " + year;
         textViewScheduleDate.setText(stringDate);
     }
 

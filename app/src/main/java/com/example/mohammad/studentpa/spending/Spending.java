@@ -89,6 +89,7 @@ public class Spending extends Fragment implements DatePickerDialog.OnDateSetList
             public void onClick(View v) {
                 showDatePickerDialog(v);
                 textViewDate.setText(localData.get_date());
+
             }
         });
 
@@ -109,17 +110,14 @@ public class Spending extends Fragment implements DatePickerDialog.OnDateSetList
                     Toast.makeText(getActivity(), "Required data missing",
                             Toast.LENGTH_SHORT).show();
                 }else{
-
                     String amount = editTextAmount.getText().toString();
                     double amountDouble = Double.parseDouble(amount);
                     String details = editTextAmountDetails.getText().toString();
-                    double total = 0;
-                    String totalSpent = Double.toString(total);
                     String date = localData.get_date();
                     int user = localData.get_user();
 
                     spendingViewModel.insert
-                            (new SpendingEntity(date, amount, details, totalSpent, user));
+                            (new SpendingEntity(date, amountDouble, details, user));
 
                     editTextAmount.setText("");
                     editTextAmountDetails.setText("");
@@ -135,21 +133,20 @@ public class Spending extends Fragment implements DatePickerDialog.OnDateSetList
                 }
         });
 
+        //Calculate total spent
         sumItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    spendingViewModel.getAllSpendingByDate(localData.get_date())
+                    spendingViewModel.getAllSpendingByDate(localData.get_date(), localData.get_user())
                             .observe(getActivity(), new Observer<List<SpendingEntity>>() {
                     @Override
                     public void onChanged(@Nullable List<SpendingEntity> spendingEntities) {
-                        String storedAmount;
-                        float amount;
+                        double storedAmount;
                         float total = 0;
                         if(spendingEntities != null){
                             for(int i = 0; i < spendingEntities.size(); i++){
                                 storedAmount = spendingEntities.get(i).getSpendAmount();
-                                amount = Float.parseFloat(storedAmount);
-                                total += amount;
+                                total += storedAmount;
                             }
 
                             localData.set_amount(total);
@@ -176,7 +173,7 @@ public class Spending extends Fragment implements DatePickerDialog.OnDateSetList
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String stringDate= dayOfMonth + " / " + month + " / " + year;
+        String stringDate= dayOfMonth + " / " + (month + 1) + " / " + year;
     }
 
     public void initRecyclerView(){
@@ -187,7 +184,7 @@ public class Spending extends Fragment implements DatePickerDialog.OnDateSetList
         recyclerView.setAdapter(adapter);
 
         spendingViewModel = ViewModelProviders.of(this).get(SpendingViewModel.class);
-        spendingViewModel.getAllSpending().observe(this, new Observer<List<SpendingEntity>>() {
+        spendingViewModel.getAllSpendingByUser(localData.get_user()).observe(this, new Observer<List<SpendingEntity>>() {
             @Override
             public void onChanged(@Nullable List<SpendingEntity> spendingEntities) {
                 //Update the cached copy of words in the adapter

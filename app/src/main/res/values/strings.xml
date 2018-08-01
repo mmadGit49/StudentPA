@@ -35,6 +35,8 @@
     <string name="Title_header">Title</string>
     <string name="text_header">Enter Text</string>
     <string name="spending_date">Date</string>
+    <string name="user">User</string>
+
     <!--FOR SPENDING MODULE-->
     <string name="spending_date_format">Date e.g. 01/01/1970</string>
     <string name="spending_amount">Amount spent</string>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
+import com.example.mohammad.studentpa.reminders.LocalData;
 
 import java.util.List;
 
@@ -44,6 +45,8 @@ public class MilestoneRecyclerViewAdapter
         if(milestones != null) {
             holder.textViewTitle.setText(milestones.get(position).getMilestoneTitle());
             holder.textViewMilestone.setText(milestones.get(position).getMilestoneDetails());
+            LocalData localData = new LocalData(context);
+            holder.textViewCurrentUser.setText(localData.get_name());
             holder.milestoneLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,6 +96,7 @@ public class MilestoneRecyclerViewAdapter
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textViewTitle;
         TextView textViewMilestone;
+        TextView textViewCurrentUser;
         LinearLayout milestoneLayout;
 
         public ViewHolder(View itemView) {
@@ -100,6 +104,7 @@ public class MilestoneRecyclerViewAdapter
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewMilestone = itemView.findViewById(R.id.textViewMilestone);
             milestoneLayout = itemView.findViewById(R.id.recyclerview_note_display);
+            textViewCurrentUser = itemView.findViewById(R.id.textViewCurrentUserDisplay);
         }
     }
 

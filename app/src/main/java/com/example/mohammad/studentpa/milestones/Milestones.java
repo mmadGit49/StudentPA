@@ -23,8 +23,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
-import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
+import com.example.mohammad.studentpa.db_classes.UserViewModel;
+import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 import com.example.mohammad.studentpa.reminders.LocalData;
 
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class Milestones extends Fragment {
 
     private View mileView;
     private MilestoneViewModel milestoneViewModel;
+    private UserViewModel userViewModel;
+
 
     // public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private static final String TAG = "milestone fragment";
@@ -85,11 +88,20 @@ public class Milestones extends Fragment {
 //                Log.i("##############",milestoneEntities.size()+"");
 //            }
 //        });
-
-        //FIXME: ONLY SHOW ITEMS FOR CURRENT USER
-
+//
+//        LocalData local = new LocalData(getActivity());
+//        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+//        userViewModel.getUserByID(local.get_user()).observe(this, new Observer<List<User>>() {
+//            @Override
+//            public void onChanged(@Nullable List<User> users) {
+//                adapter.setMilestone(users.get(0).getMilestoneEntities());
+//                Log.i("##############",users.get(0).getFirstName()+"");
+//
+//            }
+//        });
         LocalData local = new LocalData(getActivity());
-        milestoneViewModel.getAllMilestonesPerUser(local.get_user()).observe(this, new Observer<List<MilestoneEntity>>() {
+        milestoneViewModel.getAllMilestonesPerUser(local.get_user()).observe(this,
+                new Observer<List<MilestoneEntity>>() {
             @Override
             public void onChanged(@Nullable List<MilestoneEntity> milestoneEntities) {
                 adapter.setMilestone(milestoneEntities);
@@ -108,8 +120,7 @@ public class Milestones extends Fragment {
                     }
 
                     @Override
-                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
-                                         int direction) {
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                         int position = viewHolder.getAdapterPosition();
                         final MilestoneEntity milestone = adapter.getMilestonesAtPosition(position);
 

@@ -20,6 +20,8 @@ public class LocalData {
     private static final String dateKey= "date";
     private static final String amountKey= "amount";
     private static final String userKey = "user";
+    private static final String nameKey= "name";
+
 
     public LocalData(Context context) {
         this.appSharedPrefs = context.getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
@@ -151,4 +153,13 @@ public class LocalData {
         prefsEditor.commit();
     }
 
+    //For user
+    public String get_name() {
+        return appSharedPrefs.getString(nameKey, "User");
+    }
+
+    public void set_name(String name) {
+        prefsEditor.putString(nameKey, name);
+        prefsEditor.commit();
+    }
 }

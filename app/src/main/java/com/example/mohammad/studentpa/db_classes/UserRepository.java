@@ -13,28 +13,33 @@ public class UserRepository {
 
     UserDao repoUserDao;
     private LiveData<List<User>> allUsers;
-    private LiveData<List<User>> allUserEmails;
-    private LiveData<List<User>> allUserPasswords;
+//    private LiveData<List<User>> allUserEmails;
+//    private LiveData<List<User>> allUserPasswords;
 
-
-    public UserRepository(Application application) {
+    UserRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoUserDao = db.userDao();
         allUsers = repoUserDao.getAllUsers();
-        allUserEmails = repoUserDao.getUserEmail();
-        allUserPasswords = repoUserDao.getUserPassword();
-
+//        allUserEmails = repoUserDao.getUserEmail();
+//        allUserPasswords = repoUserDao.getUserPassword();
     }
 
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
     }
-    public LiveData<List<User>> getAllUserEmails() {
-        return allUserEmails;
+//    public LiveData<List<User>> getAllUserEmails() {
+//        return allUserEmails;
+//    }
+//    public LiveData<List<User>> getAllUserPasswords() {
+//        return allUserPasswords;
+//    }
+//    public LiveData<List<User>> getAllUsersbyID(int userID) {
+//        return repoUserDao.getAllUsersByID(userID);
+//    }
+    public LiveData<User> getUserCredentials(String email, String password){
+        return repoUserDao.getUserCredentialsLogin(email, password);
     }
-    public LiveData<List<User>> getAllUserPasswords() {
-        return allUserPasswords;
-    }
+
 
     public void insert (User user) {
         //starts the async task which, in this case, inserts a user to the db
@@ -44,10 +49,6 @@ public class UserRepository {
     public void delete (User user) {
         //starts the async task which, in this case, deletes a user from the db
         new UserRepository.deleteAsyncTask(repoUserDao).execute(user);
-    }
-
-    public LiveData<User> getUserCredentials(String email, String password){
-        return repoUserDao.getUserCredentialsLogin(email, password);
     }
 
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {

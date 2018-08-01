@@ -8,11 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity (foreignKeys = @ForeignKey(entity = User.class,
-        parentColumns = "userID",
-        childColumns = "milestoneID",
-        onUpdate = CASCADE,
-        onDelete = CASCADE))
+@Entity
 
 public class MilestoneEntity {
 
@@ -59,7 +55,9 @@ public class MilestoneEntity {
         this.milestoneDetails = milestoneDetails;
     }
 
-    //************************************FOREIGN KEYS*********************************************
+    //*************************************FOREIGN KEYS*********************************************
+    @ForeignKey(entity = User.class, parentColumns = "userID", childColumns = "milestoneID",
+            onUpdate = CASCADE, deferred = true)
     @ColumnInfo(name = "userID")
     private int userID;
     public int getUserID() {
@@ -68,5 +66,4 @@ public class MilestoneEntity {
     public void setUserID(int userID) {
         this.userID = userID;
     }
-
 }

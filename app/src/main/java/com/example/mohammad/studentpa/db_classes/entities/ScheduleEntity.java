@@ -10,11 +10,7 @@ import io.reactivex.annotations.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity (foreignKeys = @ForeignKey(entity = User.class,
-        parentColumns = "userID",
-        childColumns = "scheduleID",
-        onUpdate = CASCADE,
-        onDelete = CASCADE))
+@Entity
 
 public class ScheduleEntity {
 
@@ -26,6 +22,7 @@ public class ScheduleEntity {
         this.duration = duration;
         this.date = date;
         this.userID = userID;
+
     }
 
     @Ignore
@@ -98,6 +95,8 @@ public class ScheduleEntity {
     }
 
     //************************************FOREIGN KEYS*********************************************
+    @ForeignKey(entity = User.class, parentColumns = "userID", childColumns = "scheduleID",
+            onUpdate = CASCADE, deferred = true)
     @ColumnInfo(name = "userID")
     private int userID;
     public int getUserID() {
