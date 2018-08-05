@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
-import com.example.mohammad.studentpa.reminders.LocalData;
+import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.schedule.Adapters.ScheduleRecyclerViewAdapter;
 import com.example.mohammad.studentpa.schedule.TakeSchedule;
 

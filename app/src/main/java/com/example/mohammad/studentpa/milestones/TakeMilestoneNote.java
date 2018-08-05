@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
-import com.example.mohammad.studentpa.reminders.LocalData;
+import com.example.mohammad.studentpa.util.LocalData;
 
 public class TakeMilestoneNote extends AppCompatActivity {
 

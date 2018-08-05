@@ -26,7 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.mohammad.studentpa.MainActivity;
+import com.example.mohammad.studentpa.util.LocalData;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -52,14 +52,16 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (context != null) {
             LocalData localData = new LocalData(context);
             if (intent.hasExtra("remindID")) {
-                NotificationScheduler.showNotification(context, MainActivity.class,
+                NotificationScheduler.showNotification(context, ReminderInfo.class,
                         intent.getStringExtra("title"), intent.getStringExtra("details"));
+                Intent infoIntent = new Intent(context, ReminderInfo.class);
+                infoIntent.putExtra("remindID", intent.getStringExtra("remindID"));
             } else {
-                NotificationScheduler.showNotification(context, MainActivity.class,
+                NotificationScheduler.showNotification(context, ReminderInfo.class,
                         localData.get_title(), localData.get_details());
             }
         }else{
-            NotificationScheduler.showNotification(context, MainActivity.class,
+            NotificationScheduler.showNotification(context, ReminderInfo.class,
                    "Talk to me" , "Watch them now?");
         }
 

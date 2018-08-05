@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -24,10 +25,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.milestones.Milestones;
-import com.example.mohammad.studentpa.reminders.LocalData;
+import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.reminders.Reminders;
 import com.example.mohammad.studentpa.schedule.Schedule;
-import com.example.mohammad.studentpa.spending.Spending;
+import com.example.mohammad.studentpa.spending.Budget;
 import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class MainActivity extends AppCompatActivity
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        stayLoggedIn();
+
+        stayLoggedIn();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -72,7 +75,8 @@ public class MainActivity extends AppCompatActivity
         //To display the current user in  navigation bar
         TextView currentUser = headerView.findViewById(R.id.textViewUser);
         LocalData localData = new LocalData(this);
-        currentUser.setText(localData.get_name());
+        String user= "Current User: " + localData.get_name();
+        currentUser.setText(user);
 
     }
 
@@ -96,6 +100,18 @@ public class MainActivity extends AppCompatActivity
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+        }
+        int id = item.getItemId();
+
+        if (id == R.id.Info) {
+            //TODO: Insert help here and menu
+            return true;
+        }else if(id == R.id.Logout){
+            Intent logoutIntent = new Intent(MainActivity.this, Login.class);
+            startActivity(logoutIntent);
+            SavedUserLogin.clearUserName(MainActivity.this);
+            finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -145,13 +161,20 @@ public class MainActivity extends AppCompatActivity
             fragment= new Reminders();
             replaceFrag(fragment);
             Toast.makeText(this, "Reminders!", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.Spending) {
-            fragment= new Spending();
+        } else if (id == R.id.Budget) {
+            fragment= new Budget();
             replaceFrag(fragment);
-            Toast.makeText(this, "Spending!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Budget!", Toast.LENGTH_SHORT).show();
         }
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.extra_options, menu);
+        return true;
+    }
+
 
 
     @Override
@@ -180,6 +203,7 @@ public class MainActivity extends AppCompatActivity
         if(SavedUserLogin.getUserName(MainActivity.this).length() == 0){
             Intent loginIntent = new Intent(MainActivity.this, Login.class);
             startActivity(loginIntent);
+            finish();
         }
     }
 

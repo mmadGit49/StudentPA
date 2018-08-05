@@ -36,6 +36,7 @@ public class NotificationScheduler
         // cancel already scheduled reminders
         cancelReminder(context,cls);
 
+        //if time is set on already elapsed time set reminder to next day
         if(setCalendar.before(calendar))
             setCalendar.add(Calendar.DATE,1);
 

@@ -14,11 +14,9 @@
         <item android:id= "@+id/Reminders"
             android:icon="@drawable/ic_reminders"
             android:title= "@string/Reminders"/>
-        <item android:id="@+id/Spending"
+        <item android:id="@+id/Budget"
             android:icon="@drawable/ic_spending"
-            android:title="@string/Spending" />
+            android:title="@string/Budget" />
     </group>
-
-
 
 </menu>

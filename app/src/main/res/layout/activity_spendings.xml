@@ -1,4 +1,4 @@
-<!--<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,20 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="100"
         android:background="@drawable/list_view_design"
         android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-
 
         <TextView
             android:id="@+id/textViewSpendDate"
@@ -141,120 +134,73 @@
         android:background="@drawable/list_view_design"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_spending_items"
-            android:layout_margin="8dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/textViewDateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="20"
+                android:fontFamily="sans-serif-smallcaps"
+                android:padding="8dp"
+                android:text="@string/spending_dateTitle"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewAmountTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="30"
+                android:fontFamily="sans-serif-smallcaps"
+                android:padding="8dp"
+                android:text="@string/spending_amountTitle"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="50"
+                android:fontFamily="sans-serif-smallcaps"
+                android:padding="8dp"
+                android:text="@string/spending_detailsTitle"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_spending_items"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_done_black_24dp" />
+
+        </android.support.design.widget.CoordinatorLayout>
 
 
     </LinearLayout>
-
-</LinearLayout>-->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/list_view_design"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-
-    <TextView
-        android:id="@+id/textViewCurrentDailyBudget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/budget"
-        android:padding="8dp"
-        android:layout_margin="8dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textViewWeeklyBudget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/weekly_budget"
-        android:padding="8dp"
-        android:layout_margin="8dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textViewMonthlyBudget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/monthly_budget"
-        android:padding="8dp"
-        android:layout_margin="8dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textViewCurrentlySpent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/spending_total"
-        android:padding="8dp"
-        android:layout_margin="8dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textViewAlertBudget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="8dp"
-        android:text="@string/alert_budget"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/editTextDailyBudget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:ems="10"
-        android:hint="@string/daily_budget"
-        android:inputType="numberDecimal"
-        android:padding="8dp"
-        android:textAlignment="center" />
-
-    <Button
-        android:id="@+id/buttonSetBudget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_margin="8dp"
-        android:text="@string/update_budget" />
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_spend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_spending" />
-
-        <TextView
-            android:id="@+id/textViewInform"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inform_budget"
-            android:textAlignment="center" />
-    </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

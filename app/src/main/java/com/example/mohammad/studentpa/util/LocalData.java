@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.reminders;
+package com.example.mohammad.studentpa.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,18 +9,24 @@ public class LocalData {
 
     private SharedPreferences appSharedPrefs;
     private SharedPreferences.Editor prefsEditor;
-
+    //Reminders
     private static final String hour="hour";
     private static final String min="min";
     private static final String day="day";
     private static final String month="month";
     private static final String year="year";
+    private static final String remindKey= "remindID";
     private static final String titleKey= "title";
     private static final String detailsKey= "details";
+    //Budget
     private static final String dateKey= "date";
     private static final String amountKey= "amount";
+    //Users
     private static final String userKey = "user";
     private static final String nameKey= "name";
+    //Budget
+    private static final String budgetKey= "budget";
+
 
 
     public LocalData(Context context) {
@@ -102,6 +108,17 @@ public class LocalData {
     }
 
     //For notification
+
+    public int get_remindID()
+    {
+        return appSharedPrefs.getInt(remindKey, 0);
+    }
+
+    public void set_remindID(int h)
+    {
+        prefsEditor.putInt(remindKey, h);
+        prefsEditor.commit();
+    }
     public String get_title() {
         return appSharedPrefs.getString(titleKey, "placeholder");
     }
@@ -162,4 +179,16 @@ public class LocalData {
         prefsEditor.putString(nameKey, name);
         prefsEditor.commit();
     }
+
+    //Set and retrieve daily budget
+    public float get_budget()
+    {
+        return appSharedPrefs.getFloat(budgetKey, 0);
+    }
+
+    public void set_budget(float m) {
+        prefsEditor.putFloat(budgetKey, m);
+        prefsEditor.commit();
+    }
+
 }

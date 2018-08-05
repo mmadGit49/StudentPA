@@ -13,7 +13,7 @@
         android:id="@+id/textViewSpendDateView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="30"
+        android:layout_weight="35"
         android:ems="10"
         android:padding="8dp"
         android:textSize="14sp" />
@@ -22,7 +22,7 @@
         android:id="@+id/txtViewSpendAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="20"
+        android:layout_weight="25"
         android:ems="10"
         android:padding="8dp"
         android:textSize="14sp" />
@@ -31,7 +31,7 @@
         android:id="@+id/txtViewSpendDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_weight="40"
         android:ems="10"
         android:padding="8dp"
         android:textSize="14sp" />

@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.example.mohammad.studentpa.db_classes.UserViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.User;
-import com.example.mohammad.studentpa.reminders.LocalData;
+import com.example.mohammad.studentpa.util.LocalData;
+import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class Login extends AppCompatActivity {
     private EditText username;
@@ -29,6 +30,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        checkLogin();
 
         Button register = findViewById(R.id.buttonSignUp);
         final Button login = findViewById(R.id.buttonLogin);
@@ -69,6 +72,7 @@ public class Login extends AppCompatActivity {
                                         int userID = user.getUserID();
                                         localData.set_user(userID);
                                         startMain(view, checkEmail);
+                                        finish();
                                         Toast.makeText(Login.this, "Welcome " + user.getFirstName(),
                                                 Toast.LENGTH_SHORT).show();
                                         localData.set_name(user.getFirstName());
@@ -102,6 +106,14 @@ public class Login extends AppCompatActivity {
         Intent register= new Intent(this, Registration.class);
         startActivity(register);
         finish();//prevents user from returning to this screen
+    }
+
+    public void checkLogin() {
+        if (SavedUserLogin.getUserName(Login.this).length() != 0) {
+            Intent loginIntent = new Intent(Login.this, MainActivity.class);
+            startActivity(loginIntent);
+            finish();
+        }
     }
 
 }

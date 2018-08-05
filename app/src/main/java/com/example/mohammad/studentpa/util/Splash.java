@@ -7,7 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.example.mohammad.studentpa.Login;
+import com.example.mohammad.studentpa.MainActivity;
 import com.example.mohammad.studentpa.R;
 
 public class Splash extends AppCompatActivity {
@@ -19,7 +19,7 @@ public class Splash extends AppCompatActivity {
         Animation splashAnim= AnimationUtils.loadAnimation(this, R.anim.mytransition);
         imageView= findViewById(R.id.imageViewLogo);//finds the logo
         imageView.startAnimation(splashAnim);//starts the animation transition
-        final Intent intent= new Intent(this, Login.class);
+        final Intent intent= new Intent(this, MainActivity.class);
 
         /**
          * A thread is a thread of execution in a program.

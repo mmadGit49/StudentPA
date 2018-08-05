@@ -22,6 +22,7 @@ import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.ReminderViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ReminderEntity;
 import com.example.mohammad.studentpa.util.DatePickerFragment;
+import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.util.TimePickerFragment;
 
 //For the not_reminder_layout xml layout
@@ -101,6 +102,7 @@ public class TakeReminder extends AppCompatActivity implements DatePickerDialog.
                             int day = localData.get_day();
                             int month = localData.get_month();
                             int year = localData.get_year();
+                            localData.set_remindID(remindID);
                             localData.set_title(reminderTitle);
                             localData.set_details(reminderDetails);
                             int userID = localData.get_user();

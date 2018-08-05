@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.entities.ReminderEntity;
+import com.example.mohammad.studentpa.util.LocalData;
 
 import java.util.List;
 
@@ -41,7 +42,10 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolderRemind: called.");//log tag
         if(reminders != null){
-            //TODO: Possibly remove details and set text to "Click to view details"
+            //Dirty quick fix to set reminderID
+            LocalData localData = new LocalData(context);
+            localData.set_remindID(reminders.get(holder.getAdapterPosition()).getReminderID());
+
             holder.textViewReminderTitle.setText(reminders.get(position).getReminderTitle());
             holder.textViewReminderDetail.setText(R.string.Alert_details);
             holder.textViewReminderDate.setText(reminders.get(position).getReminderDate());
