@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="4dp"
+        tools:context=".util.InfoPopup">
+
+        <TextView
+            android:id="@+id/textViewHowTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/how_to"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewInfo1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/information1" />
+
+        <TextView
+            android:id="@+id/textViewInfo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2sp"
+            android:padding="8dp"
+            android:text="@string/information2"
+            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/textViewInfo3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/information3" />
+
+        <TextView
+            android:id="@+id/textViewInfo4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/information4"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</ScrollView>

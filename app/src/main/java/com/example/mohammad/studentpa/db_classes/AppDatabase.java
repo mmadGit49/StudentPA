@@ -6,11 +6,13 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.example.mohammad.studentpa.db_classes.DAOs.BudgetDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.MilestoneDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.ReminderDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.ScheduleDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.SpendingDao;
 import com.example.mohammad.studentpa.db_classes.DAOs.UserDao;
+import com.example.mohammad.studentpa.db_classes.entities.BudgetEntity;
 import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 import com.example.mohammad.studentpa.db_classes.entities.ReminderEntity;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
@@ -22,7 +24,7 @@ import com.example.mohammad.studentpa.db_classes.entities.User;
                     ScheduleEntity.class,
                     SpendingEntity.class,
                     ReminderEntity.class,
-                    /*MondaySchedule.class*/}, version= 2, exportSchema = false)
+                    BudgetEntity.class}, version= 2, exportSchema = false)
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
@@ -30,8 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ScheduleDao scheduleDao();
     public abstract ReminderDao reminderDao();
     public abstract SpendingDao spendingDao();
-//    public abstract MondayDao mondayDao();
-
+    public abstract BudgetDao budgetDao();
 
     private static AppDatabase DB_INSTANCE;//Database instance
 

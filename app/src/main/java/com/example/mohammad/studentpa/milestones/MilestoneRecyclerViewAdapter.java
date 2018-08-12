@@ -81,7 +81,6 @@ public class MilestoneRecyclerViewAdapter
         return milestones.get(position);
     }
 
-
     @Override
     public int getItemCount() {
         // getItemCount() is called many times, and when it is first called,

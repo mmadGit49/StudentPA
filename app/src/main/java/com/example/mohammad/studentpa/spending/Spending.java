@@ -24,10 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
+import com.example.mohammad.studentpa.db_classes.BudgetViewModel;
 import com.example.mohammad.studentpa.db_classes.SpendingViewModel;
+import com.example.mohammad.studentpa.db_classes.entities.BudgetEntity;
 import com.example.mohammad.studentpa.db_classes.entities.SpendingEntity;
-import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.util.DatePickerFragment;
+import com.example.mohammad.studentpa.util.LocalData;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,9 +42,9 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
     private EditText editTextAmount;
     private EditText editTextAmountDetails;
     private TextView spendingTotal;
-    private FloatingActionButton fab;
 
     private SpendingViewModel spendingViewModel;
+    private BudgetViewModel budgetViewModel;
     private LocalData localData;
 
     @Override
@@ -56,11 +58,11 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
         editTextAmountDetails = findViewById(R.id.editTextSpendDetails);
         textViewDate = findViewById(R.id.textViewSpendDate);
         spendingTotal= findViewById(R.id.textViewTotal);
-        fab = findViewById(R.id.fab_save);
+        FloatingActionButton fab = findViewById(R.id.fab_save);
         Button sumItems = findViewById(R.id.buttonSumItems);
 
         spendingViewModel = ViewModelProviders.of(Spending.this).get(SpendingViewModel.class);
-
+        budgetViewModel = ViewModelProviders.of(Spending.this).get(BudgetViewModel.class);
 
         textViewDate.setText(getDate());
         spendingTotal.setText(R.string.spend_total);
@@ -68,12 +70,13 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
                 @Override
                 public void onClick(View v) {
                     showDatePickerDialog(v);
-                    }
+                }
             });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateTotals();
                 finish();
             }
         });
@@ -117,7 +120,7 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
         sumItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    spendingViewModel.getAllSpendingByDate(localData.get_date(), localData.get_user())
+                    spendingViewModel.getAllSpendingByDate(textViewDate.getText().toString(), localData.get_user())
                             .observe(Spending.this, new Observer<List<SpendingEntity>>() {
                                 @Override
                                 public void onChanged(@Nullable List<SpendingEntity> spendingEntities) {
@@ -128,32 +131,31 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
                                             storedAmount = spendingEntities.get(i).getSpendAmount();
                                             total += storedAmount;
                                         }
-                                        String totalAmount = "Total spent today: " + Float.toString(total);
+                                        String totalAmount = "Total spent "
+                                                +"("
+                                                +textViewDate.getText().toString()
+                                                +") "
+                                                + Float.toString(total);
                                         spendingTotal.setText(totalAmount);
                                     }
                                 }
                             });
-
                 }
             });
-
 
         initRecyclerView();
 
     }
-
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String stringDate= dayOfMonth + " / " + (month + 1) + " / " + year;
         textViewDate.setText(stringDate);
-        localData.set_date(stringDate);
     }
 
     public void initRecyclerView(){
@@ -187,6 +189,7 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
                                          int direction) {
                         int position = viewHolder.getAdapterPosition();
                         final SpendingEntity spendingEntity = adapter.getSpendingAtPosition(position);
+
                         AlertDialog.Builder builder;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             builder = new AlertDialog.Builder(Spending.this,
@@ -198,6 +201,7 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
                                 .setMessage("Are you sure you want to delete?")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+                                        textViewDate.setText(spendingEntity.getSpendDate());
                                         spendingViewModel.delete(spendingEntity);
                                         Toast.makeText(Spending.this,
                                                 "Item deleted!", Toast.LENGTH_SHORT).show();
@@ -222,5 +226,28 @@ public class Spending extends AppCompatActivity implements DatePickerDialog.OnDa
         return day + " / " + (month + 1) + " / " + year;
     }
 
+    public void updateTotals(){
+        spendingViewModel.getAllSpendingByDate(textViewDate.getText().toString(), localData.get_user())
+                .observe(Spending.this, new Observer<List<SpendingEntity>>() {
+                    @Override
+                    public void onChanged(@Nullable List<SpendingEntity> spendingEntities) {
+                        double storedAmount;
+                        float total = 0;
+                        if(spendingEntities != null){
+                            for(int i = 0; i < spendingEntities.size(); i++){
+                                storedAmount = spendingEntities.get(i).getSpendAmount();
+                                total += storedAmount;
+                            }
+                            budgetViewModel.insert(new BudgetEntity(textViewDate.getText().toString(),
+                                    total, localData.get_user()));
+
+                        }else{
+                            budgetViewModel.insert(new BudgetEntity(textViewDate.getText().toString(),
+                                    0, localData.get_user()));
+                        }
+                    }
+                });
+
+    }
 
 }

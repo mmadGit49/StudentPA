@@ -18,9 +18,6 @@ import java.util.List;
 
 public class ReminderInfo extends AppCompatActivity {
 
-    private ReminderViewModel reminderViewModel;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,33 +29,19 @@ public class ReminderInfo extends AppCompatActivity {
         final TextView textViewSetReminderTime = findViewById(R.id.textViewReminderTime);
         FloatingActionButton fab = findViewById(R.id.fab_save_reminder);
 
-        reminderViewModel = ViewModelProviders.of
+        ReminderViewModel reminderViewModel = ViewModelProviders.of
                 (ReminderInfo.this).get(ReminderViewModel.class);
         final LocalData localData = new LocalData(this);
 
-//        if(getIntent().hasExtra("remindID")){
-//            final int remindID = Integer.parseInt(getIntent().getStringExtra("remindID"));
-//            reminderViewModel.getAllRemindersByID(localData.get_user()).observe(this, new Observer<List<ReminderEntity>>() {
-//                @Override
-//                public void onChanged(@Nullable List<ReminderEntity> reminderEntities) {
-//                    textViewReminderTitle.setText(reminderEntities.get(remindID).getReminderTitle());
-//                    textViewReminderDetails.setText(reminderEntities.get(remindID).getReminderDetails());
-//                    textViewSetReminderDate.setText(reminderEntities.get(remindID).getReminderDate());
-//                    textViewSetReminderTime.setText(reminderEntities.get(remindID).getReminderTime());
-//                }
-//            });
-
-
-//        }
-
-        reminderViewModel.getAllRemindersByID(localData.get_user()).observe(this, new Observer<List<ReminderEntity>>() {
+        reminderViewModel.getAllRemindersByID(localData.get_user()).observe(this,
+                new Observer<List<ReminderEntity>>() {
                     @Override
                     public void onChanged(@Nullable List<ReminderEntity> reminderEntities) {
                         int remindID = localData.get_remindID();
-                        textViewReminderTitle.setText(reminderEntities.get(remindID - 1).getReminderTitle());
-                        textViewReminderDetails.setText(reminderEntities.get(remindID - 1).getReminderDetails());
-                        textViewSetReminderDate.setText(reminderEntities.get(remindID - 1).getReminderDate());
-                        textViewSetReminderTime.setText(reminderEntities.get(remindID - 1).getReminderTime());
+                        textViewReminderTitle.setText(reminderEntities.get(remindID).getReminderTitle());
+                        textViewReminderDetails.setText(reminderEntities.get(remindID).getReminderDetails());
+                        textViewSetReminderDate.setText(reminderEntities.get(remindID).getReminderDate());
+                        textViewSetReminderTime.setText(reminderEntities.get(remindID).getReminderTime());
                     }
             });
 

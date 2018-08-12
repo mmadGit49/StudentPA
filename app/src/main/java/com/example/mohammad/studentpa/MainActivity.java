@@ -1,6 +1,5 @@
 package com.example.mohammad.studentpa;
 
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -20,19 +19,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mohammad.studentpa.milestones.Milestones;
-import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.reminders.Reminders;
 import com.example.mohammad.studentpa.schedule.Schedule;
 import com.example.mohammad.studentpa.spending.Budget;
+import com.example.mohammad.studentpa.util.InfoPopup;
+import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.util.SavedUserLogin;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
     private static final String TAG = "MainActivity started";
     private DrawerLayout drawerLayout;
 
@@ -104,13 +103,29 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Info) {
-            //TODO: Insert help here and menu
+            InfoPopup infoPopup = new InfoPopup();
+            infoPopup.show(getSupportFragmentManager(), "Info");
             return true;
         }else if(id == R.id.Logout){
-            Intent logoutIntent = new Intent(MainActivity.this, Login.class);
-            startActivity(logoutIntent);
-            SavedUserLogin.clearUserName(MainActivity.this);
-            finish();
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(MainActivity.this,
+                        android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(MainActivity.this);
+            }
+            builder.setTitle("Log out")
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent logoutIntent = new Intent(MainActivity.this, Login.class);
+                            startActivity(logoutIntent);
+                            SavedUserLogin.clearUserName(MainActivity.this);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null).show();
+
             return true;
         }
 
@@ -173,15 +188,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.extra_options, menu);
         return true;
-    }
-
-
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String stringDate= dayOfMonth + " / " + (month + 1) + " / " + year;
-        LocalData localData = new LocalData(this);
-        localData.set_date(stringDate);
     }
 
     public void runFirstTime(){

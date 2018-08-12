@@ -36,7 +36,7 @@
 
         <!-- Register the Alarm Receiver -->
         <receiver
-            android:name=".reminders.AlarmReceiver"
+            android:name=".util.AlarmReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -44,7 +44,7 @@
         </receiver>
 
         <activity android:name=".spending.Spending" />
-        <activity android:name=".reminders.ReminderInfo"></activity>
+        <activity android:name=".reminders.ReminderInfo" />
     </application>
 
 </manifest>

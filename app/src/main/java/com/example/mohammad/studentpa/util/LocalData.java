@@ -9,6 +9,7 @@ public class LocalData {
 
     private SharedPreferences appSharedPrefs;
     private SharedPreferences.Editor prefsEditor;
+
     //Reminders
     private static final String hour="hour";
     private static final String min="min";
@@ -19,8 +20,11 @@ public class LocalData {
     private static final String titleKey= "title";
     private static final String detailsKey= "details";
     //Budget
-    private static final String dateKey= "date";
     private static final String amountKey= "amount";
+    private static final String weekKey= "weekAmount";
+    private static final String monthKey= "monthAmount";
+
+
     //Users
     private static final String userKey = "user";
     private static final String nameKey= "name";
@@ -42,69 +46,45 @@ public class LocalData {
     {
         return appSharedPrefs.getInt(hour, 0);
     }
-
-    public void set_hour(int h)
-    {
+    public void set_hour(int h) {
         prefsEditor.putInt(hour, h);
         prefsEditor.commit();
     }
-
     // Settings Page Reminder Time (Minutes)
-
     public int get_min()
     {
         return appSharedPrefs.getInt(min, 0);
     }
-
-    public void set_min(int m)
-    {
+    public void set_min(int m) {
         prefsEditor.putInt(min, m);
         prefsEditor.commit();
     }
-
     // Settings Page Reminder Day
-
     public int get_day()
     {
         return appSharedPrefs.getInt(day, 0);
     }
-
-    public void set_day(int m)
-    {
+    public void set_day(int m) {
         prefsEditor.putInt(day, m);
         prefsEditor.commit();
     }
-
     // Settings Page Reminder Month
-
     public int get_month()
     {
         return appSharedPrefs.getInt(month, 0);
     }
-
-    public void set_month(int m)
-    {
+    public void set_month(int m) {
         prefsEditor.putInt(month, m);
         prefsEditor.commit();
     }
-
     // Settings Page Reminder Year
-
     public int get_year()
     {
         return appSharedPrefs.getInt(year, 0);
     }
-
     public void set_year(int m) {
         prefsEditor.putInt(year, m);
         prefsEditor.commit();
-    }
-
-    //Probably useless
-    public void reset() {
-        prefsEditor.clear();
-        prefsEditor.commit();
-
     }
 
     //For notification
@@ -113,16 +93,14 @@ public class LocalData {
     {
         return appSharedPrefs.getInt(remindKey, 0);
     }
-
-    public void set_remindID(int h)
-    {
+    public void set_remindID(int h) {
         prefsEditor.putInt(remindKey, h);
         prefsEditor.commit();
     }
+
     public String get_title() {
         return appSharedPrefs.getString(titleKey, "placeholder");
     }
-
     public void set_title(String title) {
         prefsEditor.putString(titleKey, title);
         prefsEditor.commit();
@@ -132,19 +110,8 @@ public class LocalData {
     public String get_details() {
         return appSharedPrefs.getString(detailsKey, "placeholder");
     }
-
     public void set_details(String details) {
         prefsEditor.putString(detailsKey, details);
-        prefsEditor.commit();
-    }
-
-    //for spending
-    public String get_date() {
-        return appSharedPrefs.getString(dateKey, "placeholder");
-    }
-
-    public void set_date(String date) {
-        prefsEditor.putString(dateKey, date);
         prefsEditor.commit();
     }
 
@@ -152,9 +119,26 @@ public class LocalData {
     {
         return appSharedPrefs.getFloat(amountKey, 0);
     }
-
     public void set_amount(float m) {
         prefsEditor.putFloat(amountKey, m);
+        prefsEditor.commit();
+    }
+
+    public float get_weekAmount()
+    {
+        return appSharedPrefs.getFloat(weekKey, 0);
+    }
+    public void set_weekAmount(float m) {
+        prefsEditor.putFloat(weekKey, m);
+        prefsEditor.commit();
+    }
+
+    public float get_monthAmount()
+    {
+        return appSharedPrefs.getFloat(monthKey, 0);
+    }
+    public void set_monthAmount(float m) {
+        prefsEditor.putFloat(monthKey, m);
         prefsEditor.commit();
     }
 
@@ -163,9 +147,7 @@ public class LocalData {
     {
         return appSharedPrefs.getInt(userKey, 0);
     }
-
-    public void set_user(int user)
-    {
+    public void set_user(int user) {
         prefsEditor.putInt(userKey, user);
         prefsEditor.commit();
     }
@@ -174,7 +156,6 @@ public class LocalData {
     public String get_name() {
         return appSharedPrefs.getString(nameKey, "User");
     }
-
     public void set_name(String name) {
         prefsEditor.putString(nameKey, name);
         prefsEditor.commit();
@@ -185,7 +166,6 @@ public class LocalData {
     {
         return appSharedPrefs.getFloat(budgetKey, 0);
     }
-
     public void set_budget(float m) {
         prefsEditor.putFloat(budgetKey, m);
         prefsEditor.commit();

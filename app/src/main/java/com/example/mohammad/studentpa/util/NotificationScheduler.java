@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.reminders;
+package com.example.mohammad.studentpa.util;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -87,10 +87,10 @@ public class NotificationScheduler
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(REMINDER_REQUEST_CODE,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        ReminderNotification reminderNotification = new ReminderNotification(context);
+        NotificationSetup notificationSetup = new NotificationSetup(context);
         NotificationCompat.Builder nb;
-        nb = reminderNotification.getChannelNotification(title, content, pendingIntent);
-        reminderNotification.getManager().notify(generateRandom(), nb.build());
+        nb = notificationSetup.getChannelNotification(title, content, pendingIntent);
+        notificationSetup.getManager().notify(generateRandom(), nb.build());
 
     }
 

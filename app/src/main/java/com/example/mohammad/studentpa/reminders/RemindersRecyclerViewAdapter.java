@@ -68,6 +68,9 @@ public class RemindersRecyclerViewAdapter extends RecyclerView.Adapter<Reminders
                     context.startActivity(remindIntent);
                 }
             });
+
+            localData .set_remindID(holder.getAdapterPosition());
+
         }else{
             holder.textViewReminderTitle.setText(R.string.null_notes);
         }

@@ -1,4 +1,4 @@
-package com.example.mohammad.studentpa.reminders;
+package com.example.mohammad.studentpa.util;
 
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
@@ -14,12 +14,12 @@ import android.support.v4.app.NotificationCompat;
 
 import com.example.mohammad.studentpa.R;
 
-public class ReminderNotification extends ContextWrapper {
+public class NotificationSetup extends ContextWrapper {
     public static final String CHANNEL_ID = "Reminder_Notifications";
     public static final String CHANNEL_NAME = "Reminders";
     private NotificationManager notificationManager;
 
-    public ReminderNotification(Context base) {
+    public NotificationSetup(Context base) {
         super(base);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel();

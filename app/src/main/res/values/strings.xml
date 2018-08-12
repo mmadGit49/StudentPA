@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Student PA</string>
+    <string name="app_name">Organ Eyes</string>
     <string name="register_prompt">Register</string>
     <string name="login_prompt">Log In</string>
     <string name="textviewregister_prompt">Don\'t have an account? Click below to sign up</string>
@@ -25,7 +25,6 @@
     <string name="info">Info</string>
     <string name="logout">Logout</string>
 
-
     <string name="Reminders">Reminders</string>
     <string name="Budget">Budget</string>
     <string name="Milestones">Milestones</string>
@@ -46,8 +45,10 @@
     <string name="spending_details">Details</string>
     <string name="spending_add_detail">Add an Item</string>
     <string name="spending_remove_detail">Delete Item</string>
-    <string name="spending_sum_detail">Calculate total (Selected Day)</string>
+    <string name="spending_sum_detail">Total (Click date to change)</string>
     <string name="spending_total">Total Spent Today: </string>
+    <string name="spending_weekly">Past week (7 days): </string>
+    <string name="spending_monthly">Past month (30 days) : </string>
     <string name="spending_dateTitle">DATE</string>
     <string name="spending_amountTitle">AMOUNT</string>
     <string name="spending_detailsTitle">TITLE</string>
@@ -84,7 +85,49 @@
     <string name="monthly_budget">Month Budget: </string>
     <string name="update_budget">Update Budget</string>
     <string name="inform_budget">Click button below to open expenditure log</string>
-    <string name="alert_budget">Budget status...</string>
+    <string name="alert_budget">Budget status…</string>
+    <!--For info popup-->
+    <string name="exit">Close</string>
+    <string name="how_to">How to Use:</string>
+    <string name="information1">
+        Organ Eyes is an application to help you, as a student, to organise yourself better.
+        Be it your class work or extra-curricular activities this app is intended to help you
+        by getting all your activities and obligations in one location for you.
+    </string>
+
+    <string name="information2">
+        To begin, open the drawer menu and select a category.\n\n
+
+        1. MILESTONES is an area in which you can jot down any notes regarding any sort of information,
+        for example some topics you would like to study today or things to note for an upcoming event.
+
+        \n\n
+
+        2. SCHEDULES is where you take note of all classes, lectures, examinations, tests and CATs you
+        may be having during the week.
+
+        \n\n
+
+        3. REMINDERS is clear, any reminders you would like to be notified about, e.g a pending
+        assignment will be set here and you will be notified when the time arrives
+
+        \n\n
+
+        4. BUDGET is a special feature that allows you to plan your daily budget amount and will allow
+        you to note down how much you spent on each day. It will provide daily totals and will notify
+        you in the event that you overspend your budget, helping you to hopefully spend wiser and
+        save money.
+
+        \n\n
+     </string>
+
+    <string name="information3">
+        Hopefully this application helps you to better organise yourself as a student and consequently
+        you will begin to see improvement in your academic even non-academic life. An Organised mind
+        will always prosper.
+     </string>
+
+    <string name="information4">Have Fun!</string>
 
 
 </resources>

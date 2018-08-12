@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -24,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.MilestoneViewModel;
-import com.example.mohammad.studentpa.db_classes.UserViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 import com.example.mohammad.studentpa.util.LocalData;
 
@@ -35,14 +35,12 @@ public class Milestones extends Fragment {
 
     private View mileView;
     private MilestoneViewModel milestoneViewModel;
-    private UserViewModel userViewModel;
-
 
     // public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private static final String TAG = "milestone fragment";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mileView= inflater.inflate(R.layout.fragment_milestones, container, false);
 
@@ -80,25 +78,7 @@ public class Milestones extends Fragment {
         recyclerView.setAdapter(adapter);
 
         milestoneViewModel = ViewModelProviders.of(this).get(MilestoneViewModel.class);
-//        milestoneViewModel.getAllMilestones().observe(this, new Observer<List<MilestoneEntity>>() {
-//            @Override
-//            public void onChanged(@Nullable List<MilestoneEntity> milestoneEntities) {
-//                //Update the cached copy of words in the adapter
-//                adapter.setMilestone(milestoneEntities);
-//                Log.i("##############",milestoneEntities.size()+"");
-//            }
-//        });
-//
-//        LocalData local = new LocalData(getActivity());
-//        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-//        userViewModel.getUserByID(local.get_user()).observe(this, new Observer<List<User>>() {
-//            @Override
-//            public void onChanged(@Nullable List<User> users) {
-//                adapter.setMilestone(users.get(0).getMilestoneEntities());
-//                Log.i("##############",users.get(0).getFirstName()+"");
-//
-//            }
-//        });
+
         LocalData local = new LocalData(getActivity());
         milestoneViewModel.getAllMilestonesPerUser(local.get_user()).observe(this,
                 new Observer<List<MilestoneEntity>>() {
