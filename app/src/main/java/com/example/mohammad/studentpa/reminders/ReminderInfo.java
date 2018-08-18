@@ -52,6 +52,5 @@ public class ReminderInfo extends AppCompatActivity {
             }
         });
 
-
     }
 }

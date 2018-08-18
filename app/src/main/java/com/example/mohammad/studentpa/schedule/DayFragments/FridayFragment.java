@@ -22,29 +22,25 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
-import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.schedule.Adapters.ScheduleRecyclerViewAdapter;
 import com.example.mohammad.studentpa.schedule.TakeSchedule;
+import com.example.mohammad.studentpa.util.LocalData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FridayFragment extends Fragment {
-    private View fridayView;
-    private FloatingActionButton fab;
-    private LinearLayoutManager layoutManager;
     private ScheduleViewModel scheduleViewModel;
     private String dayOfWeek = "Friday";
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        fridayView = inflater.inflate(R.layout.fragment_schedule_friday, container, false);
+        View fridayView = inflater.inflate(R.layout.fragment_schedule_friday, container, false);
 
-        fab= fridayView.findViewById(R.id.fab);
+        FloatingActionButton fab = fridayView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +55,7 @@ public class FridayFragment extends Fragment {
 
         RecyclerView recyclerView =
                 fridayView.findViewById(R.id.recycler_view_schedule_friday);
-        layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         final ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(),
                 new ArrayList<ScheduleEntity>());
@@ -67,13 +63,7 @@ public class FridayFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
-//        scheduleViewModel.getAllSchedules().observe(this, new Observer<List<ScheduleEntity>>() {
-//            @Override
-//            public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
-//                //Update the cached copy of words in the adapter
-//                adapter.setClass(scheduleEntities);
-//            }
-//        });
+
         LocalData localData = new LocalData(getActivity());
         int userID = localData.get_user();
         scheduleViewModel.getAllSchedulesByDay(dayOfWeek, userID).observe(this, new Observer<List<ScheduleEntity>>() {

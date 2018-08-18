@@ -36,8 +36,6 @@ import java.util.List;
 public class Reminders extends Fragment {
 
     private View remindView;
-    private FloatingActionButton fab;
-    private LinearLayoutManager layoutManager;
     private ReminderViewModel reminderViewModel;
     private static final String TAG = "reminders";
 
@@ -54,7 +52,7 @@ public class Reminders extends Fragment {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         toolbar.setTitle("Reminders");
 
-        fab = remindView.findViewById(R.id.fab_reminders);
+        FloatingActionButton fab = remindView.findViewById(R.id.fab_reminders);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,9 +64,10 @@ public class Reminders extends Fragment {
         initRecyclerView();
         return remindView;
     }
+
     public void initRecyclerView() {//initialises adapters, views and what have you's
         RecyclerView recyclerView = remindView.findViewById(R.id.recycler_view_reminders);
-        layoutManager = new LinearLayoutManager(this.getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
         final RemindersRecyclerViewAdapter adapter = new RemindersRecyclerViewAdapter(this.getActivity(),
                 new ArrayList<ReminderEntity>());
@@ -129,8 +128,5 @@ public class Reminders extends Fragment {
                 });
         helper.attachToRecyclerView(recyclerView);
     }
-
-
-
 
 }

@@ -36,7 +36,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Spending extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-
     private Context context;
     private TextView textViewDate;
     private EditText editTextAmount;

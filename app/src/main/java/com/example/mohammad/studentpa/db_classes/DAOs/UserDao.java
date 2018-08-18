@@ -34,14 +34,6 @@ public interface UserDao {
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<User> getUserCredentialsLogin(String email, String password);//Get the email from DB to check if match
 
-    @Query("SELECT userID, email FROM user")//Method to get all user names
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<User>> getUserEmail();//
-
-    @Query("SELECT userID, password FROM user")//Method to get all user names
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    LiveData<List<User>> getUserPassword();//
-
     @Update
     void updateList(User user);//Update the table
 

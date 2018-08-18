@@ -23,18 +23,15 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
-import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.schedule.Adapters.ScheduleRecyclerViewAdapter;
 import com.example.mohammad.studentpa.schedule.TakeSchedule;
+import com.example.mohammad.studentpa.util.LocalData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MondayFragment extends Fragment {
 
-    private View mondayView;
-    private FloatingActionButton fab;
-    private LinearLayoutManager layoutManager;
     private ScheduleViewModel scheduleViewModel;
     private String dayOfWeek = "Monday";
 
@@ -43,9 +40,9 @@ public class MondayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mondayView = inflater.inflate(R.layout.fragment_schedule_monday,
+        View mondayView = inflater.inflate(R.layout.fragment_schedule_monday,
                 container, false);
-        fab= mondayView.findViewById(R.id.fab_monday);
+        FloatingActionButton fab = mondayView.findViewById(R.id.fab_monday);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +58,7 @@ public class MondayFragment extends Fragment {
 
         RecyclerView recyclerView =
                 mondayView.findViewById(R.id.recycler_view_schedule_monday);
-        layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         final ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(),
                 new ArrayList<ScheduleEntity>());

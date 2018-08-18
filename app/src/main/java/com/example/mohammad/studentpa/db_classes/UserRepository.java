@@ -11,35 +11,22 @@ import java.util.List;
 
 public class UserRepository {
 
-    UserDao repoUserDao;
+    private UserDao repoUserDao;
     private LiveData<List<User>> allUsers;
-//    private LiveData<List<User>> allUserEmails;
-//    private LiveData<List<User>> allUserPasswords;
 
     UserRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoUserDao = db.userDao();
         allUsers = repoUserDao.getAllUsers();
-//        allUserEmails = repoUserDao.getUserEmail();
-//        allUserPasswords = repoUserDao.getUserPassword();
     }
 
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
     }
-//    public LiveData<List<User>> getAllUserEmails() {
-//        return allUserEmails;
-//    }
-//    public LiveData<List<User>> getAllUserPasswords() {
-//        return allUserPasswords;
-//    }
-//    public LiveData<List<User>> getAllUsersbyID(int userID) {
-//        return repoUserDao.getAllUsersByID(userID);
-//    }
+
     public LiveData<User> getUserCredentials(String email, String password){
         return repoUserDao.getUserCredentialsLogin(email, password);
     }
-
 
     public void insert (User user) {
         //starts the async task which, in this case, inserts a user to the db

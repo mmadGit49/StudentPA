@@ -38,4 +38,5 @@ public class ScheduleViewModel extends AndroidViewModel {
 
     public  void update(ScheduleEntity scheduleEntity){
         scheduleRepository.updateSchedule(scheduleEntity);    }
+
 }

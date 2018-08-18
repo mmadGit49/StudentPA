@@ -10,17 +10,11 @@ import java.util.List;
 
 public class SpendingViewModel extends AndroidViewModel {
     private SpendingRepository spendingRepository;
-    private LiveData<List<SpendingEntity>> allSpending;
 
     public SpendingViewModel (Application application){
         super(application);
         spendingRepository = new SpendingRepository(application);
-        allSpending = spendingRepository.getAllSpending();
     }
-
-//    public LiveData<List<SpendingEntity>> getAllSpending() {
-//        return allSpending;
-//    }
 
     public LiveData<List<SpendingEntity>> getAllSpendingByDate(String date, int userID) {
     return spendingRepository.getAllSpendingbyDate(date, userID);

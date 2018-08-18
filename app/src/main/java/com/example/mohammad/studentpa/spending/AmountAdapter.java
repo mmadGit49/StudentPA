@@ -16,12 +16,11 @@ import com.example.mohammad.studentpa.db_classes.entities.SpendingEntity;
 import java.util.List;
 
 public class AmountAdapter extends  RecyclerView.Adapter<AmountAdapter.ViewHolder> {
-    private Context context;
     private List<SpendingEntity> spendingEntities;
 
     private static final String TAG = "AmountAdapter";
     AmountAdapter(Context context, List<SpendingEntity> spendingEntities) {
-        this.context = context;
+        Context context1 = context;
         this.spendingEntities = spendingEntities;
     }
 

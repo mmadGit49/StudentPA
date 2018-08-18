@@ -72,13 +72,5 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-//    @Ignore
-//    private List<MilestoneEntity> milestoneEntities;
-//    public List<MilestoneEntity> getMilestoneEntities() {
-//        return milestoneEntities;
-//    }
-//    public void setMilestoneEntities(List<MilestoneEntity> milestoneEntities) {
-//        this.milestoneEntities = milestoneEntities;
-//    }
 
 }

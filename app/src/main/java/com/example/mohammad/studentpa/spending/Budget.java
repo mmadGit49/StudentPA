@@ -2,7 +2,6 @@ package com.example.mohammad.studentpa.spending;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,8 +31,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Budget extends Fragment{
-
-    private Context context;
     private TextView currentBudget;
     private TextView weeklyBudget;
     private TextView monthlyBudget;

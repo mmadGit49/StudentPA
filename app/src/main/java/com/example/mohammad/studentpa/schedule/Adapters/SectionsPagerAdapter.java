@@ -14,8 +14,6 @@ import com.example.mohammad.studentpa.schedule.DayFragments.WednesdayFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private static final String TAG = "SectionsPagerAdapter";
-
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
     }

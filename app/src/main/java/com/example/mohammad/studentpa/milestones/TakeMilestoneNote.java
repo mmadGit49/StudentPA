@@ -40,7 +40,7 @@ public class TakeMilestoneNote extends AppCompatActivity {
                 get(MilestoneViewModel.class);
 
         final LocalData localData = new LocalData(this);
-//        String currentUser = Integer.toString(localData.get_user());
+
         textViewUser.setText(localData.get_name());
 
         if(getIntent().hasExtra("mileID")){

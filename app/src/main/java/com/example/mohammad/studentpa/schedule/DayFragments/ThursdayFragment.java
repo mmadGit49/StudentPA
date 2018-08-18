@@ -22,17 +22,15 @@ import android.widget.Toast;
 import com.example.mohammad.studentpa.R;
 import com.example.mohammad.studentpa.db_classes.ScheduleViewModel;
 import com.example.mohammad.studentpa.db_classes.entities.ScheduleEntity;
-import com.example.mohammad.studentpa.util.LocalData;
 import com.example.mohammad.studentpa.schedule.Adapters.ScheduleRecyclerViewAdapter;
 import com.example.mohammad.studentpa.schedule.TakeSchedule;
+import com.example.mohammad.studentpa.util.LocalData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ThursdayFragment extends Fragment {
     private View thursdayView;
-    private FloatingActionButton fab;
-    private LinearLayoutManager layoutManager;
     private ScheduleViewModel scheduleViewModel;
     private String dayOfWeek = "Thursday";
 
@@ -44,7 +42,7 @@ public class ThursdayFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         thursdayView = inflater.inflate(R.layout.fragment_schedule_thursday, container, false);
 
-        fab = thursdayView.findViewById(R.id.fab);
+        FloatingActionButton fab = thursdayView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,20 +63,14 @@ public class ThursdayFragment extends Fragment {
     public void initRecyclerView() {
         RecyclerView recyclerView =
                 thursdayView.findViewById(R.id.recycler_view_schedule_thursday);
-        layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         final ScheduleRecyclerViewAdapter adapter = new ScheduleRecyclerViewAdapter(getActivity(),
                 new ArrayList<ScheduleEntity>());
         recyclerView.setAdapter(adapter);
 
         scheduleViewModel = ViewModelProviders.of(this).get(ScheduleViewModel.class);
-//        scheduleViewModel.getAllSchedules().observe(this, new Observer<List<ScheduleEntity>>() {
-//            @Override
-//            public void onChanged(@Nullable List<ScheduleEntity> scheduleEntities) {
-//                //Update the cached copy of words in the adapter
-//                adapter.setClass(scheduleEntities);
-//            }
-//        });
+
         LocalData localData = new LocalData(getActivity());
         int userID = localData.get_user();
         scheduleViewModel.getAllSchedulesByDay(dayOfWeek, userID).observe(this, new Observer<List<ScheduleEntity>>() {

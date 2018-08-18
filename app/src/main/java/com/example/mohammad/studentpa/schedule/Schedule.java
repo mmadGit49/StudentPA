@@ -1,6 +1,7 @@
 package com.example.mohammad.studentpa.schedule;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,7 +17,7 @@ import com.example.mohammad.studentpa.schedule.Adapters.SectionsPagerAdapter;
 
 public class Schedule extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View schedView = inflater.inflate(R.layout.fragment_schedule, container, false);
         Toolbar toolbar = schedView.findViewById(R.id.toolbar);

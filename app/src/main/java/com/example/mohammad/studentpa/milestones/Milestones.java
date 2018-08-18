@@ -36,7 +36,6 @@ public class Milestones extends Fragment {
     private View mileView;
     private MilestoneViewModel milestoneViewModel;
 
-    // public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private static final String TAG = "milestone fragment";
 
     @Override

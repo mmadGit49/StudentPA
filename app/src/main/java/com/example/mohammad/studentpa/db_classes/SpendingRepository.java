@@ -14,7 +14,7 @@ public class SpendingRepository {
     private LiveData<List<SpendingEntity>> allSpending;
 
 
-    public SpendingRepository(Application application) {
+    SpendingRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoSpendingDao = db.spendingDao();
         allSpending = repoSpendingDao.getAllSpendingItems();
@@ -27,6 +27,7 @@ public class SpendingRepository {
     public LiveData<List<SpendingEntity>> getAllSpendingbyDate(String date, int userID) {
         return repoSpendingDao.getAllSpendingItemsByDate(date, userID);
     }
+
     public LiveData<List<SpendingEntity>> getAllSpendingbyUser(int userID) {
         return repoSpendingDao.getAllSpendingItemsByUser(userID);
     }
@@ -34,9 +35,11 @@ public class SpendingRepository {
     public void insertSpending (SpendingEntity spendingEntity) {
         new insertAsyncTask(repoSpendingDao).execute(spendingEntity);
     }
+
     public void deleteSpending (SpendingEntity spendingEntity) {
         new deleteAsyncTask(repoSpendingDao).execute(spendingEntity);
     }
+
     public void updateSpending (SpendingEntity spendingEntity){
         new updateAsyncTask(repoSpendingDao).execute(spendingEntity);
     }

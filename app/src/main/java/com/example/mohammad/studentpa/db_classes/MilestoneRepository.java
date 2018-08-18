@@ -13,7 +13,6 @@ public class MilestoneRepository {
     private MilestoneDao repoMilestoneDao;
     private LiveData<List<MilestoneEntity>> allMilestones;
 
-
     MilestoneRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         repoMilestoneDao = db.milestoneDao();

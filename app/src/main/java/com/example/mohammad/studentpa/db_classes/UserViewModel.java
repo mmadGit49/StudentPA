@@ -23,13 +23,10 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
     }
+
     public LiveData<User> getCredentials(String email, String password){
         return userRepository.getUserCredentials(email, password);
     }
-//    public LiveData<List<User>> getUserByID(int userID){
-//        return userRepository.getAllUsersbyID(userID);
-//    }
-
 
     public void insert(User user) {
         userRepository.insert(user);
