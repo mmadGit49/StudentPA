@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MondayFragment extends Fragment {
-
     private ScheduleViewModel scheduleViewModel;
     private String dayOfWeek = "Monday";
 

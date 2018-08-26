@@ -18,9 +18,7 @@ import com.example.mohammad.studentpa.db_classes.entities.MilestoneEntity;
 import com.example.mohammad.studentpa.util.LocalData;
 
 public class TakeMilestoneNote extends AppCompatActivity {
-
     private static final String TAG = "TakeMilestoneNote";
-
     private EditText editTextTitle;
     private EditText editTextDetails;
 

@@ -49,7 +49,7 @@
             android:padding="8dp"
             android:text="@string/nav_header_user"
             android:textAlignment="viewEnd"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="?attr/colorPrimaryDark"
             android:textSize="14sp"
             android:textStyle="bold" />
 

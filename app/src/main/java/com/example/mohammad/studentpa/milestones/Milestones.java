@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Milestones extends Fragment {
-
     private View mileView;
     private MilestoneViewModel milestoneViewModel;
 

@@ -45,8 +45,10 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         if (schedules != null) {
             holder.textViewScheduleTitleDisplay.setText(schedules.get(position).getScheduleTitle());
             holder.textViewScheduleDateDisplay.setText(schedules.get(position).getDate());
-            holder.textViewScheduleTimeFromDisplay.setText(schedules.get(position).getTimeFrom());
-            holder.textViewScheduleDurationDisplay.setText(schedules.get(position).getDuration());
+            String from = "From: " + schedules.get(position).getTimeFrom();
+            holder.textViewScheduleTimeFromDisplay.setText(from);
+            String duration = "(" + schedules.get(position).getDuration() + ")";
+            holder.textViewScheduleDurationDisplay.setText(duration);
             holder.scheduleLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
