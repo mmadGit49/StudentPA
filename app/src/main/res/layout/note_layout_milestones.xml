@@ -3,7 +3,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/list_view_design"
+    android:background="@drawable/background_colour"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -26,6 +26,8 @@
             android:ems="10"
             android:fontFamily="sans-serif-smallcaps"
             android:hint="@string/Title_header"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
             android:inputType="textPersonName"
             android:padding="8dp"
             android:textAlignment="viewStart"
@@ -61,6 +63,8 @@
         android:hint="@string/text_header"
         android:inputType="textMultiLine"
         android:padding="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
         android:textAlignment="viewStart"
         android:textSize="18sp"
         tools:textColor="#000" />

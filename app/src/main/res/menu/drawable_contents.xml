@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item android:id= "@+id/Milestones"
             android:icon="@drawable/ic_note_add_black_24dp"
+            android:tint="@android:color/white"
             android:title= "@string/Milestones"/>
         <item android:id= "@+id/Schedule"
             android:icon="@drawable/ic_schedule"
+            android:tint="@android:color/white"
             android:title= "@string/Schedule"/>
         <item android:id= "@+id/Reminders"
             android:icon="@drawable/ic_reminders"
+            android:tint="@android:color/white"
             android:title= "@string/Reminders"/>
         <item android:id="@+id/Budget"
             android:icon="@drawable/ic_spending"
+            android:tint="@android:color/white"
             android:title="@string/Budget" />
     </group>
 

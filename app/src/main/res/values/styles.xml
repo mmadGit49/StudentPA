@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--code is meant to change colour of item when highlighted-->
+        <!--<item name="android:colorActivatedHighlight">@android:color/transparent</item>-->
     </style>
 
     <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.DarkActionBar"/>

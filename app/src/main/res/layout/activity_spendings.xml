@@ -6,12 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="100"
-        android:background="@drawable/list_view_design"
+        android:background="@drawable/background_colour"
         android:orientation="vertical">
 
         <TextView
@@ -21,7 +20,9 @@
             android:layout_margin="8dp"
             android:ems="10"
             android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/colorPrimary"
             android:hint="@string/spending_date_format"
+            android:textColorHint="@color/colorPrimary"
             android:padding="8dp"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -38,6 +39,7 @@
                 android:ems="10"
                 android:padding="8dp"
                 android:text="@string/spending_amount"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textSize="18sp"
@@ -50,6 +52,7 @@
                 android:ems="10"
                 android:padding="8dp"
                 android:text="@string/spending_details"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textSize="18sp"
@@ -69,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="numberDecimal"
+                android:textColor="@color/colorPrimary"
                 android:padding="8dp"
                 android:layout_weight="50" />
 
@@ -78,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textMultiLine"
+                android:textColor="@color/colorPrimary"
                 android:padding="8dp"
                 android:layout_weight="50"
                 />
@@ -123,6 +128,7 @@
             android:fontFamily="sans-serif-smallcaps"
             android:padding="8dp"
             android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
             tools:text="@string/spending_total" />
 
     </LinearLayout>
@@ -131,7 +137,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="100"
-        android:background="@drawable/list_view_design"
+        android:background="@drawable/background_colour"
         android:orientation="vertical">
 
         <LinearLayout
@@ -149,6 +155,7 @@
                 android:fontFamily="sans-serif-smallcaps"
                 android:padding="8dp"
                 android:text="@string/spending_dateTitle"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -161,6 +168,7 @@
                 android:fontFamily="sans-serif-smallcaps"
                 android:padding="8dp"
                 android:text="@string/spending_amountTitle"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -173,6 +181,7 @@
                 android:fontFamily="sans-serif-smallcaps"
                 android:padding="8dp"
                 android:text="@string/spending_detailsTitle"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 

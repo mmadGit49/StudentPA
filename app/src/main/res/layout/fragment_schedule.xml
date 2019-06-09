@@ -23,12 +23,12 @@
             <android.support.design.widget.TabLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/background_colour"
                 app:tabSelectedTextColor="@color/colorAccent"
                 app:tabTextColor="@color/colorPrimary"
                 android:id="@+id/scheduleTabLayout">
 
-            </android.support.design.widget.TabLayout>
+             </android.support.design.widget.TabLayout>
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPagerContainer"
@@ -41,7 +41,6 @@
             </android.support.v4.view.ViewPager>
 
             <android.support.v7.widget.RecyclerView
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/recycler_view_schedule"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,8 +49,6 @@
 
             </android.support.v7.widget.RecyclerView>
         </RelativeLayout>
-
-
 
     </android.support.design.widget.CoordinatorLayout>
 

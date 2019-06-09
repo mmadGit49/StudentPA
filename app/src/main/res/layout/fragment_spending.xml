@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/list_view_design"
+    android:background="@drawable/background_colour"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/budget"
+        android:textColor="@color/colorPrimary"
         android:padding="8dp"
         android:layout_margin="8dp"
         android:textSize="18sp" />
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:text="@string/weekly_budget"
+            android:textColor="@color/colorPrimary"
             android:padding="8dp"
             android:layout_margin="8dp"
             android:textSize="18sp" />
@@ -43,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/monthly_budget"
+            android:textColor="@color/colorPrimary"
             android:padding="8dp"
             android:layout_margin="8dp"
             android:textSize="18sp" />
@@ -56,6 +59,7 @@
         android:layout_margin="8dp"
         android:padding="8dp"
         android:text="@string/spending_total"
+        android:textColor="@color/colorPrimary"
         android:textAlignment="center"
         android:textSize="18sp" />
 
@@ -72,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:text="@string/spending_weekly"
+            android:textColor="@color/colorPrimary"
             android:padding="8dp"
             android:layout_margin="8dp"
             android:textSize="18sp" />
@@ -82,6 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:text="@string/spending_monthly"
+            android:textColor="@color/colorPrimary"
             android:padding="8dp"
             android:layout_margin="8dp"
             android:textSize="18sp" />
@@ -108,6 +114,8 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:hint="@string/daily_budget"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
         android:inputType="numberDecimal"
         android:padding="8dp"
         android:textAlignment="center" />
@@ -138,6 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inform_budget"
+            android:textColor="@color/colorPrimary"
             android:textAlignment="center" />
     </android.support.design.widget.CoordinatorLayout>
 
